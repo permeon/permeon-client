@@ -1,0 +1,12 @@
+.App {
+
+}
+
+.Grid {
+    margin: 0 !important;
+}
+
+.Row, .Col {
+    padding: 0 !important;
+    margin: 0 !important;
+}
