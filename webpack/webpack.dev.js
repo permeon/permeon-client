@@ -7,6 +7,7 @@ const globalCss = new ExtractTextPlugin('styles-global.css');
 const common = require('./webpack.common');
 
 const devConfig = merge([{
+  mode: 'development',
   devServer: {
     historyApiFallback: true,
     contentBase: './dist',

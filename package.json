@@ -5,8 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "test": "node_modules/.bin/jest",
-    "start": "webpack-dev-server --progress --colors --host 0.0.0.0 --port 8080 --config webpack/webpack.dev.js",
-    "build": "webpack --config webpack/webpack.prod.js --progress",
+    "start": "node_modules/.bin/webpack-dev-server --progress --colors --host 0.0.0.0 --port 8080 --config webpack/webpack.dev.js",
+    "build": "node_modules/.bin/webpack --config webpack/webpack.prod.js --progress",
     "precommit": "yarn run prettier",
     "prettier": "./node_modules/.bin/prettier --write src/**/*.js"
   },
@@ -41,7 +41,7 @@
     "css-loader": "^0.28.7",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
-    "extract-text-webpack-plugin": "^3.0.2",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^1.1.6",
     "glob": "^7.1.2",
     "html-webpack-plugin": "^3.1.0",
@@ -57,6 +57,7 @@
     "uglifyjs-webpack-plugin": "^1.1.6",
     "url-loader": "^1.0.1",
     "webpack": "^4.2.0",
+    "webpack-cli": "^2.0.13",
     "webpack-dev-server": "^3.1.1"
   },
   "jest": {
