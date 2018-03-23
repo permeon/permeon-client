@@ -4,12 +4,12 @@ import { connect } from "react-redux";
 
 import { Header, Grid } from "semantic-ui-react";
 
-import styles from "./LoginScene.css";
+import styles from "./Login.css";
 import LoginForm from "./LoginForm";
 
 const REDIRECT_URL = "/";
 
-class LoginScene extends Component {
+class Login extends Component {
   componentDidMount() {
     if (this.props.token) {
       this.props.history.push(REDIRECT_URL);
@@ -34,7 +34,7 @@ class LoginScene extends Component {
   }
 }
 
-LoginScene.propTypes = {};
+Login.propTypes = {};
 
 const mapStateToProps = state => {
   return {
@@ -42,5 +42,4 @@ const mapStateToProps = state => {
   };
 };
 
-const LoginSceneContainer = connect(mapStateToProps)(LoginScene);
-export default LoginSceneContainer;
+export default connect(mapStateToProps)(Login);

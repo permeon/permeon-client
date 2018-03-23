@@ -5,8 +5,8 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import { Grid, Message } from "semantic-ui-react";
 
-import LoginScene from "../../scenes/LoginScene/LoginScene";
-import ChatScene from "../../scenes/ChatSceen/ChatSceen";
+import Login from "../../scenes/Login/Login";
+import Home from "../../scenes/Home/Home";
 
 class App extends Component {
   constructor(props) {
@@ -17,8 +17,8 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Route exact path="/" component={ChatScene} />
-          <Route path="/login" component={LoginScene} />
+          <Route exact path="/" component={Home} />
+          <Route path="/login" component={Login} />
         </div>
       </Router>
     );

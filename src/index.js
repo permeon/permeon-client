@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 
-// import "../semantic/dist/semantic.css";
+import "../semantic/dist/semantic.css";
 import styles from "./index.css";
 
 import App from "./components/App/App";
