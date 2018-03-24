@@ -1,32 +1,50 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Route, Link } from "react-router-dom";
 
-import { Grid, Message } from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
 
-import Login from "../../scenes/Login/Login";
+import Sidebar from '../Sidebar/Sidebar';
+import Header from '../Header/Header';
 import Home from "../../scenes/Home/Home";
+import Login from "../../scenes/Login/Login";
+import styles from './App.css';
 
 class App extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      isSidebarVisible: true,
+    };
+    this.toggleSidebar = this.toggleSidebar.bind(this);
+  }
+
+  toggleSidebar() {
+    this.setState(prevState => ({
+      isSidebarVisible: !prevState.isSidebarVisible,
+    }));
   }
 
   render() {
+    const { isSidebarVisible } = this.state;
+    const sidebarWidth = isSidebarVisible ? '250px' : '0';
+
     return (
-      <Router>
-        <div>
+      <div className={styles.App}>
+        <Header toggleSidebar={this.toggleSidebar} />
+        <Sidebar isVisible={isSidebarVisible} width={sidebarWidth} />
+        <div className={styles.MainContent} style={{paddingLeft: sidebarWidth}}>
           <Route exact path="/" component={Home} />
           <Route path="/login" component={Login} />
         </div>
-      </Router>
+      </div>
     );
   }
 }
 
 App.propTypes = {};
 
-// const AppContainer = connect()(App)
 
+// export default connect(mapStateToProps)(App)
 export default App;
