@@ -33,10 +33,6 @@ class Sidebar extends Component {
           My Channel
           <Icon name="grid layout"/>
         </Menu.Item>
-        <Menu.Item name='login' active={path === '/login'} onClick={this.handleItemClick} as={Link} to="/login" />
-        <Menu.Item name='companies' active={activeItem === 'companies'} onClick={this.handleItemClick} />
-        <Menu.Item name='links' active={activeItem === 'links'} onClick={this.handleItemClick} />
-
       </Menu>
     );
   }

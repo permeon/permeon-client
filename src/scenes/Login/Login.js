@@ -23,12 +23,10 @@ class Login extends Component {
   render() {
     return (
       <Grid centered verticalAlign="middle" className={styles.LoginScene}>
-        <Grid.Row>
-          <Header as="h2">Login</Header>
-        </Grid.Row>
-        <Grid.Row>
+        <Grid.Column style={{ maxWidth: 450 }}>
+          <Header as='h2' color='teal' textAlign='center'>Login with Your Steem Account</Header>
           <LoginForm dispatch={this.props.dispatch} redirect={this.handleRedirect.bind(this)} />
-        </Grid.Row>
+        </Grid.Column>
       </Grid>
     );
   }

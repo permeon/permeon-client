@@ -1,40 +1,50 @@
-import { CALL_API } from "../lib/apiMiddleware";
-import * as utils from "../lib/utils";
+import * as utils from '../lib/utils';
+import steem from '../lib/steemApi';
 
 export const actionTypes = {
-  SET_TOKEN: "SET_TOKEN",
-  LOGIN: "LOGIN",
-  LOGOUT: "LOGOUT"
+  ADD_ACCOUNT: 'ADD_ACCOUNT',
+  SET_ACTIVE_ACCOUNT: 'SET_ACTIVE_ACCOUNT',
+  LOGIN: 'LOGIN',
+  LOGOUT: 'LOGOUT',
 };
 
-export function setToken(token) {
-  utils.storagePut("token", token);
+export function addAccount(username, keys) {
+  utils.storagePut('accounts', {
+    ...utils.storageGet('accounts'),
+    [username]: keys,
+  });
   return {
-    type: actionTypes.SET_TOKEN,
-    token: token
+    type: actionTypes.ADD_ACCOUNT,
+    username,
+    keys,
   };
 }
 
-export function login(username, password) {
-  return {
-    [CALL_API]: {
-      type: actionTypes.LOGIN,
-      endpoint: `/auth/login`,
-      method: "POST",
-      data: {
-        username,
-        password
-      }
+export function steemLogin(username, postingKey) {
+  console.log(username, postingKey);
+  return dispatch => {
+    if (!steem.auth.isWif(postingKey)) {
+      return Promise.reject('Invalid posting key');
     }
-  };
+    let pubPostingKey = steem.auth.wifToPublic(postingKey);
+    return steem.api.getAccountsAsync([username])
+      .then(result => {
+        if (!result.length) {
+          return Promise.reject('Username does not exist');
+        }
+        let account = result[0];
+        let postingPublicKeys = account.posting.key_auths;
+        for (let [publicKey] of postingPublicKeys) {
+          if (publicKey === pubPostingKey) {
+            dispatch(addAccount(username, {posting: postingKey}));
+            return Promise.resolve('Successfully logged in');
+          }
+        }
+        return Promise.reject('Invalid posting key');
+      })
+  }
 }
 
-export function logout() {
-  return {
-    [CALL_API]: {
-      type: actionTypes.LOGOUT,
-      endpoint: `/auth/logout`,
-      method: "POST"
-    }
-  };
+export function steemLogout() {
+  throw new Error('not implemented');
 }

@@ -1,33 +1,39 @@
+import { combineReducers } from 'react-redux';
+
 import { actionTypes } from "../actions/authActions";
 import * as utils from "../lib/utils";
 
-const defaultToken = utils.storageGet("token");
+const defaultAccounts = utils.storageGet('accounts');
 
-export const token = (state = defaultToken, action) => {
+function accounts(state = defaultAccounts, action) {
   switch (action.type) {
-    case actionTypes.SET_TOKEN:
-      console.log("setting token");
-      return action.token;
-    default:
-      return state;
-  }
-};
-
-export default function auth(state = {}, action) {
-  switch (action.type) {
-    case `${actionTypes.LOGIN}_FETCH`:
-      return state;
-    case `${actionTypes.LOGIN}_SUCCESS`:
-      return state;
-    case `${actionTypes.LOGIN}_FAILURE`:
-      return state;
-    case `${actionTypes.LOGOUT}_FETCH`:
-      return state;
-    case `${actionTypes.LOGOUT}_SUCCESS`:
-      return state;
-    case `${actionTypes.LOGOUT}_FAILURE`:
-      return state;
+    case actionTypes.ADD_ACCOUNT:
+      const newAccounts = {...state};
+      const account = newAccounts[action.username];
+      newAccounts[action.username] = {
+        ...account,
+        keys: action.keys,
+      };
+      return newAccounts;
     default:
       return state;
   }
 }
+
+const defaultActiveAccount = utils.storageGet('activeAccount');
+
+function activeAccount(state = defaultActiveAccount, action) {
+  switch (action.type) {
+    case actionTypes.SET_ACTIVE_ACCOUNT:
+      return action.username;
+    default:
+      return state;
+  }
+}
+
+export default combineReducers({
+  accounts,
+  activeAccount,
+});
+
+export const isLoggedIn = state => state.activeAccount;

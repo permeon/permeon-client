@@ -1,12 +1,10 @@
 import { combineReducers } from "redux";
 
-import auth, { token } from "./auth";
-import user from "./user";
+import auth from "./auth";
 
-const geoApp = combineReducers({
+export default combineReducers({
   auth,
-  token,
-  user
 });
 
-export default geoApp;
+// Selectors
+export const isLoggedIn = state => state.auth;

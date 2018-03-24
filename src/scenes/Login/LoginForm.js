@@ -2,9 +2,10 @@ import React from "react";
 import { withFormik } from "formik";
 import yup from "yup";
 
-import { Form, Button, Message } from "semantic-ui-react";
+import {Form, Button, Message, Segment} from "semantic-ui-react";
 
-import { login } from "../../actions/authActions";
+import { steemLogin } from "../../actions/authActions";
+import { STEEM_SIGNUP } from "../../lib/constants";
 
 const LoginForm = ({
   values,
@@ -16,28 +17,37 @@ const LoginForm = ({
   isSubmitting,
   status
 }) => (
-  <Form onSubmit={handleSubmit} error>
+  <Form onSubmit={handleSubmit} error size="large">
     {status && status.map((error, idx) => <Message key={idx} error content={error} />)}
-    <Form.Input
-      name="username"
-      label="username"
-      placeholder="username..."
-      onChange={handleChange}
-      onBlur={handleBlur}
-      value={values.username}
-    />
-    {touched.username && errors.username && <Message error content={errors.username} />}
-    <Form.Input
-      name="password"
-      label="password"
-      placeholder="password..."
-      onChange={handleChange}
-      onBlur={handleBlur}
-      value={values.password}
-    />
-    {touched.password && errors.password && <Message error content={errors.password} />}
-    <Button disabled={isSubmitting}>login</Button>
-    <p>Test user - username: testuser password: password123</p>
+    <Segment stacked>
+      <Form.Input
+        name="username"
+        label="username"
+        placeholder="Steem username"
+        onChange={handleChange}
+        onBlur={handleBlur}
+        fluid
+        icon='user'
+        iconPosition='left'
+        value={values.username}
+      />
+      {touched.username && errors.username && <Message error content={errors.username} />}
+      <Form.Input
+        name="password"
+        label="posting key"
+        placeholder="Steem posting key"
+        onChange={handleChange}
+        onBlur={handleBlur}
+        value={values.password}
+        fluid
+        icon='lock'
+        iconPosition='left'
+        type='password'
+      />
+      {touched.password && errors.password && <Message error content={errors.password} />}
+      <Button fluid size="large" disabled={isSubmitting}>login</Button>
+    </Segment>
+    <p>New to Steem? <a href={STEEM_SIGNUP}>signup on steemit</a></p>
   </Form>
 );
 
@@ -49,14 +59,16 @@ const LoginFormContainer = withFormik({
   }),
   handleSubmit: ({ username, password }, { props, setSubmitting, setStatus }) => {
     props
-      .dispatch(login(username, password))
-      .then(() => {
+      .dispatch(steemLogin(username, password))
+      .then(response => {
+        console.log(response);
         setSubmitting(false);
         props.redirect();
       })
-      .catch(() => {
+      .catch(error => {
+        console.log(error);
         setSubmitting(false);
-        setStatus(["Invalid username or password"]);
+        setStatus([error.message || error]);
       });
   }
 })(LoginForm);

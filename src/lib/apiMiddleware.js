@@ -12,6 +12,7 @@ export const apiMiddleware = store => next => action => {
   if (typeof callAPI === "undefined") {
     return next(action);
   }
+  throw new Error('Setup Api First dummy');
 
   const { type, data, endpoint, method } = callAPI;
 
