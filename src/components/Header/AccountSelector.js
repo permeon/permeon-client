@@ -16,21 +16,19 @@ const AccountSelector = ({
   onAccountClick,
 }) => {
   return (
-    <Menu.Menu position='right'>
-      {isLoggedIn ? (
-        <Dropdown item trigger={<Avatar username={activeAccount}/>}>
-          <Dropdown.Menu>
-            {accountItems(accounts, activeAccount, onAccountClick)}
-            <Dropdown.Divider style={{margin: 0}}/>
-            <Dropdown.Item as={Link} to='/login'>Add account</Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
-      ) : (
-        <Menu.Item>
-          <Button as={Link} to="/login">Log-in</Button>
-        </Menu.Item>
-      )}
-    </Menu.Menu>
+    isLoggedIn ? (
+      <Dropdown item trigger={<Avatar username={activeAccount}/>}>
+        <Dropdown.Menu>
+          {accountItems(accounts, activeAccount, onAccountClick)}
+          <Dropdown.Divider style={{margin: 0}}/>
+          <Dropdown.Item as={Link} to='/login'>Add account</Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
+    ) : (
+      <Menu.Item>
+        <Button as={Link} to="/login">Log-in</Button>
+      </Menu.Item>
+    )
   );
 };
 

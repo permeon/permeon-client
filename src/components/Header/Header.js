@@ -38,7 +38,12 @@ class Header extends Component {
         <Menu.Item style={{width: '30%'}}>
           <Input icon='search' fluid placeholder='Search...' />
         </Menu.Item>
-        <AccountSelector />
+        <Menu.Menu position='right'>
+          <Menu.Item as={Link} to='/upload' title='Upload Video'>
+            <Icon name='cloud upload' />
+          </Menu.Item>
+          <AccountSelector />
+        </Menu.Menu>
       </Menu>
     );
   }
