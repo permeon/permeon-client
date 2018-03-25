@@ -27,7 +27,7 @@ class Header extends Component {
         <Menu.Item onClick={toggleSidebar}>
           <Icon name='sidebar' className={styles.OpenMenuButton} />
         </Menu.Item>
-        <Menu.Item as='a' header>
+        <Menu.Item as={Link} to='/' header>
           <Image
             size='mini'
             src='/logo.png'
