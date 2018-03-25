@@ -1,13 +1,26 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import {Button, Menu, Image, Icon, Input, Dropdown} from "semantic-ui-react";
 
-import {Button, Menu, SmHeader, Image, Container, Icon, Input} from "semantic-ui-react";
+import { selectors } from '../../reducers';
+import { steemLogout } from "../../actions/authActions";
 import styles from './Header.css';
+import AccountSelector from "./AccountSelector";
 
 class Header extends Component {
+  constructor(props) {
+    super(props);
+    this.handleLogout = this.handleLogout.bind(this);
+  }
+
+  handleLogout() {
+    this.props.dispatch(steemLogout());
+  }
+
   render() {
-    const { toggleSidebar } = this.props;
+    const { toggleSidebar, isLoggedIn, accounts, activeAccount } = this.props;
 
     return (
       <Menu className={styles.Header} fixed='top' borderless>
@@ -25,11 +38,7 @@ class Header extends Component {
         <Menu.Item style={{width: '30%'}}>
           <Input icon='search' fluid placeholder='Search...' />
         </Menu.Item>
-        <Menu.Menu position='right'>
-          <Menu.Item>
-            <Button as={Link} to="/login">Log-in</Button>
-          </Menu.Item>
-        </Menu.Menu>
+        <AccountSelector />
       </Menu>
     );
   }
@@ -39,4 +48,12 @@ Header.propTypes = {
   toggleSidebar: PropTypes.func.isRequired,
 };
 
-export default Header;
+function mapStateToProps(state) {
+  return {
+    isLoggedIn: selectors.auth.isLoggedIn(state),
+    activeAccount: selectors.auth.activeAccountName(state),
+    accounts: selectors.auth.getAccounts(state),
+  };
+}
+
+export default connect(mapStateToProps)(Header);
