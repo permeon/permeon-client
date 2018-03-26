@@ -27,7 +27,7 @@ const LinkUploadForm = ({
     <Form.Input
       type="text"
       name="link"
-      placeholder='link eg. https://youtube.com/?vid=123k4j12jkl'
+      placeholder='video url... eg. https://youtube.com/?vid=123k4j12jkl'
       onChange={handleChange}
       onBlur={handleBlur}
       value={values.link}
@@ -62,16 +62,37 @@ const LinkUpload = ({ dispatch }) => {
     <div>
       <Formik
         initialValues={{
-          link: 'default link',
-          title: 'default title',
-          body: 'default bod',
-          tags: ['firstTagger'],
+          link: 'https://www.youtube.com/watch?v=pjnBi_styks',
+          title: 'Golden State Warriors vs Utah Jazz Full Game Highlights / March 25 / 2017-18 NBA Season',
+          body: '🏀Golden State Warriors vs Utah Jazz Full Game Highlights / March 25 / 2017-18 NBA Season\n' +
+          '\n' +
+          '👍Follow Us on Twitter: https://twitter.com/stayhls\n' +
+          '\n' +
+          '👍Like Us on Facebook: https://www.facebook.com/stayhls\n' +
+          '\n' +
+          '👀Subscribe To Me On Social Networks To Keep Up To Date With Updates On My Channel :)\n' +
+          '\n' +
+          '⚠️Disclaimer:\n' +
+          '➡️ Monetization is disabled.\n' +
+          '➡️ Companies that claim rights to my videos are entitled to the \n' +
+          'monetisations and will earn a profit from my videos if they \n' +
+          'decide to monetize them. This is not my decision.\n' +
+          '➡️ If you want the video removed, I\'d appreciate if you request the\n' +
+          'video to be globally blocked or muted, since it\'s hassle to deal \n' +
+          'with copyright strikes.\n' +
+          '\n' +
+          '📕Copyright Disclaimer Under Section 107 of the Copyright Act 1976,\n' +
+          'allowance is made for "fair use" for purposes such as criticism,\n' +
+          'comment, news reporting, teaching, scholarship, and research.\n' +
+          'Fair use is a use permitted by copyright statute that might otherwise be infringing.\n' +
+          'Non-profit, educational or personal use tips the balance in favor of fair use.',
+          tags: ['nba', 'warriors', 'jazz'],
         }}
         validationSchema={
           yup.object().shape({
             link: yup.string().required(),
-            title: yup.string().required(),
-            body: yup.string(),
+            title: yup.string().required().max(255),
+            body: yup.string().max(65535, 'Body must not be over 65KB'),
             tags: yup.array().max(4),
           })
         }

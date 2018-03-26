@@ -5,7 +5,9 @@ import yup from "yup";
 import {Form, Button, Message, Segment} from "semantic-ui-react";
 
 import { steemLogin } from "../../actions/authActions";
-import { STEEM_SIGNUP } from "../../lib/constants";
+import config from "../../config";
+
+const { STEEM_SIGNUP } = config.pick('STEEM_SIGNUP');
 
 const LoginForm = ({
   values,
