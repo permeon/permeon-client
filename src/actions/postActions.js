@@ -1,5 +1,4 @@
 import steem from '../lib/steemApi';
-import _ from 'lodash';
 
 import {selectors} from "../reducers";
 import { getAppJsonMetadata, generatePermlink } from "../helpers/postHelpers";

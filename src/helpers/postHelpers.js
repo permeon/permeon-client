@@ -1,6 +1,5 @@
 import uuidv4 from 'uuid/v4';
-const APP_VERSION = '0.1';
-const APP_NAME = 'myapp';
+import { APP_NAME, APP_VERSION } from "../lib/constants";
 
 export function getAppJsonMetadata() {
   return `${APP_NAME}/${APP_VERSION}`;
