@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
-import { Form, Button, Message, Segment } from 'semantic-ui-react';
+import { Divider, Form, Button, Message, Segment } from 'semantic-ui-react';
 import yup from 'yup';
 
+import TagEditor from "../../components/TagEditor/TagEditor";
 
 const LinkUploadForm = ({
   values,
@@ -14,6 +15,7 @@ const LinkUploadForm = ({
   handleBlur,
   handleSubmit,
   isSubmitting,
+  setFieldValue,
 }) => (
   <Form onSubmit={handleSubmit} error size='large'>
     {status && status.map((error, idx) => <Message key={idx} error content={error} />)}
@@ -43,15 +45,9 @@ const LinkUploadForm = ({
       value={values.body}
     />
     {touched.body && errors.body && <Message error content={errors.body} />}
-    <Form.Input
-      type="text"
-      name="tags"
-      placeholder='tags'
-      onChange={handleChange}
-      onBlur={handleBlur}
-      value={values.title}
-    />
+    <TagEditor name='tags' handleChange={setFieldValue} tags={values.tags}/>
     {touched.tags && errors.tags && <Message error content={errors.tags} />}
+    <Divider />
     <Button size="large" floated='right' disabled={isSubmitting}>post</Button>
   </Form>
 );
@@ -64,14 +60,14 @@ const LinkUpload = (props) => {
           link: '',
           title: '',
           body: '',
-          tags: '',
+          tags: ['firstTagger'],
         }}
         validationSchema={
           yup.object().shape({
             link: yup.string().required(),
             title: yup.string().required(),
             body: yup.string(),
-            tags: yup.string(),
+            tags: yup.array(),
           })
         }
         onSubmit={(
@@ -79,7 +75,7 @@ const LinkUpload = (props) => {
           { setSubmitting, setErrors }
         ) => {
           setSubmitting(true);
-          console.log('submitting')
+          console.log('submitting');
           setTimeout(() => {
             setSubmitting(false);
             console.log('done');

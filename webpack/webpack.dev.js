@@ -26,7 +26,7 @@ const devConfig = merge([{
         },
       },
       {
-        test: /^((?!semantic|leaflet).)*\.css$/,
+        test: /^((?!semantic|react-tagsinput).)*\.css$/,
         use: [
           'style-loader',
           {
@@ -43,7 +43,7 @@ const devConfig = merge([{
         ]
       },
       {
-        test: /(semantic\.css|leaflet\.css)/,
+        test: /(semantic\.css|react-tagsinput\.css)/,
         use: [
           'style-loader',
           {

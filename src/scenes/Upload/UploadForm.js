@@ -15,7 +15,7 @@ class UploadForm extends React.Component {
         link: 'nice link',
         title: 'nice title',
         body: 'nice body',
-        tags: 'nice,tag,three',
+        tags: ['one', 'two', 'nice-tag'],
       },
     };
     this.handleTabClick = this.handleTabClick.bind(this);
@@ -31,7 +31,7 @@ class UploadForm extends React.Component {
       case 'linkUploader':
         return <LinkUpload />;
       default:
-        return null;
+        return <div>not implemented</div>;
     }
   }
 
