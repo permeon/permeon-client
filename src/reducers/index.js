@@ -28,5 +28,6 @@ export const selectors = {
     isLoggedIn: state => authSelectors.isLoggedIn(state.auth),
     getAccounts: state => authSelectors.getAccounts(state.auth),
     activeAccountName: state => authSelectors.activeAccountName(state.auth),
+    activeKeys: state => authSelectors.activeKeys(state.auth),
   },
 };

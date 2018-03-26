@@ -46,3 +46,4 @@ export const isLoggedIn = state => !!state.activeAccount;
 export const getAccounts = state => Object.keys(state.accounts)
   .map(username => ({ username, keys: state.accounts[username] }));
 export const activeAccountName = state => state.activeAccount || '';
+export const activeKeys = state => state.accounts[state.activeAccount] || '';

@@ -11,12 +11,6 @@ class UploadForm extends React.Component {
     super(props);
     this.state = {
       activeUploader: 'linkUploader',
-      linkUploader: {
-        link: 'nice link',
-        title: 'nice title',
-        body: 'nice body',
-        tags: ['one', 'two', 'nice-tag'],
-      },
     };
     this.handleTabClick = this.handleTabClick.bind(this);
   }
@@ -37,6 +31,7 @@ class UploadForm extends React.Component {
 
   render() {
     const { activeUploader } = this.state;
+
     return (
       <Segment clearing color='red'>
         <Menu tabular>

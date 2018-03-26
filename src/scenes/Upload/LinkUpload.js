@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Formik } from 'formik';
-import { Divider, Form, Button, Message, Segment } from 'semantic-ui-react';
+import { Loader, Dimmer, Divider, Form, Button, Message, Segment } from 'semantic-ui-react';
 import yup from 'yup';
 
 import TagEditor from "../../components/TagEditor/TagEditor";
+import { postVideo } from "../../actions/postActions";
 
 const LinkUploadForm = ({
   values,
@@ -18,6 +20,9 @@ const LinkUploadForm = ({
   setFieldValue,
 }) => (
   <Form onSubmit={handleSubmit} error size='large'>
+    <Dimmer active={isSubmitting} page>
+      <Loader size='huge'>uploading</Loader>
+    </Dimmer>
     {status && status.map((error, idx) => <Message key={idx} error content={error} />)}
     <Form.Input
       type="text"
@@ -52,14 +57,14 @@ const LinkUploadForm = ({
   </Form>
 );
 
-const LinkUpload = (props) => {
+const LinkUpload = ({ dispatch }) => {
   return (
     <div>
       <Formik
         initialValues={{
-          link: '',
-          title: '',
-          body: '',
+          link: 'default link',
+          title: 'default title',
+          body: 'default bod',
           tags: ['firstTagger'],
         }}
         validationSchema={
@@ -67,19 +72,22 @@ const LinkUpload = (props) => {
             link: yup.string().required(),
             title: yup.string().required(),
             body: yup.string(),
-            tags: yup.array(),
+            tags: yup.array().max(4),
           })
         }
         onSubmit={(
           values,
           { setSubmitting, setErrors }
         ) => {
-          setSubmitting(true);
-          console.log('submitting');
-          setTimeout(() => {
-            setSubmitting(false);
-            console.log('done');
-          }, 800);
+          dispatch(postVideo(values))
+            .then(response => {
+              console.log('response:', response);
+              setSubmitting(false);
+            })
+            .catch(error => {
+              console.log('error:', error);
+              setSubmitting(false);
+            })
         }}
         render={props => <LinkUploadForm {...props} />}
       />
@@ -91,4 +99,4 @@ LinkUpload.propTypes = {
 
 };
 
-export default LinkUpload;
+export default connect()(LinkUpload);
