@@ -1,0 +1,12 @@
+.ChannelBanner {
+  position: relative;
+  min-height: 150px;
+  max-height: 240px;
+}
+
+.BannerImage {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+  position: absolute !important;
+}

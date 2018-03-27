@@ -8,6 +8,8 @@ import Header from '../Header/Header';
 import Home from "../../scenes/Home/Home";
 import Login from "../../scenes/Login/Login";
 import Upload from "../../scenes/Upload/Upload";
+import Channel from "../../scenes/Channel/Channel";
+
 import styles from './App.css';
 
 class App extends Component {
@@ -37,6 +39,7 @@ class App extends Component {
           <Route exact path="/" component={Home} />
           <Route path="/login" component={Login} />
           <Route path="/upload" component={Upload} />
+          <Route path="/channel/:username" component={Channel} />
         </div>
       </div>
     );
