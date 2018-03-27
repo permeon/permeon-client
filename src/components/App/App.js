@@ -9,6 +9,7 @@ import Home from "../../scenes/Home/Home";
 import Login from "../../scenes/Login/Login";
 import Upload from "../../scenes/Upload/Upload";
 import Channel from "../../scenes/Channel/Channel";
+import Video from '../../scenes/Video/Video';
 
 import styles from './App.css';
 
@@ -39,7 +40,8 @@ class App extends Component {
           <Route exact path="/" component={Home} />
           <Route path="/login" component={Login} />
           <Route path="/upload" component={Upload} />
-          <Route path="/channel/:username" component={Channel} />
+          <Route exact path="/channel/:username" component={Channel} />
+          <Route exact path="/channel/:username/:video" component={Video} />
         </div>
       </div>
     );
