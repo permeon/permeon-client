@@ -6,6 +6,8 @@
 
   & img {
     height: 118px;
+    width: 100%;
+    object-fit: cover;
   }
 
   & h4 {
@@ -22,7 +24,6 @@
 
     & img {
       width: 100%;
-      height: auto;
     }
   }
 }

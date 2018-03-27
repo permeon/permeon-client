@@ -28,11 +28,11 @@ class Header extends Component {
           <Icon name='sidebar' className={styles.OpenMenuButton} />
         </Menu.Item>
         <Menu.Item as={Link} to='/' header>
-          <Image
-            size='mini'
-            src='/logo.png'
-            style={{ marginRight: '1.5em' }}
-          />
+          {/*<Image*/}
+            {/*size='mini'*/}
+            {/*src='/logo.png'*/}
+            {/*style={{ marginRight: '1.5em' }}*/}
+          {/*/>*/}
           Permeon
         </Menu.Item>
         <Menu.Item style={{width: '30%'}}>

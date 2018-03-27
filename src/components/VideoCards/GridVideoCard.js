@@ -14,6 +14,7 @@ const GridVideoCard = ({
   playtime,
   rewards,
   date,
+  app,
 }) => {
   return (
     <div className={styles.GridVideoCard}>

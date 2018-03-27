@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 export function storagePut(key, value) {
   window.localStorage.setItem(key, JSON.stringify(value));
 }
@@ -23,18 +25,26 @@ export function transformErrors(errors) {
  * Transforms the payload received from and api into a object.
  * Where keys are the ids mapping to each entity
  * @param payload
- * @param id the key to use for the id of each entity
+ * @param idPath the key to use for the id of each entity
  */
-export function transformPayload(payload, id = "_id") {
+export function transformPayload(payload, idPath = 'id') {
   const entities = {};
   if (Array.isArray(payload)) {
     payload.forEach(entity => {
-      entities[entity[id]] = entity;
+      entities[_.get(entity, idPath)] = entity;
     });
   } else if (typeof payload === "object") {
-    entities[payload[id]] = payload;
+    entities[_.get(payload, idPath)] = payload;
   } else {
     throw new Error("Payload must either be an array or an object.");
   }
   return entities;
+}
+
+export function safeJsonParse(jsonString) {
+  try {
+    return JSON.parse(jsonString);
+  } catch (e) {
+    return null;
+  }
 }

@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Menu, Container, Divider } from 'semantic-ui-react';
 
+import { selectors } from '../../reducers';
 import ChannelBanner from "./ChannelBanner";
 import ChannelAbout from "./ChannelAbout";
 import ChannelVideos from "./ChannelVideos";
+import {channelVideos} from "../../actions/channelActions";
 import styles from './Channel.css';
 
 class Channel extends Component {
@@ -93,7 +95,8 @@ class Channel extends Component {
   }
 
   componentDidMount() {
-    console.log('mounting my dude')
+    console.log('mounting my dude');
+    this.props.dispatch(channelVideos('elimence'));
   }
 
   onMenuClick(event, {name}) {
@@ -102,7 +105,7 @@ class Channel extends Component {
 
   renderActive(activeTab) {
     if (activeTab === 'VIDEOS') {
-      return <ChannelVideos videos={this.state.videos} />;
+      return <ChannelVideos videos={this.props.videos} />;
     } else if (activeTab === 'ABOUT') {
       return <ChannelAbout />;
     }
@@ -112,6 +115,7 @@ class Channel extends Component {
   render() {
     const { username } = this.props;
     const { activeTab } = this.state;
+    // TODO: put urls into config
     const bannerUrl = 'https://img.esteem.ws/jz7gqt5t2c.jpg';
     const avatarUrl = `https://steemitimages.com/u/${username}/avatar/`;
 
@@ -138,8 +142,10 @@ class Channel extends Component {
 Channel.propTypes = {};
 
 function mapStateToProps(state, ownProps) {
+  const username = ownProps.match.params.username;
   return {
-    username: ownProps.match.params.username,
+    username,
+    videos: selectors.channels.allVideos(state, username),
   }
 }
 
