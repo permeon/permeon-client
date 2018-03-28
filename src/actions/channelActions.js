@@ -7,11 +7,24 @@ import {transformPayload} from "../lib/utils";
 
 export const actionTypes = {
   RECEIVE_VIDEOS: 'RECEIVE_VIDEOS',
+  SET_VIDEOS_FETCHING_STATUS: 'SET_VIDEOS_FETCHING_STATUS',
+  SET_CHANNEL_VIDEOS_PAGINATION: 'SET_CHANNEL_VIDEOS_PAGINATION',
 };
 
-export function channelVideos(username, limit=100, startAuthor='', startPermlink='') {
+function setVideosFetching(isFetching) {
+  return {
+    type: actionTypes.SET_VIDEOS_FETCHING_STATUS,
+    isFetching,
+  }
+}
+
+export function channelVideos(username, limit=20, start_author='', start_permlink='') {
   return (dispatch, getState) => {
-    const query = {tag: username, limit, truncate_body: 1};
+    if (selectors.channels.isFetchingVideos(getState())) {
+      return Promise.resolve();
+    }
+    const query = {tag: username, limit, truncate_body: 1, start_author, start_permlink};
+    dispatch(setVideosFetching(true));
     return steem.api.getDiscussionsByBlogAsync(query)
       .then(response => {
         const videoPosts = getVideoPosts(response).filter(post => post.author === username);
@@ -20,11 +33,22 @@ export function channelVideos(username, limit=100, startAuthor='', startPermlink
           payload: transformPayload(videoPosts, 'id'),
           username,
         });
+        dispatch(setVideosFetching(false));
+        console.log('response len:', response.length);
+        if (response.length === limit) {
+          const lastVideo = response[response.length-1];
+          dispatch({
+            type: actionTypes.SET_CHANNEL_VIDEOS_PAGINATION,
+            pagination: {start_author: lastVideo.author, start_permlink: lastVideo.permlink}
+          });
+        }
         console.log('videoPosts:', videoPosts);
       })
       .catch(error => {
         console.log('error:', error);
+        dispatch(setVideosFetching(false));
       });
   }
 }
+
 

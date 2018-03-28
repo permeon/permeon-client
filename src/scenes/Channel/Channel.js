@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Menu, Container, Divider } from 'semantic-ui-react';
+import { Menu, Container, Button } from 'semantic-ui-react';
 
 import { selectors } from '../../reducers';
 import ChannelBanner from "./ChannelBanner";
@@ -16,82 +16,10 @@ class Channel extends Component {
     super(props);
     this.state = {
       activeTab: 'VIDEOS',
-      videos: [
-        // {
-        //   url: '/channel/elimence/fwt6reux',
-        //   title: 'Music talk: Samplers, limitations, creativity, meditation, spirituality.',
-        //   username: 'elimence',
-        //   thumbnail: 'https://snap1.d.tube/ipfs/QmT2CbjZ7tv312ZZ42owPxx9nx9xfEWShGsZqDemYEjec6',
-        //   playtime: '09:07',
-        //   rewards: '$16.516',
-        //   date: '5 hours ago',
-        // },
-        //         {
-        //   url: '/channel/elimence/fwt6reux',
-        //   title: 'Music talk: Samplers, limitations, creativity, meditation, spirituality.',
-        //   username: 'elimence',
-        //   thumbnail: 'https://snap1.d.tube/ipfs/QmT2CbjZ7tv312ZZ42owPxx9nx9xfEWShGsZqDemYEjec6',
-        //   playtime: '09:07',
-        //   rewards: '$16.516',
-        //   date: '5 hours ago',
-        // },
-        //         {
-        //   url: '/channel/elimence/fwt6reux',
-        //   title: 'Music talk: Samplers, limitations, creativity, meditation, spirituality.',
-        //   username: 'elimence',
-        //   thumbnail: 'https://snap1.d.tube/ipfs/QmT2CbjZ7tv312ZZ42owPxx9nx9xfEWShGsZqDemYEjec6',
-        //   playtime: '09:07',
-        //   rewards: '$16.516',
-        //   date: '5 hours ago',
-        // },
-        //         {
-        //   url: '/channel/elimence/fwt6reux',
-        //   title: 'Music talk: Samplers, limitations, creativity, meditation, spirituality.',
-        //   username: 'elimence',
-        //   thumbnail: 'https://snap1.d.tube/ipfs/QmT2CbjZ7tv312ZZ42owPxx9nx9xfEWShGsZqDemYEjec6',
-        //   playtime: '09:07',
-        //   rewards: '$16.516',
-        //   date: '5 hours ago',
-        // },
-        //         {
-        //   url: '/channel/elimence/fwt6reux',
-        //   title: 'Music talk: Samplers, limitations, creativity, meditation, spirituality.',
-        //   username: 'elimence',
-        //   thumbnail: 'https://snap1.d.tube/ipfs/QmT2CbjZ7tv312ZZ42owPxx9nx9xfEWShGsZqDemYEjec6',
-        //   playtime: '09:07',
-        //   rewards: '$16.516',
-        //   date: '5 hours ago',
-        // },
-        //         {
-        //   url: '/channel/elimence/fwt6reux',
-        //   title: 'Music talk: Samplers, limitations, creativity, meditation, spirituality.',
-        //   username: 'elimence',
-        //   thumbnail: 'https://snap1.d.tube/ipfs/QmT2CbjZ7tv312ZZ42owPxx9nx9xfEWShGsZqDemYEjec6',
-        //   playtime: '09:07',
-        //   rewards: '$16.516',
-        //   date: '5 hours ago',
-        // },
-        //         {
-        //   url: '/channel/elimence/fwt6reux',
-        //   title: 'Music talk: Samplers, limitations, creativity, meditation, spirituality.',
-        //   username: 'elimence',
-        //   thumbnail: 'https://snap1.d.tube/ipfs/QmT2CbjZ7tv312ZZ42owPxx9nx9xfEWShGsZqDemYEjec6',
-        //   playtime: '09:07',
-        //   rewards: '$16.516',
-        //   date: '5 hours ago',
-        // },
-        //         {
-        //   url: '/channel/elimence/fwt6reux',
-        //   title: 'Music talk: Samplers, limitations, creativity, meditation, spirituality.',
-        //   username: 'elimence',
-        //   thumbnail: 'https://snap1.d.tube/ipfs/QmT2CbjZ7tv312ZZ42owPxx9nx9xfEWShGsZqDemYEjec6',
-        //   playtime: '09:07',
-        //   rewards: '$16.516',
-        //   date: '5 hours ago',
-        // },
-      ],
+      videos: [],
     };
     this.onMenuClick = this.onMenuClick.bind(this);
+    this.loadMoreVideos = this.loadMoreVideos.bind(this);
   }
 
   componentDidMount() {
@@ -100,6 +28,13 @@ class Channel extends Component {
 
   onMenuClick(event, {name}) {
     this.setState({ activeTab: name });
+  }
+
+  loadMoreVideos() {
+    const { start_author, start_permlink } = this.props.videoPagination;
+    this.props.dispatch(channelVideos(
+      this.props.username, 50, start_author, start_permlink
+    ));
   }
 
   renderActive(activeTab) {
@@ -112,7 +47,7 @@ class Channel extends Component {
   }
 
   render() {
-    const { username } = this.props;
+    const { username, isLoadingVideos } = this.props;
     const { activeTab } = this.state;
     // TODO: put urls into config
     const bannerUrl = 'https://img.esteem.ws/jz7gqt5t2c.jpg';
@@ -132,6 +67,7 @@ class Channel extends Component {
             <Menu.Item name='ABOUT' active={activeTab === 'ABOUT'} onClick={this.onMenuClick} />
           </Menu>
           {this.renderActive(activeTab)}
+          <Button onClick={this.loadMoreVideos}>more</Button>
         </Container>
       </div>
     );
@@ -145,6 +81,8 @@ function mapStateToProps(state, ownProps) {
   return {
     username,
     videos: selectors.channels.allVideos(state, username),
+    isLoadingVideos: selectors.channels.isFetchingVideos(state),
+    videoPagination: selectors.channels.videoPagination(state),
   }
 }
 

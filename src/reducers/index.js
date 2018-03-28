@@ -17,6 +17,9 @@ export const selectors = {
   },
   channels: {
     allVideos: (state, channel) => channelsSelectors.allVideos(state.channels, channel),
-    isLoading: state => channelsSelectors.isLoading(state.channels),
+    isFetchingVideos: state => channelsSelectors.isFetchingVideos(state.channels),
+    videosToFetch: state => channelsSelectors.videosToFetch(state.channels),
+    currentChannel: state => channelsSelectors.currentChannel(state.channels),
+    videoPagination: state => channelsSelectors.videoPagination(state.channels),
   },
 };
