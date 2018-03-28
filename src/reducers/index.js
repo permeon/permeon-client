@@ -2,10 +2,12 @@ import { combineReducers } from "redux";
 
 import authReducer, * as authSelectors from "./auth";
 import channelsReducer, * as channelsSelectors from "./channels";
+import settingsReducer, * as settingsSelectors from "./settings";
 
 export default combineReducers({
   auth: authReducer,
   channels: channelsReducer,
+  settings: settingsReducer,
 });
 
 export const selectors = {
@@ -21,5 +23,8 @@ export const selectors = {
     videosToFetch: state => channelsSelectors.videosToFetch(state.channels),
     currentChannel: state => channelsSelectors.currentChannel(state.channels),
     videoPagination: state => channelsSelectors.videoPagination(state.channels),
+  },
+  settings: {
+    all: state => settingsSelectors.all(state.settings),
   },
 };
