@@ -33,5 +33,5 @@ export default combineReducers({
 });
 
 // Selectors
-export const allVideos = (state, channel) => _.values(state.videos);
+export const allVideos = (state, channel) => _.sortBy(_.values(state.videos), ['created']).reverse();
 export const isLoading = state => state.isLoading;

@@ -9,12 +9,12 @@ export const actionTypes = {
   RECEIVE_VIDEOS: 'RECEIVE_VIDEOS',
 };
 
-export function channelVideos(username, start=0, limit=100) {
+export function channelVideos(username, limit=100, startAuthor='', startPermlink='') {
   return (dispatch, getState) => {
-    // return steem.api.getBlogAsync(username, start, limit)
-    return steem.api.getDiscussionsByBlogAsync({tag: username, limit})
+    const query = {tag: username, limit, truncate_body: 1};
+    return steem.api.getDiscussionsByBlogAsync(query)
       .then(response => {
-        const videoPosts = getVideoPosts(response);
+        const videoPosts = getVideoPosts(response).filter(post => post.author === username);
         dispatch({
           type: actionTypes.RECEIVE_VIDEOS,
           payload: transformPayload(videoPosts, 'id'),

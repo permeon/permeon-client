@@ -19,8 +19,13 @@ export function getVideoPosts(posts) {
   const videos = [];
   posts.forEach(post => {
     const { appName } = getAppInfo(post);
+    const json_metadata = safeJsonParse(post.json_metadata);
+
     if (videoApps.includes(appName)) {
       videos.push(parsers[appName](post));
+    } else if (appName === 'steemit' && _.get(json_metadata, 'video.content.videohash')) {
+      // TODO: refactor quick hack. posts updated by steemit change app name
+      videos.push(parsers['dtube'](post));
     }
   });
   return videos;
