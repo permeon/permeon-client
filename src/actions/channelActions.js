@@ -9,14 +9,22 @@ export const actionTypes = {
   RECEIVE_VIDEOS: 'RECEIVE_VIDEOS',
 };
 
-export function channelVideos(account, start=0, limit=50) {
+export function channelVideos(username, start=0, limit=100) {
   return (dispatch, getState) => {
-    return steem.api.getBlogAsync(account, start, limit)
+    // return steem.api.getBlogAsync(username, start, limit)
+    return steem.api.getDiscussionsByBlogAsync({tag: username, limit})
       .then(response => {
         const videoPosts = getVideoPosts(response);
-        dispatch({type: actionTypes.RECEIVE_VIDEOS, payload: transformPayload(videoPosts, 'id')});
+        dispatch({
+          type: actionTypes.RECEIVE_VIDEOS,
+          payload: transformPayload(videoPosts, 'id'),
+          username,
+        });
         console.log('videoPosts:', videoPosts);
       })
+      .catch(error => {
+        console.log('error:', error);
+      });
   }
 }
 

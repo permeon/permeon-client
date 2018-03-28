@@ -17,5 +17,6 @@ export const selectors = {
   },
   channels: {
     allVideos: (state, channel) => channelsSelectors.allVideos(state.channels, channel),
+    isLoading: state => channelsSelectors.isLoading(state.channels),
   },
 };

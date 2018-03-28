@@ -18,9 +18,9 @@ export function getVideoPosts(posts) {
   console.log('posts:', posts);
   const videos = [];
   posts.forEach(post => {
-    const { appName } = getAppInfo(post.comment);
+    const { appName } = getAppInfo(post);
     if (videoApps.includes(appName)) {
-      videos.push(parsers[appName](post.comment));
+      videos.push(parsers[appName](post));
     }
   });
   return videos;

@@ -21,8 +21,6 @@ const ChannelVideos = ({
 function parseVideos(videos) {
   const cardData = [];
   videos.forEach(video => {
-    console.log('video:', video);
-    console.log('app', getAppInfo(video));
     cardData.push({
       url: `/channel/${video.author}/${video.permlink}`,
       title: video.title,

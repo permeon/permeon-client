@@ -95,8 +95,7 @@ class Channel extends Component {
   }
 
   componentDidMount() {
-    console.log('mounting my dude');
-    this.props.dispatch(channelVideos('elimence'));
+    this.props.dispatch(channelVideos(this.props.username));
   }
 
   onMenuClick(event, {name}) {
