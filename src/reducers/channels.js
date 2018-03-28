@@ -9,7 +9,7 @@ function videos(state = {}, action) {
       const keys = Object.keys(state);
       // For now only cache current channels videos eg. remove videos from other channels
       if (keys.length) {
-        if (state[keys[0]] !== action.username) {
+        if (state[keys[0]].author !== action.username) {
           return {...action.payload};
         }
       }
@@ -45,7 +45,10 @@ export default combineReducers({
 });
 
 // Selectors
-export const allVideos = (state, channel) => _.sortBy(_.values(state.videos), ['created']).reverse();
+export const allVideos = (state, channel) =>
+  _.sortBy(_.values(state.videos), ['created'])
+  .reverse()
+  .filter(video => video.author === channel);
 export const isFetchingVideos = state => state.isFetchingVideos;
 export const videoPagination = state => state.videoPagination;
 export const currentChannel = state => {

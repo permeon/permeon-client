@@ -39,7 +39,12 @@ export function channelVideos(username, limit=20, start_author='', start_permlin
           const lastVideo = response[response.length-1];
           dispatch({
             type: actionTypes.SET_CHANNEL_VIDEOS_PAGINATION,
-            pagination: {start_author: lastVideo.author, start_permlink: lastVideo.permlink}
+            pagination: {start_author: lastVideo.author, start_permlink: lastVideo.permlink},
+          });
+        } else {
+          dispatch({
+            type: actionTypes.SET_CHANNEL_VIDEOS_PAGINATION,
+            pagination: {},
           });
         }
         console.log('videoPosts:', videoPosts);

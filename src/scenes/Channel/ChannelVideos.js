@@ -19,20 +19,16 @@ const ChannelVideos = ({
 };
 
 function parseVideos(videos) {
-  const cardData = [];
-  videos.forEach(video => {
-    cardData.push({
-      url: `/channel/${video.author}/${video.permlink}`,
-      title: video.title,
-      username: video.author,
-      thumbnail: video.videoData.thumbnail,
-      playtime: '09:07',
-      rewards: '$16.516',
-      date: '5 hours ago',
-      app: getAppInfo(video).appName,
-    });
-  });
-  return cardData;
+  return videos.map(video => ({
+    url: `/channel/${video.author}/${video.permlink}`,
+    title: video.title,
+    username: video.author,
+    thumbnail: video.videoData.thumbnail,
+    playtime: '09:07',
+    rewards: '$16.516',
+    date: '5 hours ago',
+    app: getAppInfo(video).appName,
+  }));
 }
 
 ChannelVideos.propTypes = {

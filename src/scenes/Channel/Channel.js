@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Menu, Container, Button } from 'semantic-ui-react';
+import { Menu, Container, Button, Divider } from 'semantic-ui-react';
 
 import { selectors } from '../../reducers';
 import ChannelBanner from "./ChannelBanner";
@@ -9,6 +9,7 @@ import ChannelAbout from "./ChannelAbout";
 import ChannelVideos from "./ChannelVideos";
 import {channelVideos} from "../../actions/channelActions";
 import styles from './Channel.css';
+import {videoPagination} from "../../reducers/channels";
 
 class Channel extends Component {
 
@@ -16,14 +17,15 @@ class Channel extends Component {
     super(props);
     this.state = {
       activeTab: 'VIDEOS',
-      videos: [],
     };
     this.onMenuClick = this.onMenuClick.bind(this);
     this.loadMoreVideos = this.loadMoreVideos.bind(this);
   }
 
   componentDidMount() {
-    this.props.dispatch(channelVideos(this.props.username));
+    if (!this.props.videos.length) {
+      this.props.dispatch(channelVideos(this.props.username));
+    }
   }
 
   onMenuClick(event, {name}) {
@@ -47,7 +49,7 @@ class Channel extends Component {
   }
 
   render() {
-    const { username, isLoadingVideos } = this.props;
+    const { username, moreVideosToLoad } = this.props;
     const { activeTab } = this.state;
     // TODO: put urls into config
     const bannerUrl = 'https://img.esteem.ws/jz7gqt5t2c.jpg';
@@ -67,7 +69,8 @@ class Channel extends Component {
             <Menu.Item name='ABOUT' active={activeTab === 'ABOUT'} onClick={this.onMenuClick} />
           </Menu>
           {this.renderActive(activeTab)}
-          <Button onClick={this.loadMoreVideos}>more</Button>
+          <Divider clearing />
+          {moreVideosToLoad && <Button onClick={this.loadMoreVideos} floated='right'>more</Button>}
         </Container>
       </div>
     );
@@ -83,6 +86,7 @@ function mapStateToProps(state, ownProps) {
     videos: selectors.channels.allVideos(state, username),
     isLoadingVideos: selectors.channels.isFetchingVideos(state),
     videoPagination: selectors.channels.videoPagination(state),
+    moreVideosToLoad: !!Object.keys(selectors.channels.videoPagination(state)).length,
   }
 }
 
