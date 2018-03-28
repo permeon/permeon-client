@@ -12,6 +12,7 @@ import Channel from "../../scenes/Channel/Channel";
 import Video from '../../scenes/Video/Video';
 
 import styles from './App.css';
+import Settings from "../../scenes/Settings/Settings";
 
 class App extends Component {
   constructor(props) {
@@ -40,6 +41,7 @@ class App extends Component {
           <Route exact path="/" component={Home} />
           <Route path="/login" component={Login} />
           <Route path="/upload" component={Upload} />
+          <Route path="/settings" component={Settings} />
           <Route exact path="/channel/:username" component={Channel} />
           <Route exact path="/channel/:username/:video" component={Video} />
         </div>

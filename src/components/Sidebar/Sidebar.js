@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { withRouter, Link } from 'react-router-dom';
 
-import { Menu, Icon } from "semantic-ui-react";
+import { Menu, Icon, Divider } from "semantic-ui-react";
 import styles from './Sidebar.css';
 
 class Sidebar extends Component {
@@ -32,6 +32,11 @@ class Sidebar extends Component {
         <Menu.Item name='channel' active={path === '/channel'} onClick={this.handleItemClick} as={Link} to="/channel">
           My Channel
           <Icon name="grid layout"/>
+        </Menu.Item>
+        <Divider />
+        <Menu.Item name='settings' active={path === '/settings'} onClick={this.handleItemClick} as={Link} to="/settings">
+          Settings
+          <Icon name="setting"/>
         </Menu.Item>
       </Menu>
     );

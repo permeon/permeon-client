@@ -39,6 +39,9 @@ class Header extends Component {
           <Input icon='search' fluid placeholder='Search...' />
         </Menu.Item>
         <Menu.Menu position='right'>
+          <Menu.Item as={Link} to='/settings' title='Settings'>
+            <Icon name='setting' />
+          </Menu.Item>
           <Menu.Item as={Link} to='/upload' title='Upload Video'>
             <Icon name='cloud upload' />
           </Menu.Item>

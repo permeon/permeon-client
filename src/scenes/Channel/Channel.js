@@ -54,8 +54,6 @@ class Channel extends Component {
     // TODO: put urls into config
     const bannerUrl = 'https://img.esteem.ws/jz7gqt5t2c.jpg';
     const avatarUrl = `https://steemitimages.com/u/${username}/avatar/`;
-    console.log('isLoading:', isLoadingVideos);
-
 
     return (
       <div>
