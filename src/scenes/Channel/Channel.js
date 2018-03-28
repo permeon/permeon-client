@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Menu, Container, Button, Divider } from 'semantic-ui-react';
+import { Menu, Container, Button, Divider, Loader } from 'semantic-ui-react';
 
 import { selectors } from '../../reducers';
 import ChannelBanner from "./ChannelBanner";
@@ -49,11 +49,13 @@ class Channel extends Component {
   }
 
   render() {
-    const { username, moreVideosToLoad } = this.props;
+    const { username, moreVideosToLoad, isLoadingVideos } = this.props;
     const { activeTab } = this.state;
     // TODO: put urls into config
     const bannerUrl = 'https://img.esteem.ws/jz7gqt5t2c.jpg';
     const avatarUrl = `https://steemitimages.com/u/${username}/avatar/`;
+    console.log('isLoading:', isLoadingVideos);
+
 
     return (
       <div>
@@ -69,7 +71,8 @@ class Channel extends Component {
             <Menu.Item name='ABOUT' active={activeTab === 'ABOUT'} onClick={this.onMenuClick} />
           </Menu>
           {this.renderActive(activeTab)}
-          <Divider clearing />
+          <Loader active={isLoadingVideos} size='large'/>
+          {moreVideosToLoad && <Divider clearing />}
           {moreVideosToLoad && <Button onClick={this.loadMoreVideos} floated='right'>more</Button>}
         </Container>
       </div>
