@@ -1,0 +1,38 @@
+
+/*@media (min-width: 0px) and (max-width: 447px) {*/
+  /*.ContentContainer {*/
+    /*width: 214px !important;*/
+  /*}*/
+/*}*/
+
+/*@media (min-width: 448px) and (max-width: 661px) {*/
+/*@media (max-width: 661px) {*/
+  /*.ContentContainer {*/
+    /*width: 428px !important;*/
+  /*}*/
+/*}*/
+
+@media (min-width: 662px) {
+  .ContentContainer {
+    width: 642px !important;
+  }
+}
+
+@media (min-width: 876px) {
+  .ContentContainer {
+    width: 856px !important;
+  }
+}
+
+@media (min-width: 1090px) {
+  .ContentContainer {
+    width: 1070px !important;
+  }
+}
+
+@media (min-width: 1304px) {
+  .ContentContainer {
+    width: 1284px !important;
+  }
+}
+
