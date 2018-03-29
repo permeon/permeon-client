@@ -11,7 +11,7 @@ const ChannelBanner = ({
   avatarUrl,
   isSubscribed,
   onSubscribe,
-  subscriberCounts,
+  onUnSubscribe,
 }) => {
   return (
     <div className={styles.ChannelBanner}>
@@ -19,14 +19,24 @@ const ChannelBanner = ({
       <Container style={{paddingTop: '10px', position: 'relative'}}>
         <Image src={avatarUrl} circular style={{height: '80%'}} verticalAlign='middle' floated='left' />
         <Header as='h3' style={{position: 'relative', marginTop: '100px'}} floated='left' inverted>{username}</Header>
-        <Button
-          floated='right'
-          color='red'
-          onClick={onSubscribe}
-          style={{marginTop: '80px'}}
-        >
-          Subscribe
-        </Button>
+        {isSubscribed ? (
+          <Button
+            floated='right'
+            onClick={onUnSubscribe}
+            style={{marginTop: '80px'}}
+          >
+            UNSUBSCRIBE
+          </Button>
+        ) : (
+          <Button
+            floated='right'
+            color='red'
+            onClick={onSubscribe}
+            style={{marginTop: '80px'}}
+          >
+            SUBSCRIBE
+          </Button>
+        )}
       </Container>
     </div>
   );

@@ -9,6 +9,10 @@ import ChannelAbout from "./ChannelAbout";
 import GridVideoCardLayout from "../../components/VideoCards/GridVideoCardLayout";
 import GridVideoCards from "../../components/VideoCards/GridVideoCards";
 import {channelVideos} from "../../actions/channelActions";
+import {
+  subscribe, unSubscribe, subscriptionCount, subscriptions,
+  allSubscriptions
+} from "../../actions/subscriptionsActions";
 import styles from './Channel.css';
 
 class Channel extends Component {
@@ -20,12 +24,23 @@ class Channel extends Component {
     };
     this.onMenuClick = this.onMenuClick.bind(this);
     this.loadMoreVideos = this.loadMoreVideos.bind(this);
+    this.onSubscribeClick = this.onSubscribeClick.bind(this);
+    this.onUnSubscribeClick = this.onUnSubscribeClick.bind(this);
   }
 
   componentDidMount() {
     if (!this.props.videos.length) {
-      this.props.dispatch(channelVideos(this.props.username));
+      // this.props.dispatch(channelVideos(this.props.username));
     }
+    // this.props.dispatch(subscriptionCount(this.props.username));
+  }
+
+  onSubscribeClick() {
+    this.props.dispatch(subscribe(this.props.username));
+  }
+
+  onUnSubscribeClick() {
+    this.props.dispatch(unSubscribe(this.props.username));
   }
 
   onMenuClick(event, {name}) {
@@ -61,7 +76,9 @@ class Channel extends Component {
           username={username}
           bannerUrl={bannerUrl}
           avatarUrl={avatarUrl}
-          onSubscribe={() => alert('not implemented')}
+          isSubscribed={true}
+          onSubscribe={this.onSubscribeClick}
+          onUnSubscribe={this.onUnSubscribeClick}
         />
         <GridVideoCardLayout>
           <Menu pointing secondary tabular attached='top' className={styles.ChannelMenu}>
@@ -81,6 +98,7 @@ class Channel extends Component {
 Channel.propTypes = {};
 
 function mapStateToProps(state, ownProps) {
+  allSubscriptions()(()=>0, ()=>state);
   const username = ownProps.match.params.username;
   return {
     username,

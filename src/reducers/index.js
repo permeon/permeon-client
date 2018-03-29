@@ -4,12 +4,14 @@ import authReducer, * as authSelectors from "./auth";
 import channelsReducer, * as channelsSelectors from "./channels";
 import settingsReducer, * as settingsSelectors from "./settings";
 import videosReducer, * as videosSelectors from "./videos";
+import subscriptionsReducer, * as subscriptionsSelectors from "./subscriptions";
 
 export default combineReducers({
   auth: authReducer,
   channels: channelsReducer,
   settings: settingsReducer,
   videos: videosReducer,
+  subscriptions: subscriptionsReducer,
 });
 
 export const selectors = {
@@ -35,5 +37,10 @@ export const selectors = {
     hot: state => videosSelectors.hot(state.videos),
     feed: state => videosSelectors.feed(state.videos),
     isLoading: (state, category)=> videosSelectors.isLoading(state.videos, category),
-  }
+  },
+  subscriptions: {
+    isSubscribedTo: (state, account, channel) => subscriptionsSelectors.isSubscribedTo(state.subscriptions, account, channel),
+    subscriberCount: (state, channel) => subscriptionsSelectors.subscriberCount(state.subscriptions, channel),
+    subscriberCountLoading: (state, channel) => subscriptionsSelectors.subscriberCountLoading(state.subscriptions, channel),
+  },
 };
