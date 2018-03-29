@@ -60,4 +60,5 @@ export const trending = state => state.trending.videos;
 export const created = state => state.created.videos;
 export const hot = state => state.hot.videos;
 export const feed = state => state.feed.videos;
+export const isLoading = (state, category) => state[category].isFetching;
 

@@ -34,5 +34,6 @@ export const selectors = {
     created: state => videosSelectors.created(state.videos),
     hot: state => videosSelectors.hot(state.videos),
     feed: state => videosSelectors.feed(state.videos),
+    isLoading: (state, category)=> videosSelectors.isLoading(state.videos, category),
   }
 };
