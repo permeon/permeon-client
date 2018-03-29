@@ -1,15 +1,15 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Menu, Container, Button, Divider, Loader } from 'semantic-ui-react';
+import { Menu, Button, Divider, Loader } from 'semantic-ui-react';
 
 import { selectors } from '../../reducers';
 import ChannelBanner from "./ChannelBanner";
 import ChannelAbout from "./ChannelAbout";
-import ChannelVideos from "./ChannelVideos";
+import GridVideoCardLayout from "../../components/VideoCards/GridVideoCardLayout";
+import GridVideoCards from "../../components/VideoCards/GridVideoCards";
 import {channelVideos} from "../../actions/channelActions";
 import styles from './Channel.css';
-import {videoPagination} from "../../reducers/channels";
 
 class Channel extends Component {
 
@@ -41,7 +41,7 @@ class Channel extends Component {
 
   renderActive(activeTab) {
     if (activeTab === 'VIDEOS') {
-      return <ChannelVideos videos={this.props.videos} />;
+      return <GridVideoCards videos={this.props.videos} />;
     } else if (activeTab === 'ABOUT') {
       return <ChannelAbout />;
     }
@@ -63,7 +63,7 @@ class Channel extends Component {
           avatarUrl={avatarUrl}
           onSubscribe={() => alert('not implemented')}
         />
-        <Container className={styles.ContentContainer}>
+        <GridVideoCardLayout>
           <Menu pointing secondary tabular attached='top' className={styles.ChannelMenu}>
             <Menu.Item name='VIDEOS' active={activeTab === 'VIDEOS'} onClick={this.onMenuClick} />
             <Menu.Item name='ABOUT' active={activeTab === 'ABOUT'} onClick={this.onMenuClick} />
@@ -72,7 +72,7 @@ class Channel extends Component {
           <Loader active={isLoadingVideos} size='large'/>
           {moreVideosToLoad && <Divider clearing />}
           {moreVideosToLoad && <Button onClick={this.loadMoreVideos} floated='right'>more</Button>}
-        </Container>
+        </GridVideoCardLayout>
       </div>
     );
   }
