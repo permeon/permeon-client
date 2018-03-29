@@ -30,6 +30,9 @@ function receiveVideos(videos, category) {
 export function fetchTrending(tag, limit=20, start_author='', permlink='') {
   const category = 'trending';
   return (dispatch, getState) => {
+    if (selectors.videos.isLoading(getState(), category)) {
+      return Promise.resolve();
+    }
     dispatch(setVideosFetching(true, category));
     return steem.api.getDiscussionsByTrendingAsync({tag, limit, start_author, permlink})
       .then(response => {
@@ -49,6 +52,9 @@ export function fetchTrending(tag, limit=20, start_author='', permlink='') {
 export function fetchCreated(tag, limit=20, start_author='', permlink='') {
   const category = 'created';
   return (dispatch, getState) => {
+    if (selectors.videos.isLoading(getState(), category)) {
+      return Promise.resolve();
+    }
     dispatch(setVideosFetching(true, category));
     return steem.api.getDiscussionsByCreatedAsync({tag, limit, start_author, permlink})
       .then(response => {
@@ -68,6 +74,9 @@ export function fetchCreated(tag, limit=20, start_author='', permlink='') {
 export function fetchHot(tag, limit=20, start_author='', permlink='') {
   const category = 'hot';
   return (dispatch, getState) => {
+    if (selectors.videos.isLoading(getState(), category)) {
+      return Promise.resolve();
+    }
     dispatch(setVideosFetching(true, category));
     return steem.api.getDiscussionsByHotAsync({tag, limit, start_author, permlink})
       .then(response => {
@@ -87,6 +96,9 @@ export function fetchHot(tag, limit=20, start_author='', permlink='') {
 export function fetchFeed(tag, limit=20, start_author='', permlink='') {
   const category = 'feed';
   return (dispatch, getState) => {
+    if (selectors.videos.isLoading(getState(), category)) {
+      return Promise.resolve();
+    }
     dispatch(setVideosFetching(true, category));
     return steem.api.getDiscussionsByFeedAsync({tag, limit, start_author, permlink})
       .then(response => {

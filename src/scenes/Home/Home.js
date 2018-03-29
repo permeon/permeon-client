@@ -37,6 +37,7 @@ class Home extends Component {
           <Header as='h3'>Subscriptions</Header>
           <GridVideoCards videos={subscriptionVideos} />
           <Loader inline active={subscriptionVideosLoading} />
+          <br/>
           {!subscriptionVideosLoading && <Link to='/feed'>SHOW MORE</Link>}
           <Divider />
         </GridVideoCardLayout>
@@ -44,6 +45,7 @@ class Home extends Component {
           <Header as='h3'>Trending</Header>
           <GridVideoCards videos={trendingVideos} />
           <Loader inline active={trendingVideosLoading} />
+          <br/>
           {!trendingVideosLoading && <Link to='/trending'>SHOW MORE</Link>}
           <Divider />
         </GridVideoCardLayout>
@@ -51,6 +53,7 @@ class Home extends Component {
           <Header as='h3'>Hot</Header>
           <GridVideoCards videos={hotVideos} />
           <Loader inline active={hotVideosLoading} />
+          <br/>
           {!hotVideosLoading && <Link to='/hot'>SHOW MORE</Link>}
           <Divider />
         </GridVideoCardLayout>
@@ -58,6 +61,7 @@ class Home extends Component {
           <Header as='h3'>New</Header>
           <GridVideoCards videos={newVideos} />
           <Loader inline active={newVideosLoading} />
+          <br/>
           {!newVideosLoading && <Link to='/new'>SHOW MORE</Link>}
           <Divider />
         </GridVideoCardLayout>
@@ -70,8 +74,8 @@ Home.propTypes = {};
 
 function mapStateToProps(state, ownProps) {
   return {
-    // username: selectors.auth.activeAccountName(state),
-    username: 'davidpakman',
+    username: selectors.auth.activeAccountName(state),
+    // username: 'davidpakman',
     trendingVideos: selectors.videos.trending(state),
     newVideos: selectors.videos.created(state),
     hotVideos: selectors.videos.hot(state),
