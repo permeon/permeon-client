@@ -33,7 +33,7 @@ class Home extends Component {
         <GridVideoCardLayout style={{marginTop: '30px'}}>
           <Header as='h3'>Subscriptions</Header>
           <GridVideoCards videos={subscriptionVideos} />
-          <Link to='/trending'>SHOW MORE</Link>
+          <Link to='/feed'>SHOW MORE</Link>
           <Divider />
         </GridVideoCardLayout>
         <GridVideoCardLayout style={{marginTop: '30px'}}>
@@ -45,7 +45,7 @@ class Home extends Component {
         <GridVideoCardLayout style={{marginTop: '30px'}}>
           <Header as='h3'>Hot</Header>
           <GridVideoCards videos={hotVideos} />
-          <Link to='/new'>SHOW MORE</Link>
+          <Link to='/hot'>SHOW MORE</Link>
           <Divider />
         </GridVideoCardLayout>
         <GridVideoCardLayout style={{marginTop: '30px'}}>
