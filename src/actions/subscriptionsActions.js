@@ -43,6 +43,15 @@ export function subscriptionCount(channel) {
     return steem.api.getFollowCountAsync(channel)
       .then(response => {
         console.log('response:', response)
+        dispatch({
+          type: actionTypes.RECEIVE_SUBSCRIPTION_COUNTS,
+          payload: {
+            [channel]: {
+              subscriptions: response.following_count,
+              subscribers: response.follower_count,
+            }
+          }
+        })
       })
       .catch(error => {
         console.log('error:', error);
@@ -56,6 +65,12 @@ export function subscriptions(limit=100, startFollowing='') {
     return steem.api.getFollowingAsync(activeAccount, startFollowing, 'blog', limit)
       .then(response => {
         console.log('response:', response)
+        dispatch({
+          type: actionTypes.RECEIVE_SUBSCRIPTIONS,
+          payload: response,
+          account: activeAccount,
+        });
+
         return response;
       })
       .catch(error => {

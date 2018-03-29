@@ -33,6 +33,9 @@ class Channel extends Component {
       // this.props.dispatch(channelVideos(this.props.username));
     }
     // this.props.dispatch(subscriptionCount(this.props.username));
+    if (!this.props.mySubscriptions) {
+      this.props.dispatch(subscriptions());
+    }
   }
 
   onSubscribeClick() {
@@ -64,7 +67,7 @@ class Channel extends Component {
   }
 
   render() {
-    const { username, moreVideosToLoad, isLoadingVideos } = this.props;
+    const { username, moreVideosToLoad, isLoadingVideos, isSubscribedTo } = this.props;
     const { activeTab } = this.state;
     // TODO: put urls into config
     const bannerUrl = 'https://img.esteem.ws/jz7gqt5t2c.jpg';
@@ -76,7 +79,7 @@ class Channel extends Component {
           username={username}
           bannerUrl={bannerUrl}
           avatarUrl={avatarUrl}
-          isSubscribed={true}
+          isSubscribed={isSubscribedTo}
           onSubscribe={this.onSubscribeClick}
           onUnSubscribe={this.onUnSubscribeClick}
         />
@@ -98,14 +101,16 @@ class Channel extends Component {
 Channel.propTypes = {};
 
 function mapStateToProps(state, ownProps) {
-  allSubscriptions()(()=>0, ()=>state);
   const username = ownProps.match.params.username;
+  const activeAccount = selectors.auth.activeAccountName(state);
   return {
     username,
     videos: selectors.channels.allVideos(state, username),
     isLoadingVideos: selectors.channels.isFetchingVideos(state),
     videoPagination: selectors.channels.videoPagination(state),
     moreVideosToLoad: !!Object.keys(selectors.channels.videoPagination(state)).length,
+    isSubscribedTo: selectors.subscriptions.isSubscribedTo(state, activeAccount, username),
+    mySubscriptions: selectors.subscriptions.mySubscriptions(state, activeAccount),
   }
 }
 

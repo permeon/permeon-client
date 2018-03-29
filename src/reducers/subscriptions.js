@@ -6,7 +6,13 @@ import { actionTypes } from "../actions/subscriptionsActions";
 function subscriptions(state = {}, action) {
   switch(action.type) {
     case actionTypes.RECEIVE_SUBSCRIPTIONS:
-      return state;
+      return {
+        ...state,
+        [action.account]: [
+          ...(state[action.account] || []),
+          ...action.payload.map(obj => obj.following)
+        ],
+      };
     default:
       return state;
   }
@@ -27,7 +33,8 @@ export default combineReducers({
 });
 
 // Selectors
-export const isSubscribedTo = (state, account, channel) => state.subscriptions[account].includes(channel);
+export const isSubscribedTo = (state, account, channel) => _.includes(state.subscriptions[account], channel);
+export const mySubscriptions = (state, account) => state.subscriptions[account];
 
 export const subscriberCount = (state, channel) => _.get(state.counts[channel], 'subscribers', -1);
 export const subscriberCountLoading = (state, channel) => _.get(state.counts[channel], 'isLoading', false);
