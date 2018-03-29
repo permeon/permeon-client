@@ -4,9 +4,9 @@ import { Container } from 'semantic-ui-react';
 
 import styles from './GridVideoCardLayout.css';
 
-const GridVideoCardLayout = ({ children }) => {
+const GridVideoCardLayout = ({ children, ...rest }) => {
   return (
-    <Container className={styles.ContentContainer}>
+    <Container className={styles.ContentContainer} {...rest}>
       {children}
     </Container>
   );

@@ -3,11 +3,13 @@ import { combineReducers } from "redux";
 import authReducer, * as authSelectors from "./auth";
 import channelsReducer, * as channelsSelectors from "./channels";
 import settingsReducer, * as settingsSelectors from "./settings";
+import videosReducer, * as videosSelectors from "./videos";
 
 export default combineReducers({
   auth: authReducer,
   channels: channelsReducer,
   settings: settingsReducer,
+  videos: videosReducer,
 });
 
 export const selectors = {
@@ -27,4 +29,10 @@ export const selectors = {
   settings: {
     all: state => settingsSelectors.all(state.settings),
   },
+  videos: {
+    trending: state => videosSelectors.trending(state.videos),
+    created: state => videosSelectors.created(state.videos),
+    hot: state => videosSelectors.hot(state.videos),
+    feed: state => videosSelectors.feed(state.videos),
+  }
 };
