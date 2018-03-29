@@ -30,7 +30,7 @@ class Channel extends Component {
 
   componentDidMount() {
     if (!this.props.videos.length) {
-      // this.props.dispatch(channelVideos(this.props.username));
+      this.props.dispatch(channelVideos(this.props.username));
     }
     // this.props.dispatch(subscriptionCount(this.props.username));
     if (!this.props.mySubscriptions) {

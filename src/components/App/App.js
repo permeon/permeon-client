@@ -43,7 +43,7 @@ class App extends Component {
           <Route path="/upload" component={Upload} />
           <Route path="/settings" component={Settings} />
           <Route exact path="/channel/:username" component={Channel} />
-          <Route exact path="/channel/:username/:video" component={Video} />
+          <Route exact path="/channel/:username/:permlink" component={Video} />
         </div>
       </div>
     );
