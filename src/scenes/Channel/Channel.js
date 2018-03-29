@@ -67,7 +67,7 @@ class Channel extends Component {
   }
 
   render() {
-    const { username, moreVideosToLoad, isLoadingVideos, isSubscribedTo } = this.props;
+    const { username, moreVideosToLoad, isLoadingVideos, isSubscribedTo, isSubbingUnsubbing } = this.props;
     const { activeTab } = this.state;
     // TODO: put urls into config
     const bannerUrl = 'https://img.esteem.ws/jz7gqt5t2c.jpg';
@@ -82,6 +82,7 @@ class Channel extends Component {
           isSubscribed={isSubscribedTo}
           onSubscribe={this.onSubscribeClick}
           onUnSubscribe={this.onUnSubscribeClick}
+          isSubButtonLoading={isSubbingUnsubbing}
         />
         <GridVideoCardLayout>
           <Menu pointing secondary tabular attached='top' className={styles.ChannelMenu}>
@@ -111,6 +112,7 @@ function mapStateToProps(state, ownProps) {
     moreVideosToLoad: !!Object.keys(selectors.channels.videoPagination(state)).length,
     isSubscribedTo: selectors.subscriptions.isSubscribedTo(state, activeAccount, username),
     mySubscriptions: selectors.subscriptions.mySubscriptions(state, activeAccount),
+    isSubbingUnsubbing: selectors.subscriptions.isSubbingUnsubbing(state, activeAccount, username)
   }
 }
 

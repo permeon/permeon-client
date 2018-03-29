@@ -4,7 +4,18 @@ import {selectors} from '../reducers';
 export const actionTypes = {
   RECEIVE_SUBSCRIPTION_COUNTS: '@subscriptions/RECEIVE_SUBSCRIPTION_COUNTS',
   RECEIVE_SUBSCRIPTIONS: '@subscriptions/RECEIVE_SUBSCRIPTIONS',
+  REMOVE_SUBSCRIPTION: '@subscriptiosn/REMOVE_SUBSCRIPTION',
+  SUB_UNSUB_SET_LOADING: '@subscriptiosn/SUB_UNSUB_SET_LOADING',
 };
+
+function subUnsubLoading(account, channel, isLoading) {
+  return {
+    type: actionTypes.SUB_UNSUB_SET_LOADING,
+    account,
+    channel,
+    isLoading,
+  }
+}
 
 export function subscribe(channel) {
   return (dispatch, getState) => {
@@ -12,11 +23,19 @@ export function subscribe(channel) {
     const postingKey = selectors.auth.activeKeys(state).posting;
     const activeAccount = selectors.auth.activeAccountName(state);
     const payload = ['follow', {follower: activeAccount, following: channel, what: ['blog']}];
+    dispatch(subUnsubLoading(activeAccount, channel, true));
     return steem.broadcast.customJsonAsync(postingKey, [], [activeAccount], 'follow', JSON.stringify(payload))
       .then(response => {
         console.log('response:', response);
+        dispatch(subUnsubLoading(activeAccount, channel, false));
+        dispatch({
+          type: actionTypes.RECEIVE_SUBSCRIPTIONS,
+          payload: [{following: channel}],
+          account: activeAccount,
+        });
       })
       .catch(error => {
+        dispatch(subUnsubLoading(activeAccount, channel, false));
         console.log('error:', error);
       });
   }
@@ -28,11 +47,19 @@ export function unSubscribe(channel) {
     const postingKey = selectors.auth.activeKeys(state).posting;
     const activeAccount = selectors.auth.activeAccountName(state);
     const payload = ['follow', {follower: activeAccount, following: channel, what: ['']}];
+    dispatch(subUnsubLoading(activeAccount, channel, true));
     return steem.broadcast.customJsonAsync(postingKey, [], [activeAccount], 'follow', JSON.stringify(payload))
       .then(response => {
         console.log('response:', response);
+        dispatch(subUnsubLoading(activeAccount, channel, false));
+        dispatch({
+          type: actionTypes.REMOVE_SUBSCRIPTION,
+          channel,
+          account: activeAccount,
+        });
       })
       .catch(error => {
+        dispatch(subUnsubLoading(activeAccount, channel, false));
         console.log('error:', error);
       });
   }

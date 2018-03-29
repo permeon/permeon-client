@@ -12,6 +12,7 @@ const ChannelBanner = ({
   isSubscribed,
   onSubscribe,
   onUnSubscribe,
+  isSubButtonLoading,
 }) => {
   return (
     <div className={styles.ChannelBanner}>
@@ -24,6 +25,8 @@ const ChannelBanner = ({
             floated='right'
             onClick={onUnSubscribe}
             style={{marginTop: '80px'}}
+            loading={isSubButtonLoading}
+            disabled={isSubButtonLoading}
           >
             UNSUBSCRIBE
           </Button>
@@ -33,6 +36,8 @@ const ChannelBanner = ({
             color='red'
             onClick={onSubscribe}
             style={{marginTop: '80px'}}
+            loading={isSubButtonLoading}
+            disabled={isSubButtonLoading}
           >
             SUBSCRIBE
           </Button>

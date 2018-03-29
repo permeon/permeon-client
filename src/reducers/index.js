@@ -41,6 +41,7 @@ export const selectors = {
   subscriptions: {
     isSubscribedTo: (state, account, channel) => subscriptionsSelectors.isSubscribedTo(state.subscriptions, account, channel),
     mySubscriptions: (state, account) => subscriptionsSelectors.mySubscriptions(state.subscriptions, account),
+    isSubbingUnsubbing: (state, account, channel) => subscriptionsSelectors.isSubbingUnsubbing(state.subscriptions, account, channel),
     subscriberCount: (state, channel) => subscriptionsSelectors.subscriberCount(state.subscriptions, channel),
     subscriberCountLoading: (state, channel) => subscriptionsSelectors.subscriberCountLoading(state.subscriptions, channel),
   },
