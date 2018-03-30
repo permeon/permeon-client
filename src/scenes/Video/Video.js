@@ -36,7 +36,7 @@ class Video extends Component {
             <Segment vertical>
               <Item.Group>
                 <Item>
-                  <Image circular src={`https://steemitimages.com/u/${video.author}/avatar/`} style={{width: '48px', height: '48px'}}/>
+                  <Avatar username={video.author} style={{width: '48px', height: '48px'}} />
                   <Item.Content>
                     <Item.Header as='h5'>{video.author}</Item.Header>
                     <Item.Meta>{video.date}</Item.Meta>

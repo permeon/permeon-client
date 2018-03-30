@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Container, Image, Header, Button } from 'semantic-ui-react';
 
 import styles from './ChannelBanner.css';
+import Avatar from "../../components/Avatar/Avatar";
 
 // TODO: Put styles in css file and fix positioning
 const ChannelBanner = ({

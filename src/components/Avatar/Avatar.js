@@ -4,10 +4,7 @@ import {Image} from "semantic-ui-react";
 
 const Avatar = ({ username, ...rest }) => {
   return (
-    <div>
-      <Image avatar src={`https://steemitimages.com/u/${username}/avatar/`} {...rest} />
-      {username}
-    </div>
+    <Image avatar src={`https://steemitimages.com/u/${username}/avatar/`} {...rest} />
   );
 };
 

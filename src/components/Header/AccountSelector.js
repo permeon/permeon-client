@@ -17,7 +17,7 @@ const AccountSelector = ({
 }) => {
   return (
     isLoggedIn ? (
-      <Dropdown item trigger={<Avatar username={activeAccount}/>}>
+      <Dropdown item trigger={<div><Avatar username={activeAccount}/>{activeAccount}</div>}>
         <Dropdown.Menu>
           {accountItems(accounts, activeAccount, onAccountClick)}
           <Dropdown.Divider style={{margin: 0}}/>
