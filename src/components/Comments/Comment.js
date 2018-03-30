@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Comment as SMComment, Header, Button, Icon } from 'semantic-ui-react';
+import DownvoteButton from "../Buttons/DownvoteButton";
+import UpvoteButton from "../Buttons/UpvoteButton";
 
 const Comment = ({
   children,
@@ -26,16 +28,10 @@ const Comment = ({
         </SMComment.Text>
         <SMComment.Actions>
           <SMComment.Action>
-            <Button style={{background: 'none', padding: '2px 4px'}}>
-              <Icon name='thumbs up'/>
-              {upvotes}
-            </Button>
+            <UpvoteButton upvotes={upvotes} style={{padding: '2px 4px'}}/>
           </SMComment.Action>
           <SMComment.Action>
-            <Button style={{background: 'none', padding: '2px 4px'}}>
-              <Icon name='thumbs down'/>
-              {downvotes}
-            </Button>
+            <DownvoteButton downvotes={downvotes} style={{padding: '2px 4px'}}/>
           </SMComment.Action>
           <SMComment.Action>Reply</SMComment.Action>
         </SMComment.Actions>

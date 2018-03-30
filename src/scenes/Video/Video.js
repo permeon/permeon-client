@@ -7,6 +7,8 @@ import RelatedVideos from "./RelatedVideos";
 import VideoEmbed from "./VideoEmbed";
 import Avatar from "../../components/Avatar/Avatar";
 import Comments from "../../components/Comments/Comments";
+import UpvoteButton from "../../components/Buttons/UpvoteButton";
+import DownvoteButton from "../../components/Buttons/DownvoteButton";
 
 class Video extends Component {
   render() {
@@ -25,16 +27,9 @@ class Video extends Component {
             <Segment vertical style={{}}>
               <Header as='h3'>{video.title}</Header>
               <div>{tags}</div>
-              {/*<div style={{float: 'right'}}>*/}
-                <div style={{textAlign: 'right'}}>
-                <Button style={{background: 'none'}}>
-                  <Icon name='thumbs up'/>
-                  {video.upvotes}
-                </Button>
-                <Button style={{background: 'none'}}>
-                  <Icon name='thumbs down'/>
-                  {video.downvotes}
-                </Button>
+              <div style={{textAlign: 'right'}}>
+                <UpvoteButton upvotes={video.upvotes} />
+                <DownvoteButton downvotes={video.downvotes} />
               </div>
             </Segment>
 
