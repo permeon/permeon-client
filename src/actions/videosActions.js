@@ -2,7 +2,7 @@ import steem from '../lib/steemApi';
 import config from "../config";
 
 import { selectors } from "../reducers";
-import {getVideoPosts} from "../helpers/channelHelpers";
+import {getVideoPosts} from "../helpers/videoHelpers";
 import {transformPayload} from "../lib/utils";
 
 export const actionTypes = {

@@ -2,8 +2,8 @@ import steem from '../lib/steemApi';
 import config from "../config";
 
 import { selectors } from "../reducers";
-import {getVideoPosts} from "../helpers/channelHelpers";
-import {transformPayload} from "../lib/utils";
+import { getVideoPosts } from "../helpers/videoHelpers";
+import { transformPayload } from "../lib/utils";
 
 export const actionTypes = {
   RECEIVE_VIDEOS: 'RECEIVE_VIDEOS',

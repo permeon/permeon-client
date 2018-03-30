@@ -2,6 +2,7 @@ import _ from 'lodash';
 import config from '../config';
 import { safeJsonParse } from "../lib/utils";
 
+
 const {APP_NAME} = config.pick('APP_NAME');
 
 const videoApps = [
@@ -14,23 +15,48 @@ const parsers = {
   'dtube': dtubeParser,
 };
 
+export function countVotes(votes) {
+  const voteCounts = {
+    upvotes: 0,
+    downvotes: 0,
+  };
+  votes.forEach(
+    vote => {
+      if (vote.percent >= 0) {
+        voteCounts.upvotes += 1;
+      } else {
+        voteCounts.downvotes += 1;
+      }
+    }
+  );
+  return voteCounts;
+}
+
 export function getVideoPosts(posts) {
   console.log('posts:', posts);
   const videos = [];
   posts.forEach(post => {
-    const { appName } = getAppInfo(post);
-    const json_metadata = safeJsonParse(post.json_metadata);
-
-    if (videoApps.includes(appName)) {
-      videos.push(parsers[appName](post));
-    } else if (appName === 'steemit' && _.get(json_metadata, 'video.content.videohash')) {
-      // TODO: refactor quick hack. posts updated by steemit change app name
-      videos.push(parsers['dtube'](post));
+    const parsedVideo = parseVideoPost(post);
+    if (parsedVideo) {
+      videos.push(parsedVideo);
     }
   });
   return videos;
 }
 
+export function parseVideoPost(post) {
+  const { appName } = getAppInfo(post);
+  const json_metadata = safeJsonParse(post.json_metadata);
+
+  let video;
+  if (videoApps.includes(appName)) {
+    video = parsers[appName](post);
+  } else if (appName === 'steemit' && _.get(json_metadata, 'video.content.videohash')) {
+    // TODO: refactor quick hack. posts updated by steemit change app name
+    video = parsers['dtube'](post);
+  }
+  return video;
+}
 
 export function getAppInfo(post) {
   try {

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import GridVideoCard from "../../components/VideoCards/GridVideoCard";
 
 import styles from './GridVideoCards.css';
-import {getAppInfo} from "../../helpers/channelHelpers";
+import {getAppInfo} from "../../helpers/videoHelpers";
 
 const GridVideoCards = ({
   videos,
