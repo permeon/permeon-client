@@ -33,7 +33,7 @@ class UploadForm extends React.Component {
     const { activeUploader } = this.state;
 
     return (
-      <Segment clearing color='red'>
+      <Segment clearing>
         <Menu tabular>
           <Menu.Item name='linkUploader' active={activeUploader === 'linkUploader'} onClick={this.handleTabClick} />
           <Menu.Item name='ipfsUploader' active={activeUploader === 'ipfsUploader'} onClick={this.handleTabClick} />

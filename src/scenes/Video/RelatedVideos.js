@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import { Header } from 'semantic-ui-react';
 
 import {getAppInfo} from "../../helpers/channelHelpers";
 import StackedVideoCard from "../../components/VideoCards/StackedVideoCard";
@@ -10,6 +11,7 @@ class RelatedVideos extends Component {
     const { videos } = this.props;
     return (
       <div>
+        <Header as='h3'>Related videos</Header>
         {parseVideos(videos).map(video => (
           <StackedVideoCard key={video.url} {...video} />
         ))}

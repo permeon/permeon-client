@@ -21,8 +21,8 @@ class Video extends Component {
       <Container style={{maxWidth: '1400px', marginTop: '30px', width: '100%', padding: '20px'}}>
         <Grid>
           <Grid.Column computer={11} tablet={16}>
-            <Segment basic>
-              {/*<VideoEmbed video={video}/>*/}
+            <Segment basic style={{paddingTop: 0}}>
+              <VideoEmbed video={video}/>
             </Segment>
             <Segment vertical style={{}}>
               <Header as='h3'>{video.title}</Header>
