@@ -105,6 +105,15 @@ function dtubeParser(post) {
 }
 
 export function youtubeToEmbedSrc(src) {
-  const id = 'wVVGv2bmxow';
+  const { id } = parseYoutubeSrc(src);
   return `https://www.youtube.com/embed/${id}`;
+}
+
+function parseYoutubeSrc(src) {
+  const [original, path, id ] = src.match(/(.*?)\?v=([^\/]+)/);
+  return {
+    original,
+    path,
+    id,
+  };
 }
