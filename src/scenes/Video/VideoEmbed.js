@@ -7,7 +7,7 @@ const VideoEmbed = ({ src }) => {
 
 function renderVideo(src) {
   if (src.match(/^https?:\/\/.*?.youtube\.com\/embed/)) {
-    return renderYoutubeVideo(src)
+    return renderYoutubeVideo(src);
   } else {
     return renderDefaultVideo(src);
   }
@@ -31,9 +31,7 @@ function renderYoutubeVideo(src) {
 
 function renderDefaultVideo(src) {
   return (
-    <video src={src} controls width='100%' style={{border: 'none'}}>
-
-    </video>
+    <video src={src} controls width='100%' style={{border: 'none'}} />
   )
 }
 

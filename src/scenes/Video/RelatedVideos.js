@@ -5,14 +5,26 @@ import { Header } from 'semantic-ui-react';
 
 import {getAppInfo} from "../../helpers/videoHelpers";
 import StackedVideoCard from "../../components/VideoCards/StackedVideoCard";
+import {selectors} from "../../reducers";
+import {channelVideos} from "../../actions/channelActions";
 
 class RelatedVideos extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  componentDidMount() {
+    if (!this.props.videos.length) {
+      this.props.dispatch(channelVideos(this.props.channel));
+    }
+  }
+
   render() {
     const { videos } = this.props;
     return (
       <div>
         <Header as='h3'>Related videos</Header>
-        {parseVideos(videos).map(video => (
+        {parseVideos(videos).slice(0, 7).map(video => (
           <StackedVideoCard key={video.url} {...video} />
         ))}
       </div>
@@ -37,53 +49,10 @@ function parseVideos(videos) {
 RelatedVideos.propTypes = {};
 
 function mapStateToProps(state, ownProps) {
+  const channel = ownProps.video.author;
   return {
-    videos: [
-      {
-        author: 'louisthomas',
-        title: 'Study: 81% of ICOs are SCAMS',
-        permlink: 'hdspgfw77',
-        json_metadata: {
-          app: 'dtube/0.7',
-        },
-        videoData: {
-          thumbnail: 'https://ipfs.io/ipfs/QmZQiScyAPoqdLaP2fwxTxWjab6pAPkFSSViagpaCpkChA',
-        },
-      },
-      {
-        author: 'louisthomas',
-        title: 'Study: 81% of ICOs are SCAMS',
-        permlink: 'hdspgfw7',
-        json_metadata: {
-          app: 'dtube/0.7',
-        },
-        videoData: {
-          thumbnail: 'https://ipfs.io/ipfs/QmZQiScyAPoqdLaP2fwxTxWjab6pAPkFSSViagpaCpkChA',
-        },
-      },
-      {
-        author: 'louisthomas',
-        title: 'Study: 81% of ICOs are SCAMS',
-        permlink: 'hdspgfw78',
-        json_metadata: {
-          app: 'dtube/0.7',
-        },
-        videoData: {
-          thumbnail: 'https://ipfs.io/ipfs/QmZQiScyAPoqdLaP2fwxTxWjab6pAPkFSSViagpaCpkChA',
-        },
-      },
-      {
-        author: 'louisthomas',
-        title: 'Study: 81% of ICOs are SCAMS',
-        permlink: 'hdspgfw79',
-        json_metadata: {
-          app: 'dtube/0.7',
-        },
-        videoData: {
-          thumbnail: 'https://ipfs.io/ipfs/QmZQiScyAPoqdLaP2fwxTxWjab6pAPkFSSViagpaCpkChA',
-        },
-      },
-    ],
+    videos: selectors.channels.allVideos(state, channel),
+    channel,
   }
 }
 

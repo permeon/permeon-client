@@ -48,6 +48,6 @@ export const selectors = {
     subscriberCountLoading: (state, channel) => subscriptionsSelectors.subscriberCountLoading(state.subscriptions, channel),
   },
   video: {
-    video: (state) => videoSelectors.video(state.video),
+    video: (state, channel) => videoSelectors.video(state.video, channel),
   },
 };

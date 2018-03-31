@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom';
 import { Grid, Container, Segment, Header, Label, Item, Dimmer, Loader } from 'semantic-ui-react';
 import _ from 'lodash';
 
@@ -60,7 +61,7 @@ class Video extends Component {
                 <Item>
                   <Avatar username={video.author} style={{width: '48px', height: '48px'}} />
                   <Item.Content>
-                    <Item.Header as='h5'>{video.author}</Item.Header>
+                    <Link to={`/channel/${video.author}`} style={{color: 'inherit'}}><Item.Header as='h5'>{video.author}</Item.Header></Link>
                     <Item.Meta>{video.created}</Item.Meta>
                     <Item.Description>
                       {video.videoData.description}
@@ -95,7 +96,7 @@ function mapStateToProps(state, ownProps) {
     // },
     subscribers: selectors.subscriptions.subscriberCount(state, channel),
     comments: [], // TODO
-    video: selectors.video.video(state),
+    video: selectors.video.video(state, channel),
     activeAccount,
     channel,
     permlink,

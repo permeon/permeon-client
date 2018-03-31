@@ -17,5 +17,5 @@ export default combineReducers({
   });
 
 // Selectors
-export const video = state => state.video;
+export const video = (state, channel) => _.get(state.video, 'author') === channel ? state.video : null;
 
