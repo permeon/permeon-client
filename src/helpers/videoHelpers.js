@@ -77,7 +77,10 @@ export function getAppInfo(post) {
 function mainAppParser(post) {
   const json_metadata = safeJsonParse(post.json_metadata);
   const videoData = {
-
+    description: post.body,
+    url: _.get(json_metadata, 'link'),
+    duration: 0,
+    thumbnail: _.get(json_metadata, 'thumbnail'),
   };
   return {
     ...post,
@@ -99,4 +102,9 @@ function dtubeParser(post) {
     json_metadata,
     videoData,
   };
+}
+
+export function youtubeToEmbedSrc(src) {
+  const id = 'wVVGv2bmxow';
+  return `https://www.youtube.com/embed/${id}`;
 }

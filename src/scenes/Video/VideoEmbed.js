@@ -1,12 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {youtubeToEmbedSrc} from "../../helpers/videoHelpers";
 
 const VideoEmbed = ({ src }) => {
+  if (!src) {
+    return null;
+  }
   return renderVideo(src);
 };
 
 function renderVideo(src) {
-  if (src.match(/^https?:\/\/.*?.youtube\.com\/embed/)) {
+  if (src.match(/^https?:\/\/.*?.youtube\.com/)) {
     return renderYoutubeVideo(src);
   } else {
     return renderDefaultVideo(src);
@@ -14,6 +18,7 @@ function renderVideo(src) {
 }
 
 function renderYoutubeVideo(src) {
+  const embedSrc = youtubeToEmbedSrc(src);
   return (
     <div style={{position:'relative', paddingBottom: '56.25%'}}>
       <iframe
@@ -21,7 +26,7 @@ function renderYoutubeVideo(src) {
         height="100%"
         width="100%"
         scrolling="no"
-        src={src}
+        src={embedSrc}
         allowFullScreen
         style={{position: 'absolute', top: 0, left: 0}}
       />

@@ -33,6 +33,17 @@ const LinkUploadForm = ({
       value={values.link}
     />
     {touched.link && errors.link && <Message error content={errors.link} />}
+
+    <Form.Input
+      type="text"
+      name="thumbnail"
+      placeholder='video thumbnail'
+      onChange={handleChange}
+      onBlur={handleBlur}
+      value={values.thumbnail}
+    />
+    {touched.thumbnail && errors.thumbnail && <Message error content={errors.thumbnail} />}
+
     <Form.Input
       type="text"
       name="title"
@@ -63,6 +74,7 @@ const LinkUpload = ({ dispatch }) => {
       <Formik
         initialValues={{
           link: 'https://www.youtube.com/watch?v=pjnBi_styks',
+          thumbnail: 'https://img.youtube.com/vi/pjnBi_styks/mqdefault.jpg',
           title: 'Golden State Warriors vs Utah Jazz Full Game Highlights / March 25 / 2017-18 NBA Season',
           body: '🏀Golden State Warriors vs Utah Jazz Full Game Highlights / March 25 / 2017-18 NBA Season\n' +
           '\n' +
@@ -91,6 +103,7 @@ const LinkUpload = ({ dispatch }) => {
         validationSchema={
           yup.object().shape({
             link: yup.string().required(),
+            thumbnail: yup.string().required(),
             title: yup.string().required().max(255),
             body: yup.string().max(65535, 'Body must not be over 65KB'),
             tags: yup.array().max(4),

@@ -9,7 +9,7 @@ export const actionTypes = {
 
 const { APP_NAME, POST_BENEFICIARY_FEE } = config.pick('APP_NAME', 'POST_BENEFICIARY_FEE');
 
-export function postVideo({ link, title, body, tags }) {
+export function postVideo({ link, title, body, tags, thumbnail }) {
   return (dispatch, getState) => {
     const state = getState();
     const postingKey = selectors.auth.activeKeys(state).posting;
@@ -18,6 +18,7 @@ export function postVideo({ link, title, body, tags }) {
     const jsonMetadata = JSON.stringify({
       tags,
       link,
+      thumbnail,
       app: getAppJsonMetadata(),
     });
     tags.push(APP_NAME);

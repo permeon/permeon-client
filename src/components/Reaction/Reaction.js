@@ -1,9 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { Button } from 'semantic-ui-react';
 
 import 'emoji-mart/css/emoji-mart.css';
 import { Picker, Emoji } from 'emoji-mart';
+import {postReaction} from "../../actions/reactionsActions";
 
 const EMOJI_SHEET = 'emojione';
 
@@ -20,6 +23,8 @@ class Reaction extends React.Component {
   }
 
   addEmoji(emoji) {
+    const { channel, permlink, dispatch } = this.props;
+    dispatch(postReaction(channel, permlink, dispatch));
     console.log('adding:', emoji);
     this.setState(prevState => ({
       emojis: [...prevState.emojis, emoji],
@@ -64,4 +69,13 @@ Reaction.propTypes = {
 
 };
 
-export default Reaction;
+function mapStateToProps(state, ownProps) {
+  let { channel, permlink } = ownProps.match.params;
+  channel = channel.replace('@', '');
+  return {
+    channel,
+    permlink,
+  }
+}
+
+export default withRouter(connect(mapStateToProps)(Reaction));
