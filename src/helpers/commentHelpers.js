@@ -27,3 +27,13 @@ export function buildCommentTree(comments) {
 
   return rootComments;
 }
+
+export function rootComments(comments) {
+  const rootComments = [];
+  for (let comment of _.values(comments)) {
+    if (comment.depth === 1) {
+      rootComments.push(comment);
+    }
+  }
+  return rootComments;
+}

@@ -15,8 +15,7 @@ import {getVideoState} from "../../actions/videoActions";
 import {selectors} from "../../reducers";
 import {countVotes} from "../../helpers/videoHelpers";
 import {subscriptionCount} from "../../actions/subscriptionsActions";
-import {fetchComments} from '../../actions/commentsActions';
-import {buildCommentTree} from "../../helpers/commentHelpers";
+import { rootComments } from "../../helpers/commentHelpers";
 
 class Video extends Component {
   componentDidMount() {
@@ -57,8 +56,6 @@ class Video extends Component {
       <Label key={tag} style={{backgroundColor: '#E0E0E0'}} >{tag}</Label>
     ));
 
-    const rootComments = buildCommentTree(comments);
-
     return (
       <Container style={{maxWidth: '1400px', marginTop: '30px', width: '100%', padding: '20px'}}>
         <Grid>
@@ -91,7 +88,7 @@ class Video extends Component {
             </Segment>
 
             <Segment vertical>
-              <Comments rootComments={rootComments} comments={comments} />
+              <Comments rootComments={rootComments(comments)} comments={comments} />
             </Segment>
           </Grid.Column>
           <Grid.Column computer={5} only='computer'>

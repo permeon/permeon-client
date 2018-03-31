@@ -18,6 +18,7 @@ const Comments = ({
           return (
             <Comment
               key={comment.author+comment.permlink}
+              depth={1}
               author={comment.author}
               date={comment.created}
               rewards='$0.944'

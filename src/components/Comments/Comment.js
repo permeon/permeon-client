@@ -14,8 +14,14 @@ const Comment = ({
   downvotes,
   replies,
   comments,
+  depth,
 }) => {
   // Use "\2022" for bullet
+  const style = {};
+  if (depth > 0) {
+    style['marginBottom'] = 0;
+    style['paddingBottom'] = 0;
+  }
   return (
     <SMComment>
       <SMComment.Avatar src={`https://steemitimages.com/u/${author}/avatar/`} />
@@ -37,7 +43,7 @@ const Comment = ({
           <SMComment.Action>Reply</SMComment.Action>
         </SMComment.Actions>
       </SMComment.Content>
-      <SMComment.Group>
+      <SMComment.Group style={style}>
         {replies.map(child => (
           renderChild(comments[child], comments)
          ))}
@@ -51,6 +57,7 @@ function renderChild(comment, comments) {
   return (
     <Comment
       key={comment.author+comment.permlink}
+      depth={comment.depth}
       author={comment.author}
       date={comment.created}
       rewards='$0.944'
