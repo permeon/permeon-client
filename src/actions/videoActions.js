@@ -5,6 +5,9 @@ import { selectors } from "../reducers";
 import {transformPayload} from "../lib/utils";
 import {parseVideoPost} from "../helpers/videoHelpers";
 import {receiveComments} from './commentsActions';
+import {parseComments} from "../helpers/commentHelpers";
+import {receiveReactions} from "./reactionsActions";
+import {parseReactions} from "../helpers/reactionsHelpers";
 
 export const actionTypes = {
   RECEIVE_VIDEO: '@video/RECEIVE_VIDEO',
@@ -26,9 +29,12 @@ export function getVideoState(tag, channel, permlink) {
           type: actionTypes.RECEIVE_VIDEO,
           payload: video,
         });
-        const commentsPayload = {...response.content};
+        const commentsPayload = parseComments(response.content);
         delete commentsPayload[`${channel}/${permlink}`];
         dispatch(receiveComments(channel, permlink, commentsPayload));
+
+        const reactionsPayload = parseReactions(response.content);
+        dispatch(receiveReactions(channel, permlink, reactionsPayload));
       })
       .catch(error => {
         console.log('error:', error);

@@ -6,14 +6,19 @@ import {selectors} from "../reducers";
 import { getAppJsonMetadata, generatePermlink } from "../helpers/postHelpers";
 
 export const actionTypes = {
+  RECEIVE_REACTIONS: '@reactions/RECEIVE_REACTIONS',
 };
 
 const { APP_NAME, POST_BENEFICIARY_FEE } = config.pick('APP_NAME', 'POST_BENEFICIARY_FEE');
 
-
-// steem.broadcast.comment(wif, 'bigballer', permlink, 'bigballer', `re-${permlink}1`, '', '🍇', jsonPayload, function(err, result) {
-//   console.log(err, result);
-// });
+export function receiveReactions(channel, permlink, payload) {
+  return {
+    type: actionTypes.RECEIVE_REACTIONS,
+    channel,
+    permlink,
+    payload,
+  }
+}
 
 export function postReaction(channel, videoPermlink, emoji) {
   return (dispatch, getState) => {

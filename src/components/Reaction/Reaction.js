@@ -59,7 +59,7 @@ class Reaction extends React.Component {
       </div>
     );
   }
-};
+}
 
 Reaction.propTypes = {
 
