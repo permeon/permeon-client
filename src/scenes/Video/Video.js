@@ -15,16 +15,18 @@ import {getVideoState} from "../../actions/videoActions";
 import {selectors} from "../../reducers";
 import {countVotes} from "../../helpers/videoHelpers";
 import {subscriptionCount} from "../../actions/subscriptionsActions";
+import {fetchComments} from '../../actions/commentsActions';
 
 class Video extends Component {
   componentDidMount() {
     const { channel, permlink, dispatch } = this.props;
     dispatch(getVideoState(channel, permlink));
     dispatch(subscriptionCount(channel));
+    dispatch(fetchComments(channel, permlink));
   }
 
   render() {
-    const { video } = this.props;
+    const { video, comments } = this.props;
 
     if (!video) {
       return (
@@ -72,7 +74,7 @@ class Video extends Component {
             </Segment>
 
             <Segment vertical>
-              <Comments comments={[]} />
+              <Comments comments={comments} />
             </Segment>
           </Grid.Column>
           <Grid.Column computer={5} only='computer'>
@@ -95,7 +97,7 @@ function mapStateToProps(state, ownProps) {
     //   pending_payout: '7.419 SBD',
     // },
     subscribers: selectors.subscriptions.subscriberCount(state, channel),
-    comments: [], // TODO
+    comments: selectors.comments.all(state, channel, permlink) || [],
     video: selectors.video.video(state, channel),
     activeAccount,
     channel,

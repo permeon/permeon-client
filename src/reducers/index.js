@@ -6,6 +6,7 @@ import settingsReducer, * as settingsSelectors from "./settings";
 import videosReducer, * as videosSelectors from "./videos";
 import subscriptionsReducer, * as subscriptionsSelectors from "./subscriptions";
 import videoReducer, * as videoSelectors from "./video";
+import commentsReducer, * as commentsSelectors from "./comments";
 
 export default combineReducers({
   auth: authReducer,
@@ -14,6 +15,7 @@ export default combineReducers({
   videos: videosReducer,
   subscriptions: subscriptionsReducer,
   video: videoReducer,
+  comments: commentsReducer,
 });
 
 export const selectors = {
@@ -50,4 +52,7 @@ export const selectors = {
   video: {
     video: (state, channel) => videoSelectors.video(state.video, channel),
   },
+  comments: {
+    all: (state, channel, permlink) => commentsSelectors.all(state.comments, channel, permlink),
+  }
 };

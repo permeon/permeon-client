@@ -11,7 +11,18 @@ const Comments = ({
     <div>
       <SMComment.Group>
         <Header as='h3' dividing style={{border: 'none'}}>{comments.length} Comments</Header>
-        <Comment children={[{id: 22}]}/>
+        {comments.map(comment => (
+          <Comment
+            key={comment.author+comment.permlink}
+            author={comment.author}
+            date={comment.created}
+            rewards='$0.944'
+            body={comment.body}
+            upvotes={2}
+            downvotes={1}
+            children={[]}
+          />
+        ))}
       </SMComment.Group>
     </div>
   );

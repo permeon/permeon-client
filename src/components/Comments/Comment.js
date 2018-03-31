@@ -5,15 +5,14 @@ import DownvoteButton from "../Buttons/DownvoteButton";
 import UpvoteButton from "../Buttons/UpvoteButton";
 
 const Comment = ({
+  author,
+  date,
+  rewards,
+  body,
+  upvotes,
+  downvotes,
   children,
 }) => {
-  const author = 'louisthomas',
-    date = 'Yesterday at 12:30AM',
-    rewards = '$0.944',
-    body = 'This has been very useful for my research. Thanks as well!',
-    upvotes = 73,
-    downvotes = 1
-
   // Use "\2022" for bullet
   return (
     <SMComment>
