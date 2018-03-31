@@ -2,11 +2,11 @@ import { combineReducers } from 'redux';
 import _ from 'lodash';
 
 
-import { actionTypes } from "../actions/commentsActions";
+import { actionTypes } from "../actions/reactionsActions";
 
 function emojisReducer(state = [], action) {
   switch (action.type) {
-    case actionTypes.RECEIVE_COMMENTS:
+    case actionTypes.RECEIVE_REACTIONS:
       return {
         [action.channel]: {
           [action.permlink]: {
@@ -24,4 +24,8 @@ export default combineReducers({
 });
 
 // Selectors
-export const emojis = (state, channel, permlink) => _.get(state.emojis, [channel, permlink]);
+export const emojis = (state, channel, permlink) =>
+  _.values(_.get(state.emojis, [channel, permlink]))
+    .map(post => (
+      _.get(post, ['json_metadata', 'emoji'])
+    ));
