@@ -1,9 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const VideoEmbed = ({ video }) => {
-  const youtubeID = video.url;
+const VideoEmbed = ({ src }) => {
+  return renderVideo(src);
+};
 
+function renderVideo(src) {
+  if (src.match(/^https?:\/\/.*?.youtube\.com\/embed/)) {
+    return renderYoutubeVideo(src)
+  } else {
+    return renderDefaultVideo(src);
+  }
+}
+
+function renderYoutubeVideo(src) {
   return (
     <div style={{position:'relative', paddingBottom: '56.25%'}}>
       <iframe
@@ -11,13 +21,21 @@ const VideoEmbed = ({ video }) => {
         height="100%"
         width="100%"
         scrolling="no"
-        src={`https://www.youtube.com/embed/${youtubeID}`}
+        src={src}
         allowFullScreen
         style={{position: 'absolute', top: 0, left: 0}}
       />
     </div>
-  );
-};
+  ) ;
+}
+
+function renderDefaultVideo(src) {
+  return (
+    <video src={src} controls width='100%' style={{border: 'none'}}>
+
+    </video>
+  )
+}
 
 VideoEmbed.propTypes = {
 

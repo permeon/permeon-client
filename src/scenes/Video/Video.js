@@ -44,7 +44,7 @@ class Video extends Component {
         <Grid>
           <Grid.Column computer={11} tablet={16}>
             <Segment basic style={{paddingTop: 0}}>
-              {/*<VideoEmbed video={video}/>*/}
+              <VideoEmbed src={video.videoData.url}/>
             </Segment>
             <Segment vertical style={{}}>
               <Header as='h3'>{video.title}</Header>
@@ -63,7 +63,7 @@ class Video extends Component {
                     <Item.Header as='h5'>{video.author}</Item.Header>
                     <Item.Meta>{video.created}</Item.Meta>
                     <Item.Description>
-                      {video.body}
+                      {video.videoData.description}
                     </Item.Description>
                   </Item.Content>
                 </Item>
