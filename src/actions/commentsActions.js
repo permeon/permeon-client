@@ -17,9 +17,10 @@ function setCommentsFetching(isFetching) {
   }
 }
 
-export function fetchComments(channel, permlink, limit=-1) {
+export function fetchComments(channel, permlink, limit=100) {
   return (dispatch, getState) => {
-    return steem.api.getContentRepliesAsync(channel, permlink, (error, response) => {
+    // return steem.api.getContentRepliesAsync(channel, permlink, (error, response) => {
+    return steem.api.getDiscussionsByChildren({start_author: channel, start_permlink: permlink, limit}, (error, response) => {
       if (error) {
         return Promise.reject(error);
       }

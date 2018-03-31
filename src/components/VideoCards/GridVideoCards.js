@@ -19,7 +19,7 @@ const GridVideoCards = ({
 
 function parseVideos(videos) {
   return videos.map(video => ({
-    url: `/channel/${video.author}/${video.permlink}`,
+    url: `/v${video.url}`,
     title: video.title,
     username: video.author,
     thumbnail: video.videoData.thumbnail,

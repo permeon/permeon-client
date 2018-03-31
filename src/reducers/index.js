@@ -50,7 +50,7 @@ export const selectors = {
     subscriberCountLoading: (state, channel) => subscriptionsSelectors.subscriberCountLoading(state.subscriptions, channel),
   },
   video: {
-    video: (state, channel) => videoSelectors.video(state.video, channel),
+    video: (state, channel, permlink) => videoSelectors.video(state.video, channel, permlink),
   },
   comments: {
     all: (state, channel, permlink) => commentsSelectors.all(state.comments, channel, permlink),

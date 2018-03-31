@@ -14,16 +14,19 @@ export const actionTypes = {
  * @param author - username of the video uploader
  * @param permlink - permlink of the video
  */
-export function getVideoState(author, permlink) {
+export function getVideoState(tag, channel, permlink) {
   return (dispatch, getState) => {
-    return steem.api.getContentAsync(author, permlink)
+
+    return steem.api.getStateAsync(`/${tag}/@${channel}/${permlink}`)
+    // return steem.api.getStateAsync('/market/@maneco64/620kisip')
       .then(response => {
-        const video = parseVideoPost(response);
+        console.log('state', response);
+        const video = parseVideoPost(_.get(response.content, `${channel}/${permlink}`, {}));
         dispatch({
           type: actionTypes.RECEIVE_VIDEO,
           payload: video,
         });
-        console.log('videoParsed', video)
+
       })
       .catch(error => {
         console.log('error:', error);

@@ -19,10 +19,25 @@ import {fetchComments} from '../../actions/commentsActions';
 
 class Video extends Component {
   componentDidMount() {
-    const { channel, permlink, dispatch } = this.props;
-    dispatch(getVideoState(channel, permlink));
-    dispatch(subscriptionCount(channel));
-    dispatch(fetchComments(channel, permlink));
+    this.fetchData(this.props);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log('nextProps', nextProps);
+    this.fetchData(nextProps);
+  }
+
+  fetchData(props) {
+    const { tag, channel, permlink, dispatch, video, comments, subscriberCount } = props;
+    if (!video){
+      dispatch(getVideoState(tag, channel, permlink));
+    }
+    if (subscriberCount < 0) {
+      dispatch(subscriptionCount(channel));
+    }
+    // if (!comments) {
+      // dispatch(fetchComments(channel, permlink));
+    // }
   }
 
   render() {
@@ -89,17 +104,19 @@ class Video extends Component {
 Video.propTypes = {};
 
 function mapStateToProps(state, ownProps) {
-  const channel = ownProps.match.params.username;
-  const permlink = ownProps.match.params.permlink;
+  let { tag, channel, permlink } = ownProps.match.params;
   const activeAccount = selectors.auth.activeAccountName(state);
+  channel = channel.replace('@', '');
+  console.log('mapSTate:', tag, channel, permlink)
   return {
     // video: {
     //   pending_payout: '7.419 SBD',
     // },
     subscribers: selectors.subscriptions.subscriberCount(state, channel),
     comments: selectors.comments.all(state, channel, permlink) || [],
-    video: selectors.video.video(state, channel),
+    video: selectors.video.video(state, channel, permlink),
     activeAccount,
+    tag,
     channel,
     permlink,
   }
