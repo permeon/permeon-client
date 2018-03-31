@@ -9,9 +9,9 @@ function comments(state = [], action) {
     case actionTypes.RECEIVE_COMMENTS:
       return {
         [action.channel]: {
-          [action.permlink]: [
+          [action.permlink]: {
             ...action.payload
-          ]
+          }
         }
       };
     default:

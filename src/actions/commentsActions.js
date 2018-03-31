@@ -17,6 +17,15 @@ function setCommentsFetching(isFetching) {
   }
 }
 
+export function receiveComments(channel, permlink, payload) {
+  return {
+    type: actionTypes.RECEIVE_COMMENTS,
+    payload,
+    channel,
+    permlink,
+  }
+}
+
 export function fetchComments(channel, permlink, limit=100) {
   return (dispatch, getState) => {
     // return steem.api.getContentRepliesAsync(channel, permlink, (error, response) => {

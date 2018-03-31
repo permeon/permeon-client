@@ -6,13 +6,14 @@ import Comment from "./Comment";
 import {countVotes} from "../../helpers/videoHelpers";
 
 const Comments = ({
+  rootComments,
   comments,
 }) => {
   return (
     <div>
       <SMComment.Group>
         <Header as='h3' dividing style={{border: 'none'}}>{comments.length} Comments</Header>
-        {comments.map(comment => {
+        {rootComments.map(comment => {
           const { upvotes, downvotes } = countVotes(comment.active_votes);
           return (
             <Comment
@@ -23,7 +24,8 @@ const Comments = ({
               body={comment.body}
               upvotes={upvotes}
               downvotes={downvotes}
-              children={[]}
+              replies={comment.replies}
+              comments={comments}
             />
           )
         })}

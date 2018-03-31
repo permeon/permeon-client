@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Comment as SMComment, Header, Button, Icon } from 'semantic-ui-react';
 import DownvoteButton from "../Buttons/DownvoteButton";
 import UpvoteButton from "../Buttons/UpvoteButton";
+import {countVotes} from "../../helpers/videoHelpers";
 
 const Comment = ({
   author,
@@ -11,7 +12,8 @@ const Comment = ({
   body,
   upvotes,
   downvotes,
-  children,
+  replies,
+  comments,
 }) => {
   // Use "\2022" for bullet
   return (
@@ -36,13 +38,30 @@ const Comment = ({
         </SMComment.Actions>
       </SMComment.Content>
       <SMComment.Group>
-        {children.map(child => (
-          <Comment key={child.id} children={[]}/>
-        ))}
+        {replies.map(child => (
+          renderChild(comments[child], comments)
+         ))}
       </SMComment.Group>
     </SMComment>
   );
 };
+
+function renderChild(comment, comments) {
+  const { upvotes, downvotes } = countVotes(comment.active_votes);
+  return (
+    <Comment
+      key={comment.author+comment.permlink}
+      author={comment.author}
+      date={comment.created}
+      rewards='$0.944'
+      body={comment.body}
+      upvotes={upvotes}
+      downvotes={downvotes}
+      replies={comment.replies}
+      comments={comments}
+    />
+  );
+}
 
 Comment.propTypes = {
 

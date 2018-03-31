@@ -16,6 +16,7 @@ import {selectors} from "../../reducers";
 import {countVotes} from "../../helpers/videoHelpers";
 import {subscriptionCount} from "../../actions/subscriptionsActions";
 import {fetchComments} from '../../actions/commentsActions';
+import {buildCommentTree} from "../../helpers/commentHelpers";
 
 class Video extends Component {
   componentDidMount() {
@@ -23,7 +24,6 @@ class Video extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('nextProps', nextProps);
     this.fetchData(nextProps);
   }
 
@@ -57,6 +57,8 @@ class Video extends Component {
       <Label key={tag} style={{backgroundColor: '#E0E0E0'}} >{tag}</Label>
     ));
 
+    const rootComments = buildCommentTree(comments);
+
     return (
       <Container style={{maxWidth: '1400px', marginTop: '30px', width: '100%', padding: '20px'}}>
         <Grid>
@@ -89,7 +91,7 @@ class Video extends Component {
             </Segment>
 
             <Segment vertical>
-              <Comments comments={comments} />
+              <Comments rootComments={rootComments} comments={comments} />
             </Segment>
           </Grid.Column>
           <Grid.Column computer={5} only='computer'>
@@ -107,12 +109,11 @@ function mapStateToProps(state, ownProps) {
   let { tag, channel, permlink } = ownProps.match.params;
   const activeAccount = selectors.auth.activeAccountName(state);
   channel = channel.replace('@', '');
-  console.log('mapSTate:', tag, channel, permlink)
   return {
     // video: {
     //   pending_payout: '7.419 SBD',
     // },
-    subscribers: selectors.subscriptions.subscriberCount(state, channel),
+    subscribersCount: selectors.subscriptions.subscriberCount(state, channel),
     comments: selectors.comments.all(state, channel, permlink) || [],
     video: selectors.video.video(state, channel, permlink),
     activeAccount,
