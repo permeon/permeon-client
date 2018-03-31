@@ -1,5 +1,6 @@
 import steem from '../lib/steemApi';
 import config from "../config";
+import _ from 'lodash';
 
 import {selectors} from "../reducers";
 import { getAppJsonMetadata, generatePermlink } from "../helpers/postHelpers";
@@ -27,10 +28,11 @@ export function postReaction(channel, videoPermlink, emoji) {
       postingKey,
       channel,
       videoPermlink,
-      'bigballer', // author
+      author,
       `${videoPermlink}-${generatePermlink()}`,
       '',   // title
-      '🍇', // body (cant be blank so use native emoji)
+      // '🍇', //
+      _.get(emoji, 'native'), // body (cant be blank so use native emoji)
       jsonMetadata,
     )
       .then(response => {

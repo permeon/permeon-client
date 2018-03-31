@@ -7,6 +7,7 @@ import { Button } from 'semantic-ui-react';
 import 'emoji-mart/css/emoji-mart.css';
 import { Picker, Emoji } from 'emoji-mart';
 import {postReaction} from "../../actions/reactionsActions";
+import {selectors} from "../../reducers";
 
 const EMOJI_SHEET = 'emojione';
 
@@ -15,8 +16,7 @@ class Reaction extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      emojis: [],
-      pickerOpen: true,
+      pickerOpen: false,
     };
     this.addEmoji = this.addEmoji.bind(this);
     this.togglePicker = this.togglePicker.bind(this);
@@ -24,11 +24,8 @@ class Reaction extends React.Component {
 
   addEmoji(emoji) {
     const { channel, permlink, dispatch } = this.props;
-    dispatch(postReaction(channel, permlink, dispatch));
+    dispatch(postReaction(channel, permlink, emoji));
     console.log('adding:', emoji);
-    this.setState(prevState => ({
-      emojis: [...prevState.emojis, emoji],
-    }));
   }
 
   togglePicker() {
@@ -43,12 +40,12 @@ class Reaction extends React.Component {
     ));
   }
 
-
   render() {
+    const { emojiReactions } = this.props;
+    console.log('emojis:', emojiReactions);
     return (
       <div style={{float: 'right', position: 'relative', zIndex: '2000'}}>
         <div>
-          {this.renderEmojis(this.state.emojis)}
           <Button circular icon='circle' floated='right' onClick={this.togglePicker} />
         </div>
         {this.state.pickerOpen &&
@@ -59,7 +56,6 @@ class Reaction extends React.Component {
             style={{position: 'absolute', right: 0, top: '20px'}}
           />
         }
-        {/*<Picker style={{position: 'absolute', bottom: '20px', right: '20px'}}/>*/}
       </div>
     );
   }
@@ -75,6 +71,7 @@ function mapStateToProps(state, ownProps) {
   return {
     channel,
     permlink,
+    emojiReactions: selectors.reactions.emojis(state, channel, permlink),
   }
 }
 

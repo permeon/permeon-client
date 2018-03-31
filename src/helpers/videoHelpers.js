@@ -110,7 +110,7 @@ export function youtubeToEmbedSrc(src) {
 }
 
 function parseYoutubeSrc(src) {
-  const [original, path, id ] = src.match(/(.*?)\?v=([^\/]+)/);
+  const [ original, path, id ] = src.match(/(.*?)\?v=([^\/]+)/);
   return {
     original,
     path,

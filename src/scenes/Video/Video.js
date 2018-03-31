@@ -66,7 +66,10 @@ class Video extends Component {
             </Segment>
             <Segment vertical style={{}}>
               <Header as='h3'>{video.title}</Header>
-              {/*<div>{tags}<Reaction/></div>*/}
+              <div>
+                {tags}
+                <Reaction />
+              </div>
               <div style={{textAlign: 'right'}}>
                 <UpvoteButton upvotes={upvotes} />
                 <DownvoteButton downvotes={downvotes} />
