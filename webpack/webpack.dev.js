@@ -26,7 +26,7 @@ const devConfig = merge([{
         },
       },
       {
-        test: /^((?!semantic|react-tagsinput).)*\.css$/,
+        test: /^((?!semantic|react-tagsinput|emoji-mart).)*\.css$/,
         use: [
           'style-loader',
           {
@@ -43,7 +43,7 @@ const devConfig = merge([{
         ]
       },
       {
-        test: /(semantic\.css|react-tagsinput\.css)/,
+        test: /(semantic\.css|react-tagsinput\.css|emoji-mart\.css)/,
         use: [
           'style-loader',
           {

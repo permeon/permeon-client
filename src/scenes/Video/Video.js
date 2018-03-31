@@ -16,6 +16,7 @@ import {selectors} from "../../reducers";
 import {countVotes} from "../../helpers/videoHelpers";
 import {subscriptionCount} from "../../actions/subscriptionsActions";
 import { rootComments } from "../../helpers/commentHelpers";
+import Reaction from "../../components/Reaction/Reaction";
 
 class Video extends Component {
   componentDidMount() {
@@ -65,7 +66,7 @@ class Video extends Component {
             </Segment>
             <Segment vertical style={{}}>
               <Header as='h3'>{video.title}</Header>
-              <div>{tags}</div>
+              <div>{tags}<Reaction/></div>
               <div style={{textAlign: 'right'}}>
                 <UpvoteButton upvotes={upvotes} />
                 <DownvoteButton downvotes={downvotes} />
