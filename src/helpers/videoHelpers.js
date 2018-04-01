@@ -73,12 +73,35 @@ export function getAppInfo(post) {
   }
 }
 
+/**
+ * Formats a videos duration
+ * @param durationSecs - duration in secs eg. 33.1123
+ * @returns {string} - a formatted duration string
+ */
+export function formatDuration(durationSecs) {
+  const duration = parseFloat(durationSecs, 10);
+  const hours = Math.floor(duration / 3600);
+  const mins = Math.floor((duration - hours * 3600) / 60);
+  const secs = Math.floor(((duration - hours * 3600) - mins * 60));
+
+  const hoursF = hours > 9 ? hours : hours;
+  const minsF = hours ? (mins > 9 ? mins : '0' + mins) : mins;
+  const secsF = secs > 9 ? secs : '0' + secs;
+
+  return hours ? `${hoursF}:${minsF}:${secsF}` : `${minsF}:${secsF}`;
+}
+
+
+/**
+ *  Video Post Parsers
+ */
+
 function mainAppParser(post) {
   const json_metadata = safeJsonParse(post.json_metadata);
   const videoData = {
     description: post.body,
     url: _.get(json_metadata, 'link'),
-    duration: 0,
+    duration: _.get(json_metadata, 'duration', 0),
     thumbnail: _.get(json_metadata, 'thumbnail'),
   };
   return {
@@ -93,7 +116,7 @@ function dtubeParser(post) {
   const videoData = {
     description: _.get(json_metadata.video, 'content.description'),
     url: `https://ipfs.io/ipfs/${_.get(json_metadata.video, 'content.videohash')}`,
-    duration: _.get(json_metadata.video, 'info.duration'),
+    duration: _.get(json_metadata.video, 'info.duration', 0),
     thumbnail: `https://ipfs.io/ipfs/${_.get(json_metadata.video, 'info.snaphash')}`,
   };
   return {

@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Header } from 'semantic-ui-react';
 
-import {getAppInfo} from "../../helpers/videoHelpers";
+import {formatDuration, getAppInfo} from "../../helpers/videoHelpers";
 import StackedVideoCard from "../../components/VideoCards/StackedVideoCard";
 import {selectors} from "../../reducers";
 import {channelVideos} from "../../actions/channelActions";
+import {postRewards} from "../../helpers/rewardsHelpers";
 
 class RelatedVideos extends Component {
   constructor(props) {
@@ -38,13 +39,12 @@ function parseVideos(videos) {
     title: video.title,
     username: video.author,
     thumbnail: video.videoData.thumbnail,
-    playtime: '09:07',
-    rewards: '$16.516',
+    playtime: formatDuration(video.videoData.duration),
+    rewards: postRewards(video),//'$16.516',
     date: '5 hours ago',
     app: getAppInfo(video).appName,
   }));
 }
-
 
 RelatedVideos.propTypes = {};
 

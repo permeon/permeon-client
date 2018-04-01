@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import GridVideoCard from "../../components/VideoCards/GridVideoCard";
 
 import styles from './GridVideoCards.css';
-import {getAppInfo} from "../../helpers/videoHelpers";
+import {formatDuration, getAppInfo} from "../../helpers/videoHelpers";
+import {postRewards} from "../../helpers/rewardsHelpers";
 
 const GridVideoCards = ({
   videos,
@@ -23,8 +24,8 @@ function parseVideos(videos) {
     title: video.title,
     username: video.author,
     thumbnail: video.videoData.thumbnail,
-    playtime: '09:07',
-    rewards: '$16.516',
+    playtime: formatDuration(video.videoData.duration),
+    rewards: postRewards(video),
     date: '5 hours ago',
     app: getAppInfo(video).appName,
   }));
