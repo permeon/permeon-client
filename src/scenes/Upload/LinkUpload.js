@@ -115,7 +115,6 @@ const LinkUpload = ({ dispatch }) => {
         ) => {
           dispatch(postVideo(values))
             .then(response => {
-              console.log('response:', response);
               setSubmitting(false);
             })
             .catch(error => {

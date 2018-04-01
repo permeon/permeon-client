@@ -34,7 +34,6 @@ export function channelVideos(username, limit=20, start_author='', start_permlin
           username,
         });
         dispatch(setVideosFetching(false));
-        console.log('response len:', response.length);
         if (response.length === limit) {
           const lastVideo = response[response.length-1];
           dispatch({
@@ -47,7 +46,6 @@ export function channelVideos(username, limit=20, start_author='', start_permlin
             pagination: {},
           });
         }
-        console.log('videoPosts:', videoPosts);
       })
       .catch(error => {
         console.log('error:', error);

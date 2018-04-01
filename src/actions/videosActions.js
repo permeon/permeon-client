@@ -39,8 +39,6 @@ export function fetchTrending(tag, limit=20, start_author='', permlink='') {
         const videoPosts = getVideoPosts(response);
         dispatch(receiveVideos(videoPosts, category));
         dispatch(setVideosFetching(false, category));
-        console.log('trending response len:', response.length);
-        console.log('trending videoPosts:', videoPosts);
       })
       .catch(error => {
         console.log('error:', error);
@@ -61,8 +59,6 @@ export function fetchCreated(tag, limit=20, start_author='', permlink='') {
         const videoPosts = getVideoPosts(response);
         dispatch(receiveVideos(videoPosts, category));
         dispatch(setVideosFetching(false, category));
-        console.log('created response len:', response.length);
-        console.log('created videoPosts:', videoPosts);
       })
       .catch(error => {
         console.log('error:', error);
@@ -83,8 +79,6 @@ export function fetchHot(tag, limit=20, start_author='', permlink='') {
         const videoPosts = getVideoPosts(response);
         dispatch(receiveVideos(videoPosts, category));
         dispatch(setVideosFetching(false, category));
-        console.log('hot response len:', response.length);
-        console.log('hot videoPosts:', videoPosts);
       })
       .catch(error => {
         console.log('error:', error);
@@ -105,8 +99,6 @@ export function fetchFeed(tag, limit=20, start_author='', permlink='') {
         const videoPosts = getVideoPosts(response);
         dispatch(receiveVideos(videoPosts, category));
         dispatch(setVideosFetching(false, category));
-        console.log('fee response len:', response.length);
-        console.log('feed videoPosts:', videoPosts);
       })
       .catch(error => {
         console.log('error:', error);

@@ -33,7 +33,6 @@ export function countVotes(votes) {
 }
 
 export function getVideoPosts(posts) {
-  console.log('posts:', posts);
   const videos = [];
   posts.forEach(post => {
     const parsedVideo = parseVideoPost(post);

@@ -26,7 +26,6 @@ export function subscribe(channel) {
     dispatch(subUnsubLoading(activeAccount, channel, true));
     return steem.broadcast.customJsonAsync(postingKey, [], [activeAccount], 'follow', JSON.stringify(payload))
       .then(response => {
-        console.log('response:', response);
         dispatch(subUnsubLoading(activeAccount, channel, false));
         dispatch({
           type: actionTypes.RECEIVE_SUBSCRIPTIONS,
@@ -50,7 +49,6 @@ export function unSubscribe(channel) {
     dispatch(subUnsubLoading(activeAccount, channel, true));
     return steem.broadcast.customJsonAsync(postingKey, [], [activeAccount], 'follow', JSON.stringify(payload))
       .then(response => {
-        console.log('response:', response);
         dispatch(subUnsubLoading(activeAccount, channel, false));
         dispatch({
           type: actionTypes.REMOVE_SUBSCRIPTION,
@@ -69,7 +67,6 @@ export function subscriptionCount(channel) {
   return (dispatch, getState) => {
     return steem.api.getFollowCountAsync(channel)
       .then(response => {
-        console.log('response:', response)
         dispatch({
           type: actionTypes.RECEIVE_SUBSCRIPTION_COUNTS,
           payload: {
@@ -91,7 +88,6 @@ export function subscriptions(limit=100, startFollowing='') {
     const activeAccount = selectors.auth.activeAccountName(getState());
     return steem.api.getFollowingAsync(activeAccount, startFollowing, 'blog', limit)
       .then(response => {
-        console.log('response:', response)
         dispatch({
           type: actionTypes.RECEIVE_SUBSCRIPTIONS,
           payload: response,

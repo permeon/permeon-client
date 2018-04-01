@@ -68,10 +68,8 @@ const SettingsFormContainer = ({ dispatch, initialValues }) => {
           values,
           { setSubmitting, setErrors }
         ) => {
-          console.log('dis:', 'dispatching')
           dispatch(updateSettings(values))
             .then(response => {
-              console.log('response:', response);
               setSubmitting(false);
             });
         }}

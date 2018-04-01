@@ -33,7 +33,6 @@ export function fetchComments(channel, permlink, limit=100) {
       if (error) {
         return Promise.reject(error);
       }
-      console.log('comments:', response);
       dispatch({
         type: actionTypes.RECEIVE_COMMENTS,
         payload: response,

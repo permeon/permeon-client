@@ -53,7 +53,6 @@ class Reaction extends React.Component {
 
   render() {
     const { emojiReactions } = this.props;
-    console.log('emojis:', emojiReactions);
 
     return (
       <div style={{top: '4px', position: 'relative', zIndex: '2000', display: 'inline-block'}}>

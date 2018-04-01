@@ -23,7 +23,6 @@ export function getVideoState(tag, channel, permlink) {
   return (dispatch, getState) => {
     return steem.api.getStateAsync(`/${tag}/@${channel}/${permlink}`)
       .then(response => {
-        console.log('state', response);
         const video = parseVideoPost(_.get(response.content, `${channel}/${permlink}`, {}));
         dispatch({
           type: actionTypes.RECEIVE_VIDEO,
