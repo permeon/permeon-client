@@ -68,9 +68,9 @@ class Video extends Component {
               <Header as='h3'>{video.title}</Header>
               <div>
                 {tags}
-                <Reaction />
               </div>
               <div style={{textAlign: 'right'}}>
+                <Reaction />
                 <UpvoteButton upvotes={upvotes} />
                 <DownvoteButton downvotes={downvotes} />
               </div>
