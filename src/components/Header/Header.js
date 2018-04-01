@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import {Button, Menu, Image, Icon, Input, Dropdown} from "semantic-ui-react";
+import { Button, Menu, Image, Icon, Input, Responsive } from "semantic-ui-react";
+import MediaQuery from 'react-responsive';
 
 import { selectors } from '../../reducers';
 import { steemLogout } from "../../actions/authActions";
@@ -36,11 +37,19 @@ class Header extends Component {
           Permeon
         </Menu.Item>
         <Menu.Item style={{width: '30%'}}>
-          <Input icon='search' fluid placeholder='Search...' />
+          <MediaQuery query="(min-width: 800px)">
+            <Input icon='search' fluid placeholder='Search...'  onChange={()=>alert('not implemented TODO')} />
+          </MediaQuery>
         </Menu.Item>
         <Menu.Menu position='right'>
+          <MediaQuery query="(max-width: 799px)">
+            <Menu.Item onClick={()=>alert('not implemented TODO')} >
+              <Icon name='search' />
+            </Menu.Item>
+          </MediaQuery>
           <Menu.Item as={Link} to='/upload' title='Upload Video'>
             <Icon name='cloud upload' />
+            {/*<Button color='red'>upload</Button>*/}
           </Menu.Item>
           <Menu.Item as={Link} to='/settings' title='Settings'>
             <Icon name='setting' />
