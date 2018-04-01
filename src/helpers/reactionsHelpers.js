@@ -6,7 +6,6 @@ export function parseReactions(posts) {
   const parsedReactions = {};
   for (let post of _.values(posts)) {
     const json_metadata = safeJsonParse(post.json_metadata);
-    console.log('json:', json_metadata);
     if (_.has(json_metadata, 'emoji')) {
       parsedReactions[`${post.author}/${post.permlink}`] = {
         ...posts[`${post.author}/${post.permlink}`],

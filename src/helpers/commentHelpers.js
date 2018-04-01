@@ -14,19 +14,6 @@ export function buildCommentTree(comments) {
       rootComments.push(comment);
     }
   }
-
-  console.log('comments:', comments);
-  // for (let comment of _.values(comments)) {
-  //   if (comment.depth > 1) {
-  //     const parent = `${comment.parent_author}/${comment.parent_permlink}`;
-  //     console.log('parent:', parent, comments[parent]);
-  //     if (!comments[parent]._childComments) {
-  //       comments[parent]._childComments = [];
-  //     }
-  //     comments[parent]._childComments.push(comment);
-  //   }
-  // }
-
   return rootComments;
 }
 
@@ -34,7 +21,6 @@ export function parseComments(comments) {
   const parsedComments = {};
   for (let comment of _.values(comments)) {
     const json_metadata = safeJsonParse(comment.json_metadata);
-    console.log('json:', json_metadata);
     if (!_.has(json_metadata, 'emoji')) {
       parsedComments[`${comment.author}/${comment.permlink}`] = {
         ...comments[`${comment.author}/${comment.permlink}`],

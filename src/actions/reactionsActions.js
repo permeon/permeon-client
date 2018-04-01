@@ -29,6 +29,17 @@ export function postReaction(channel, videoPermlink, emoji) {
       emoji,
       app: getAppJsonMetadata(),
     });
+
+    // Cheat to make ui appear like adding emoji is instant
+    const reactionsPayload = {
+      [`${channel}/${videoPermlink}`]: {
+        author: channel,
+        json_metadata: {
+          emoji,
+        },
+      },
+    };
+    dispatch(receiveReactions(channel, videoPermlink, reactionsPayload));
     return steem.broadcast.commentAsync(
       postingKey,
       channel,
@@ -41,7 +52,6 @@ export function postReaction(channel, videoPermlink, emoji) {
       jsonMetadata,
     )
       .then(response => {
-        console.log('response:', response);
       })
       .catch(error => {
         console.log('error:', error);

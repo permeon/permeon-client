@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Button, Icon } from 'semantic-ui-react';
+import { Button, Icon, Popup } from 'semantic-ui-react';
 
 import 'emoji-mart/css/emoji-mart.css';
 import { Picker, Emoji } from 'emoji-mart';
@@ -38,7 +38,16 @@ class Reaction extends React.Component {
 
   renderEmojis(emojis) {
     return emojis.map(emoji => (
-      <Emoji key={emoji.id} emoji={emoji.id} set={EMOJI_SHEET} size={16} />
+      <Popup
+        key={emoji.id}
+        trigger={
+          <div style={{display: 'inline-block'}}>
+            <Emoji emoji={emoji.id} set={EMOJI_SHEET} size={16} />
+          </div>
+        }
+        content={emoji.authors.map((author, idx) => <div key={author+idx}>{author}</div>)}
+        inverted
+      />
     ));
   }
 
