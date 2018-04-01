@@ -17,6 +17,7 @@ import {countVotes} from "../../helpers/videoHelpers";
 import {subscriptionCount} from "../../actions/subscriptionsActions";
 import { rootComments } from "../../helpers/commentHelpers";
 import Reaction from "../../components/Reaction/Reaction";
+import TimeAgo from "../../components/TimeAgo/TimeAgo";
 
 class Video extends Component {
   componentDidMount() {
@@ -82,7 +83,7 @@ class Video extends Component {
                   <Avatar username={video.author} style={{width: '48px', height: '48px'}} />
                   <Item.Content>
                     <Link to={`/channel/${video.author}`} style={{color: 'inherit'}}><Item.Header as='h5'>{video.author}</Item.Header></Link>
-                    <Item.Meta>{video.created}</Item.Meta>
+                    <Item.Meta>published <TimeAgo date={video.created}/></Item.Meta>
                     <Item.Description>
                       {video.videoData.description}
                     </Item.Description>

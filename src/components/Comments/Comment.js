@@ -4,6 +4,7 @@ import { Comment as SMComment, Header, Button, Icon } from 'semantic-ui-react';
 import DownvoteButton from "../Buttons/DownvoteButton";
 import UpvoteButton from "../Buttons/UpvoteButton";
 import {countVotes} from "../../helpers/videoHelpers";
+import TimeAgo from "../TimeAgo/TimeAgo";
 
 const Comment = ({
   author,
@@ -28,7 +29,7 @@ const Comment = ({
       <SMComment.Content>
         <SMComment.Author as='a'>{author}</SMComment.Author>
         <SMComment.Metadata>
-          <div>{date} <span style={{marginLeft: '4px'}}>{rewards}</span></div>
+          <div><TimeAgo date={date}/><span style={{marginLeft: '4px'}}>{rewards}</span></div>
         </SMComment.Metadata>
         <SMComment.Text>
           <p>{body}</p>

@@ -26,7 +26,7 @@ function parseVideos(videos) {
     thumbnail: video.videoData.thumbnail,
     playtime: formatDuration(video.videoData.duration),
     rewards: postRewards(video),
-    date: '5 hours ago',
+    date: video.created,
     app: getAppInfo(video).appName,
   }));
 }

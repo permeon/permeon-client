@@ -5,6 +5,7 @@ import { Image, Header } from 'semantic-ui-react';
 import classNames from 'classnames';
 
 import styles from './StackedVideoCard.css';
+import TimeAgo from "../TimeAgo/TimeAgo";
 
 const StackedVideoCard = ({
   url,
@@ -29,7 +30,7 @@ const StackedVideoCard = ({
         <Link to={`/channel/${username}`} className={classNames(styles.AuthorLink, 'red')}>{username}</Link>
         <div>
           <span className={styles.Rewards}>{rewards}</span>
-          <span className={styles.Date}>{date}</span>
+          <span className={styles.Date}><TimeAgo date={date}/></span>
         </div>
       </div>
     </div>

@@ -41,7 +41,7 @@ function parseVideos(videos) {
     thumbnail: video.videoData.thumbnail,
     playtime: formatDuration(video.videoData.duration),
     rewards: postRewards(video),//'$16.516',
-    date: '5 hours ago',
+    date: video.created,
     app: getAppInfo(video).appName,
   }));
 }
