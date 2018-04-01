@@ -36,11 +36,13 @@ class Header extends Component {
           {/*/>*/}
           Permeon
         </Menu.Item>
-        <Menu.Item style={{width: '30%'}}>
-          <MediaQuery query="(min-width: 800px)">
+
+        <MediaQuery query="(min-width: 800px)">
+          <Menu.Item style={{width: '30%'}}>
             <Input icon='search' fluid placeholder='Search...'  onChange={()=>alert('not implemented TODO')} />
-          </MediaQuery>
-        </Menu.Item>
+          </Menu.Item>
+        </MediaQuery>
+
         <Menu.Menu position='right'>
           <MediaQuery query="(max-width: 799px)">
             <Menu.Item onClick={()=>alert('not implemented TODO')} >
