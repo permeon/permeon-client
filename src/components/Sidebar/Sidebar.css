@@ -5,4 +5,12 @@
   top: 56px !important;
   padding-bottom: 56px;
   background-color: rgb(250, 250, 250);
+
+}
+
+.Item {
+
+  &::before {
+    display: none !important;
+  }
 }
