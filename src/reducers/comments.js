@@ -1,8 +1,7 @@
 import { combineReducers } from 'redux';
 import _ from 'lodash';
 
-
-import { actionTypes } from "../actions/commentsActions";
+import { actionTypes } from '../actions/commentsActions';
 
 function comments(state = [], action) {
   switch (action.type) {
@@ -20,7 +19,7 @@ function comments(state = [], action) {
 }
 
 export default combineReducers({
-  comments,
+  comments
 });
 
 // Selectors

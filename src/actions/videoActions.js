@@ -1,16 +1,16 @@
 import steem from '../lib/steemApi';
-import config from "../config";
+import config from '../config';
 
-import { selectors } from "../reducers";
-import {transformPayload} from "../lib/utils";
-import {parseVideoPost} from "../helpers/videoHelpers";
-import {receiveComments} from './commentsActions';
-import {parseComments} from "../helpers/commentHelpers";
-import {receiveReactions} from "./reactionsActions";
-import {parseReactions} from "../helpers/reactionsHelpers";
+import { selectors } from '../reducers';
+import { transformPayload } from '../lib/utils';
+import { parseVideoPost } from '../helpers/videoHelpers';
+import { receiveComments } from './commentsActions';
+import { parseComments } from '../helpers/commentHelpers';
+import { receiveReactions } from './reactionsActions';
+import { parseReactions } from '../helpers/reactionsHelpers';
 
 export const actionTypes = {
-  RECEIVE_VIDEO: '@video/RECEIVE_VIDEO',
+  RECEIVE_VIDEO: '@video/RECEIVE_VIDEO'
 };
 
 /**
@@ -21,12 +21,13 @@ export const actionTypes = {
  */
 export function getVideoState(tag, channel, permlink) {
   return (dispatch, getState) => {
-    return steem.api.getStateAsync(`/${tag}/@${channel}/${permlink}`)
+    return steem.api
+      .getStateAsync(`/${tag}/@${channel}/${permlink}`)
       .then(response => {
         const video = parseVideoPost(_.get(response.content, `${channel}/${permlink}`, {}));
         dispatch({
           type: actionTypes.RECEIVE_VIDEO,
-          payload: video,
+          payload: video
         });
         const commentsPayload = parseComments(response.content);
         delete commentsPayload[`${channel}/${permlink}`];
@@ -38,6 +39,5 @@ export function getVideoState(tag, channel, permlink) {
       .catch(error => {
         console.log('error:', error);
       });
-  }
+  };
 }
-

@@ -1,15 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Image} from "semantic-ui-react";
+import { Image } from 'semantic-ui-react';
 
 const Avatar = ({ username, ...rest }) => {
-  return (
-    <Image avatar src={`https://steemitimages.com/u/${username}/avatar/`} {...rest} />
-  );
+  return <Image avatar src={`https://steemitimages.com/u/${username}/avatar/`} {...rest} />;
 };
 
-Avatar.propTypes = {
-
-};
+Avatar.propTypes = {};
 
 export default Avatar;

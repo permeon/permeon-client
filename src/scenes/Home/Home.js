@@ -1,13 +1,13 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Button, Divider, Header, Loader } from 'semantic-ui-react';
 
-import {selectors} from "../../reducers";
-import {fetchFeed, fetchHot, fetchCreated, fetchTrending} from "../../actions/videosActions";
-import GridVideoCardLayout from "../../components/VideoCards/GridVideoCardLayout";
-import GridVideoCards from "../../components/VideoCards/GridVideoCards";
+import { selectors } from '../../reducers';
+import { fetchFeed, fetchHot, fetchCreated, fetchTrending } from '../../actions/videosActions';
+import GridVideoCardLayout from '../../components/VideoCards/GridVideoCardLayout';
+import GridVideoCards from '../../components/VideoCards/GridVideoCards';
 import styles from './Home.css';
 
 class Home extends Component {
@@ -28,41 +28,47 @@ class Home extends Component {
 
   render() {
     const {
-      trendingVideos, newVideos, hotVideos, subscriptionVideos,
-      trendingVideosLoading, newVideosLoading, hotVideosLoading, subscriptionVideosLoading,
+      trendingVideos,
+      newVideos,
+      hotVideos,
+      subscriptionVideos,
+      trendingVideosLoading,
+      newVideosLoading,
+      hotVideosLoading,
+      subscriptionVideosLoading
     } = this.props;
     return (
       <div>
-        <GridVideoCardLayout style={{marginTop: '30px'}}>
-          <Header as='h3'>Subscriptions</Header>
+        <GridVideoCardLayout style={{ marginTop: '30px' }}>
+          <Header as="h3">Subscriptions</Header>
           <GridVideoCards videos={subscriptionVideos} />
           <Loader inline active={subscriptionVideosLoading} />
-          <br/>
-          {!subscriptionVideosLoading && <Link to='/feed'>SHOW MORE</Link>}
+          <br />
+          {!subscriptionVideosLoading && <Link to="/feed">SHOW MORE</Link>}
           <Divider />
         </GridVideoCardLayout>
-        <GridVideoCardLayout style={{marginTop: '30px'}}>
-          <Header as='h3'>Trending</Header>
+        <GridVideoCardLayout style={{ marginTop: '30px' }}>
+          <Header as="h3">Trending</Header>
           <GridVideoCards videos={trendingVideos} />
           <Loader inline active={trendingVideosLoading} />
-          <br/>
-          {!trendingVideosLoading && <Link to='/trending'>SHOW MORE</Link>}
+          <br />
+          {!trendingVideosLoading && <Link to="/trending">SHOW MORE</Link>}
           <Divider />
         </GridVideoCardLayout>
-        <GridVideoCardLayout style={{marginTop: '30px'}}>
-          <Header as='h3'>Hot</Header>
+        <GridVideoCardLayout style={{ marginTop: '30px' }}>
+          <Header as="h3">Hot</Header>
           <GridVideoCards videos={hotVideos} />
           <Loader inline active={hotVideosLoading} />
-          <br/>
-          {!hotVideosLoading && <Link to='/hot'>SHOW MORE</Link>}
+          <br />
+          {!hotVideosLoading && <Link to="/hot">SHOW MORE</Link>}
           <Divider />
         </GridVideoCardLayout>
-        <GridVideoCardLayout style={{marginTop: '30px'}}>
-          <Header as='h3'>New</Header>
+        <GridVideoCardLayout style={{ marginTop: '30px' }}>
+          <Header as="h3">New</Header>
           <GridVideoCards videos={newVideos} />
           <Loader inline active={newVideosLoading} />
-          <br/>
-          {!newVideosLoading && <Link to='/new'>SHOW MORE</Link>}
+          <br />
+          {!newVideosLoading && <Link to="/new">SHOW MORE</Link>}
           <Divider />
         </GridVideoCardLayout>
       </div>
@@ -83,8 +89,8 @@ function mapStateToProps(state, ownProps) {
     trendingVideosLoading: selectors.videos.isLoading(state, 'trending'),
     newVideosLoading: selectors.videos.isLoading(state, 'created'),
     hotVideosLoading: selectors.videos.isLoading(state, 'hot'),
-    subscriptionVideosLoading: selectors.videos.isLoading(state, 'feed'),
-  }
+    subscriptionVideosLoading: selectors.videos.isLoading(state, 'feed')
+  };
 }
 
 export default connect(mapStateToProps)(Home);

@@ -1,11 +1,10 @@
 import steem from '../lib/steemApi';
-import config from "../config";
+import config from '../config';
 
-import {selectors} from "../reducers";
-import { getAppJsonMetadata, generatePermlink } from "../helpers/postHelpers";
+import { selectors } from '../reducers';
+import { getAppJsonMetadata, generatePermlink } from '../helpers/postHelpers';
 
-export const actionTypes = {
-};
+export const actionTypes = {};
 
 const { APP_NAME, POST_BENEFICIARY_FEE } = config.pick('APP_NAME', 'POST_BENEFICIARY_FEE');
 
@@ -19,7 +18,7 @@ export function postVideo({ link, title, body, tags, thumbnail }) {
       tags,
       link,
       thumbnail,
-      app: getAppJsonMetadata(),
+      app: getAppJsonMetadata()
     });
     tags.push(APP_NAME);
     const beneficiaries = [{ account: APP_NAME, weight: POST_BENEFICIARY_FEE }];
@@ -34,12 +33,11 @@ export function postVideo({ link, title, body, tags, thumbnail }) {
       title,
       body,
       jsonMetadata,
-      beneficiaries,
-    )
-      .then(response => {
-        return `/${rootTag}/@${author}/${generatedPermlink}`;
-      });
-  }
+      beneficiaries
+    ).then(response => {
+      return `/${rootTag}/@${author}/${generatedPermlink}`;
+    });
+  };
 }
 
 function commentWithBeneficiary(
@@ -54,7 +52,8 @@ function commentWithBeneficiary(
   beneficiaries
 ) {
   const operations = [
-    ['comment',
+    [
+      'comment',
       {
         parent_author: parentAuthor,
         parent_permlink: parentPermlink,
@@ -62,26 +61,29 @@ function commentWithBeneficiary(
         permlink,
         title,
         body,
-        json_metadata: jsonMetadata,
+        json_metadata: jsonMetadata
       }
     ],
-    ['comment_options', {
-      author,
-      permlink,
-      max_accepted_payout: '1000000.000 SBD',
-      percent_steem_dollars: 10000,
-      allow_votes: true,
-      allow_curation_rewards: true,
-      extensions: [
-        [0, {
-          beneficiaries,
-        }]
-      ]
-    }]
+    [
+      'comment_options',
+      {
+        author,
+        permlink,
+        max_accepted_payout: '1000000.000 SBD',
+        percent_steem_dollars: 10000,
+        allow_votes: true,
+        allow_curation_rewards: true,
+        extensions: [
+          [
+            0,
+            {
+              beneficiaries
+            }
+          ]
+        ]
+      }
+    ]
   ];
 
-  return steem.broadcast.sendAsync(
-    { operations, extensions: [] },
-    { posting: wif }
-  );
+  return steem.broadcast.sendAsync({ operations, extensions: [] }, { posting: wif });
 }

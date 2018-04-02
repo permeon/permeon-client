@@ -1,13 +1,13 @@
-import { combineReducers } from "redux";
+import { combineReducers } from 'redux';
 
-import authReducer, * as authSelectors from "./auth";
-import channelsReducer, * as channelsSelectors from "./channels";
-import settingsReducer, * as settingsSelectors from "./settings";
-import videosReducer, * as videosSelectors from "./videos";
-import subscriptionsReducer, * as subscriptionsSelectors from "./subscriptions";
-import videoReducer, * as videoSelectors from "./video";
-import commentsReducer, * as commentsSelectors from "./comments";
-import reactionsReducer, * as reactionsSelectors from "./reactions";
+import authReducer, * as authSelectors from './auth';
+import channelsReducer, * as channelsSelectors from './channels';
+import settingsReducer, * as settingsSelectors from './settings';
+import videosReducer, * as videosSelectors from './videos';
+import subscriptionsReducer, * as subscriptionsSelectors from './subscriptions';
+import videoReducer, * as videoSelectors from './video';
+import commentsReducer, * as commentsSelectors from './comments';
+import reactionsReducer, * as reactionsSelectors from './reactions';
 
 export default combineReducers({
   auth: authReducer,
@@ -17,7 +17,7 @@ export default combineReducers({
   subscriptions: subscriptionsReducer,
   video: videoReducer,
   comments: commentsReducer,
-  reactions: reactionsReducer,
+  reactions: reactionsReducer
 });
 
 export const selectors = {
@@ -25,39 +25,45 @@ export const selectors = {
     isLoggedIn: state => authSelectors.isLoggedIn(state.auth),
     getAccounts: state => authSelectors.getAccounts(state.auth),
     activeAccountName: state => authSelectors.activeAccountName(state.auth),
-    activeKeys: state => authSelectors.activeKeys(state.auth),
+    activeKeys: state => authSelectors.activeKeys(state.auth)
   },
   channels: {
     allVideos: (state, channel) => channelsSelectors.allVideos(state.channels, channel),
     isFetchingVideos: state => channelsSelectors.isFetchingVideos(state.channels),
     videosToFetch: state => channelsSelectors.videosToFetch(state.channels),
     currentChannel: state => channelsSelectors.currentChannel(state.channels),
-    videoPagination: state => channelsSelectors.videoPagination(state.channels),
+    videoPagination: state => channelsSelectors.videoPagination(state.channels)
   },
   settings: {
-    all: state => settingsSelectors.all(state.settings),
+    all: state => settingsSelectors.all(state.settings)
   },
   videos: {
     trending: state => videosSelectors.trending(state.videos),
     created: state => videosSelectors.created(state.videos),
     hot: state => videosSelectors.hot(state.videos),
     feed: state => videosSelectors.feed(state.videos),
-    isLoading: (state, category)=> videosSelectors.isLoading(state.videos, category),
+    isLoading: (state, category) => videosSelectors.isLoading(state.videos, category)
   },
   subscriptions: {
-    isSubscribedTo: (state, account, channel) => subscriptionsSelectors.isSubscribedTo(state.subscriptions, account, channel),
-    mySubscriptions: (state, account) => subscriptionsSelectors.mySubscriptions(state.subscriptions, account),
-    isSubbingUnsubbing: (state, account, channel) => subscriptionsSelectors.isSubbingUnsubbing(state.subscriptions, account, channel),
-    subscriberCount: (state, channel) => subscriptionsSelectors.subscriberCount(state.subscriptions, channel),
-    subscriberCountLoading: (state, channel) => subscriptionsSelectors.subscriberCountLoading(state.subscriptions, channel),
+    isSubscribedTo: (state, account, channel) =>
+      subscriptionsSelectors.isSubscribedTo(state.subscriptions, account, channel),
+    mySubscriptions: (state, account) =>
+      subscriptionsSelectors.mySubscriptions(state.subscriptions, account),
+    isSubbingUnsubbing: (state, account, channel) =>
+      subscriptionsSelectors.isSubbingUnsubbing(state.subscriptions, account, channel),
+    subscriberCount: (state, channel) =>
+      subscriptionsSelectors.subscriberCount(state.subscriptions, channel),
+    subscriberCountLoading: (state, channel) =>
+      subscriptionsSelectors.subscriberCountLoading(state.subscriptions, channel)
   },
   video: {
-    video: (state, channel, permlink) => videoSelectors.video(state.video, channel, permlink),
+    video: (state, channel, permlink) => videoSelectors.video(state.video, channel, permlink)
   },
   comments: {
-    all: (state, channel, permlink) => commentsSelectors.all(state.comments, channel, permlink),
+    all: (state, channel, permlink) => commentsSelectors.all(state.comments, channel, permlink)
   },
   reactions: {
-    emojis: (state, channel, permlink) => reactionsSelectors.emojis(state.reactions, channel, permlink),
-  },
+    emojis: (state, channel, permlink) =>
+      reactionsSelectors.emojis(state.reactions, channel, permlink)
+  }
 };

@@ -5,7 +5,7 @@
  * add an array of comment objects to each comment
  * @param comments - a comment from the steem blockchain
  */
-import {safeJsonParse} from "../lib/utils";
+import { safeJsonParse } from '../lib/utils';
 
 export function buildCommentTree(comments) {
   const rootComments = [];
@@ -25,7 +25,7 @@ export function parseComments(comments) {
       parsedComments[`${comment.author}/${comment.permlink}`] = {
         ...comments[`${comment.author}/${comment.permlink}`],
         json_metadata
-      }
+      };
     }
   }
   return parsedComments;

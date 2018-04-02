@@ -24,9 +24,9 @@ export function totalPostRewards(post) {
 }
 
 export function parsePayoutAmount(amount) {
-    return parseFloat(String(amount).replace(/\s[A-Z]*$/, ''));
+  return parseFloat(String(amount).replace(/\s[A-Z]*$/, ''));
 }
 
 export function formatRewards(amount) {
-  return `$${amount.toFixed(2)}`
+  return `$${amount.toFixed(2)}`;
 }

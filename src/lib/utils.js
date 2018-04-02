@@ -33,10 +33,10 @@ export function transformPayload(payload, idPath = 'id') {
     payload.forEach(entity => {
       entities[_.get(entity, idPath)] = entity;
     });
-  } else if (typeof payload === "object") {
+  } else if (typeof payload === 'object') {
     entities[_.get(payload, idPath)] = payload;
   } else {
-    throw new Error("Payload must either be an array or an object.");
+    throw new Error('Payload must either be an array or an object.');
   }
   return entities;
 }

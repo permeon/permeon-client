@@ -5,8 +5,8 @@ import { Formik } from 'formik';
 import { Loader, Dimmer, Divider, Form, Button, Message, Segment } from 'semantic-ui-react';
 import yup from 'yup';
 
-import TagEditor from "../../components/TagEditor/TagEditor";
-import { postVideo } from "../../actions/postActions";
+import TagEditor from '../../components/TagEditor/TagEditor';
+import { postVideo } from '../../actions/postActions';
 
 const LinkUploadForm = ({
   values,
@@ -17,17 +17,17 @@ const LinkUploadForm = ({
   handleBlur,
   handleSubmit,
   isSubmitting,
-  setFieldValue,
+  setFieldValue
 }) => (
-  <Form onSubmit={handleSubmit} error size='large'>
+  <Form onSubmit={handleSubmit} error size="large">
     <Dimmer active={isSubmitting} page>
-      <Loader size='huge'>uploading</Loader>
+      <Loader size="huge">uploading</Loader>
     </Dimmer>
     {status && status.map((error, idx) => <Message key={idx} error content={error} />)}
     <Form.Input
       type="text"
       name="link"
-      placeholder='video url... eg. https://youtube.com/?vid=123k4j12jkl'
+      placeholder="video url... eg. https://youtube.com/?vid=123k4j12jkl"
       onChange={handleChange}
       onBlur={handleBlur}
       value={values.link}
@@ -37,7 +37,7 @@ const LinkUploadForm = ({
     <Form.Input
       type="text"
       name="thumbnail"
-      placeholder='video thumbnail'
+      placeholder="video thumbnail"
       onChange={handleChange}
       onBlur={handleBlur}
       value={values.thumbnail}
@@ -47,7 +47,7 @@ const LinkUploadForm = ({
     <Form.Input
       type="text"
       name="title"
-      placeholder='title'
+      placeholder="title"
       onChange={handleChange}
       onBlur={handleBlur}
       value={values.title}
@@ -55,16 +55,18 @@ const LinkUploadForm = ({
     {touched.title && errors.title && <Message error content={errors.title} />}
     <Form.TextArea
       name="body"
-      placeholder='body'
+      placeholder="body"
       onChange={handleChange}
       onBlur={handleBlur}
       value={values.body}
     />
     {touched.body && errors.body && <Message error content={errors.body} />}
-    <TagEditor name='tags' handleChange={setFieldValue} tags={values.tags}/>
+    <TagEditor name="tags" handleChange={setFieldValue} tags={values.tags} />
     {touched.tags && errors.tags && <Message error content={errors.tags} />}
     <Divider />
-    <Button size="large" floated='right' disabled={isSubmitting}>post</Button>
+    <Button size="large" floated="right" disabled={isSubmitting}>
+      post
+    </Button>
   </Form>
 );
 
@@ -77,21 +79,19 @@ const LinkUpload = ({ dispatch, redirect }) => {
           thumbnail: '',
           title: '',
           body: '',
-          tags: [],
+          tags: []
         }}
-        validationSchema={
-          yup.object().shape({
-            link: yup.string().required(),
-            thumbnail: yup.string().required(),
-            title: yup.string().required().max(255),
-            body: yup.string().max(65535, 'Body must not be over 65KB'),
-            tags: yup.array().max(4),
-          })
-        }
-        onSubmit={(
-          values,
-          { setSubmitting, setErrors }
-        ) => {
+        validationSchema={yup.object().shape({
+          link: yup.string().required(),
+          thumbnail: yup.string().required(),
+          title: yup
+            .string()
+            .required()
+            .max(255),
+          body: yup.string().max(65535, 'Body must not be over 65KB'),
+          tags: yup.array().max(4)
+        })}
+        onSubmit={(values, { setSubmitting, setErrors }) => {
           dispatch(postVideo(values))
             .then(path => {
               setSubmitting(false);
@@ -100,7 +100,7 @@ const LinkUpload = ({ dispatch, redirect }) => {
             .catch(error => {
               console.log('error:', error);
               setSubmitting(false);
-            })
+            });
         }}
         render={props => <LinkUploadForm {...props} />}
       />
@@ -108,8 +108,6 @@ const LinkUpload = ({ dispatch, redirect }) => {
   );
 };
 
-LinkUpload.propTypes = {
-
-};
+LinkUpload.propTypes = {};
 
 export default connect()(LinkUpload);

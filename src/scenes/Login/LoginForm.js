@@ -1,11 +1,11 @@
-import React from "react";
-import { withFormik } from "formik";
-import yup from "yup";
+import React from 'react';
+import { withFormik } from 'formik';
+import yup from 'yup';
 
-import {Form, Button, Message, Segment} from "semantic-ui-react";
+import { Form, Button, Message, Segment } from 'semantic-ui-react';
 
-import { steemLogin } from "../../actions/authActions";
-import config from "../../config";
+import { steemLogin } from '../../actions/authActions';
+import config from '../../config';
 
 const { STEEM_SIGNUP } = config.pick('STEEM_SIGNUP');
 
@@ -29,8 +29,8 @@ const LoginForm = ({
         onChange={handleChange}
         onBlur={handleBlur}
         fluid
-        icon='user'
-        iconPosition='left'
+        icon="user"
+        iconPosition="left"
         value={values.username}
       />
       {touched.username && errors.username && <Message error content={errors.username} />}
@@ -42,19 +42,23 @@ const LoginForm = ({
         onBlur={handleBlur}
         value={values.password}
         fluid
-        icon='lock'
-        iconPosition='left'
-        type='password'
+        icon="lock"
+        iconPosition="left"
+        type="password"
       />
       {touched.password && errors.password && <Message error content={errors.password} />}
-      <Button fluid size="large" disabled={isSubmitting}>login</Button>
+      <Button fluid size="large" disabled={isSubmitting}>
+        login
+      </Button>
     </Segment>
-    <p>New to Steem? <a href={STEEM_SIGNUP}>signup on steemit</a></p>
+    <p>
+      New to Steem? <a href={STEEM_SIGNUP}>signup on steemit</a>
+    </p>
   </Form>
 );
 
 const LoginFormContainer = withFormik({
-  mapPropsToValues: props => ({ username: "", password: "" }),
+  mapPropsToValues: props => ({ username: '', password: '' }),
   validationSchema: yup.object().shape({
     username: yup.string().required(),
     password: yup.string().required()

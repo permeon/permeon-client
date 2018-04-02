@@ -1,28 +1,28 @@
-import axios from "axios";
+import axios from 'axios';
 
-import * as utils from "./utils";
+import * as utils from './utils';
 
-const API_BASE_URL = process.env.API_BASE_URL || "http://localhost:8000/api/v1";
+const API_BASE_URL = process.env.API_BASE_URL || 'http://localhost:8000/api/v1';
 
-export const CALL_API = "CALL_API";
+export const CALL_API = 'CALL_API';
 
 export const apiMiddleware = store => next => action => {
   const callAPI = action[CALL_API];
 
-  if (typeof callAPI === "undefined") {
+  if (typeof callAPI === 'undefined') {
     return next(action);
   }
   throw new Error('Setup Api First dummy');
 
   const { type, data, endpoint, method } = callAPI;
 
-  console.log("api:", action);
+  console.log('api:', action);
 
-  if (typeof endpoint !== "string") {
-    throw new Error("Specify a string endpoint URL.");
+  if (typeof endpoint !== 'string') {
+    throw new Error('Specify a string endpoint URL.');
   }
-  if (typeof type !== "string") {
-    throw new Error("Specify a string type");
+  if (typeof type !== 'string') {
+    throw new Error('Specify a string type');
   }
 
   const actionWith = data => {
@@ -35,9 +35,9 @@ export const apiMiddleware = store => next => action => {
 
   const headers = {};
   const token =
-    store.getState().token || utils.storageGet("token") || "XXXbjksaldfjionTOKENWOWZERSXXX";
+    store.getState().token || utils.storageGet('token') || 'XXXbjksaldfjionTOKENWOWZERSXXX';
   if (token) {
-    headers["Authorization"] = `Token ${token}`;
+    headers['Authorization'] = `Token ${token}`;
   }
 
   // return axios.get(API_BASE_URL + '/threads/').then(
@@ -60,7 +60,7 @@ export const apiMiddleware = store => next => action => {
       next(
         actionWith({
           type: `${type}_FAILURE`,
-          error: error.message || "Error during api call"
+          error: error.message || 'Error during api call'
         })
       );
     });

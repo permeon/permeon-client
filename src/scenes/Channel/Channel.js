@@ -1,26 +1,28 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Menu, Button, Divider, Loader } from 'semantic-ui-react';
 
 import { selectors } from '../../reducers';
-import ChannelBanner from "./ChannelBanner";
-import ChannelAbout from "./ChannelAbout";
-import GridVideoCardLayout from "../../components/VideoCards/GridVideoCardLayout";
-import GridVideoCards from "../../components/VideoCards/GridVideoCards";
-import {channelVideos} from "../../actions/channelActions";
+import ChannelBanner from './ChannelBanner';
+import ChannelAbout from './ChannelAbout';
+import GridVideoCardLayout from '../../components/VideoCards/GridVideoCardLayout';
+import GridVideoCards from '../../components/VideoCards/GridVideoCards';
+import { channelVideos } from '../../actions/channelActions';
 import {
-  subscribe, unSubscribe, subscriptionCount, subscriptions,
+  subscribe,
+  unSubscribe,
+  subscriptionCount,
+  subscriptions,
   allSubscriptions
-} from "../../actions/subscriptionsActions";
+} from '../../actions/subscriptionsActions';
 import styles from './Channel.css';
 
 class Channel extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
-      activeTab: 'VIDEOS',
+      activeTab: 'VIDEOS'
     };
     this.onMenuClick = this.onMenuClick.bind(this);
     this.loadMoreVideos = this.loadMoreVideos.bind(this);
@@ -46,15 +48,13 @@ class Channel extends Component {
     this.props.dispatch(unSubscribe(this.props.username));
   }
 
-  onMenuClick(event, {name}) {
+  onMenuClick(event, { name }) {
     this.setState({ activeTab: name });
   }
 
   loadMoreVideos() {
     const { start_author, start_permlink } = this.props.videoPagination;
-    this.props.dispatch(channelVideos(
-      this.props.username, 50, start_author, start_permlink
-    ));
+    this.props.dispatch(channelVideos(this.props.username, 50, start_author, start_permlink));
   }
 
   renderActive(activeTab) {
@@ -63,12 +63,17 @@ class Channel extends Component {
     } else if (activeTab === 'ABOUT') {
       return <ChannelAbout />;
     }
-      return null;
+    return null;
   }
 
   render() {
     const {
-      username, moreVideosToLoad, isLoadingVideos, isSubscribedTo, isSubbingUnsubbing, channelAccount
+      username,
+      moreVideosToLoad,
+      isLoadingVideos,
+      isSubscribedTo,
+      isSubbingUnsubbing,
+      channelAccount
     } = this.props;
     const { activeTab } = this.state;
     // TODO: put urls into config
@@ -86,14 +91,18 @@ class Channel extends Component {
           isSubButtonLoading={isSubbingUnsubbing}
         />
         <GridVideoCardLayout>
-          <Menu pointing secondary tabular attached='top' className={styles.ChannelMenu}>
-            <Menu.Item name='VIDEOS' active={activeTab === 'VIDEOS'} onClick={this.onMenuClick} />
-            <Menu.Item name='ABOUT' active={activeTab === 'ABOUT'} onClick={this.onMenuClick} />
+          <Menu pointing secondary tabular attached="top" className={styles.ChannelMenu}>
+            <Menu.Item name="VIDEOS" active={activeTab === 'VIDEOS'} onClick={this.onMenuClick} />
+            <Menu.Item name="ABOUT" active={activeTab === 'ABOUT'} onClick={this.onMenuClick} />
           </Menu>
           {this.renderActive(activeTab)}
-          <Loader active={isLoadingVideos} size='large'/>
+          <Loader active={isLoadingVideos} size="large" />
           {moreVideosToLoad && <Divider clearing />}
-          {moreVideosToLoad && <Button onClick={this.loadMoreVideos} floated='right'>more</Button>}
+          {moreVideosToLoad && (
+            <Button onClick={this.loadMoreVideos} floated="right">
+              more
+            </Button>
+          )}
         </GridVideoCardLayout>
       </div>
     );
@@ -114,8 +123,8 @@ function mapStateToProps(state, ownProps) {
     isSubscribedTo: selectors.subscriptions.isSubscribedTo(state, activeAccount, username),
     mySubscriptions: selectors.subscriptions.mySubscriptions(state, activeAccount),
     isSubbingUnsubbing: selectors.subscriptions.isSubbingUnsubbing(state, activeAccount, username),
-    channelAccount: {}, // TODO: get account from chian
-  }
+    channelAccount: {} // TODO: get account from chian
+  };
 }
 
 export default connect(mapStateToProps)(Channel);

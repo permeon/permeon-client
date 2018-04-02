@@ -3,23 +3,13 @@ import PropTypes from 'prop-types';
 import { Comment as SMComment, Header, Button, Icon } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
-import DownvoteButton from "../Buttons/DownvoteButton";
-import UpvoteButton from "../Buttons/UpvoteButton";
-import {countVotes} from "../../helpers/videoHelpers";
-import TimeAgo from "../TimeAgo/TimeAgo";
-import {formatRewards, totalPostRewards} from "../../helpers/rewardsHelpers";
+import DownvoteButton from '../Buttons/DownvoteButton';
+import UpvoteButton from '../Buttons/UpvoteButton';
+import { countVotes } from '../../helpers/videoHelpers';
+import TimeAgo from '../TimeAgo/TimeAgo';
+import { formatRewards, totalPostRewards } from '../../helpers/rewardsHelpers';
 
-const Comment = ({
-  author,
-  date,
-  rewards,
-  body,
-  upvotes,
-  downvotes,
-  replies,
-  comments,
-  depth,
-}) => {
+const Comment = ({ author, date, rewards, body, upvotes, downvotes, replies, comments, depth }) => {
   // Use "\2022" for bullet
   const style = {};
   if (depth > 0) {
@@ -30,27 +20,30 @@ const Comment = ({
     <SMComment>
       <SMComment.Avatar src={`https://steemitimages.com/u/${author}/avatar/`} />
       <SMComment.Content>
-        <SMComment.Author as={Link} to={`/channel/${author}`}>{author}</SMComment.Author>
+        <SMComment.Author as={Link} to={`/channel/${author}`}>
+          {author}
+        </SMComment.Author>
         <SMComment.Metadata>
-          <div><TimeAgo date={date}/><span style={{marginLeft: '4px'}}>{formatRewards(rewards)}</span></div>
+          <div>
+            <TimeAgo date={date} />
+            <span style={{ marginLeft: '4px' }}>{formatRewards(rewards)}</span>
+          </div>
         </SMComment.Metadata>
         <SMComment.Text>
           <p>{body}</p>
         </SMComment.Text>
         <SMComment.Actions>
           <SMComment.Action>
-            <UpvoteButton upvotes={upvotes} style={{padding: '2px 4px'}}/>
+            <UpvoteButton upvotes={upvotes} style={{ padding: '2px 4px' }} />
           </SMComment.Action>
           <SMComment.Action>
-            <DownvoteButton downvotes={downvotes} style={{padding: '2px 4px'}}/>
+            <DownvoteButton downvotes={downvotes} style={{ padding: '2px 4px' }} />
           </SMComment.Action>
           <SMComment.Action>Reply</SMComment.Action>
         </SMComment.Actions>
       </SMComment.Content>
       <SMComment.Group style={style}>
-        {replies.map(child => (
-          renderChild(comments[child], comments)
-         ))}
+        {replies.map(child => renderChild(comments[child], comments))}
       </SMComment.Group>
     </SMComment>
   );
@@ -60,7 +53,7 @@ function renderChild(comment, comments) {
   const { upvotes, downvotes } = countVotes(comment.active_votes);
   return (
     <Comment
-      key={comment.author+comment.permlink}
+      key={comment.author + comment.permlink}
       depth={comment.depth}
       author={comment.author}
       date={comment.created}
@@ -74,8 +67,6 @@ function renderChild(comment, comments) {
   );
 }
 
-Comment.propTypes = {
-
-};
+Comment.propTypes = {};
 
 export default Comment;

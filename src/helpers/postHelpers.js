@@ -1,5 +1,5 @@
 import uuidv4 from 'uuid/v4';
-import config from "../config";
+import config from '../config';
 
 const { APP_NAME, APP_VERSION } = config.pick('APP_NAME', 'APP_VERSION');
 

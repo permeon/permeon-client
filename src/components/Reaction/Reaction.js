@@ -6,18 +6,17 @@ import { Button, Icon, Popup } from 'semantic-ui-react';
 
 import 'emoji-mart/css/emoji-mart.css';
 import { Picker, Emoji } from 'emoji-mart';
-import {postReaction} from "../../actions/reactionsActions";
-import {selectors} from "../../reducers";
+import { postReaction } from '../../actions/reactionsActions';
+import { selectors } from '../../reducers';
 import styles from './Reaction.css';
 
 const EMOJI_SHEET = 'emojione';
 
 class Reaction extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
-      pickerOpen: false,
+      pickerOpen: false
     };
     this.addEmoji = this.addEmoji.bind(this);
     this.togglePicker = this.togglePicker.bind(this);
@@ -32,7 +31,7 @@ class Reaction extends React.Component {
 
   togglePicker() {
     this.setState(prevState => ({
-      pickerOpen: !prevState.pickerOpen,
+      pickerOpen: !prevState.pickerOpen
     }));
   }
 
@@ -41,11 +40,11 @@ class Reaction extends React.Component {
       <Popup
         key={emoji.id}
         trigger={
-          <div style={{display: 'inline-block'}}>
+          <div style={{ display: 'inline-block' }}>
             <Emoji emoji={emoji.id} set={EMOJI_SHEET} size={16} />
           </div>
         }
-        content={emoji.authors.map((author, idx) => <div key={author+idx}>{author}</div>)}
+        content={emoji.authors.map((author, idx) => <div key={author + idx}>{author}</div>)}
         inverted
       />
     ));
@@ -55,32 +54,28 @@ class Reaction extends React.Component {
     const { emojiReactions } = this.props;
 
     return (
-      <div style={{position: 'relative', zIndex: '2000', display: 'inline-block'}}>
-        <div className={styles.Emojis}>
-          {this.renderEmojis(emojiReactions)}
-        </div>
+      <div style={{ position: 'relative', zIndex: '2000', display: 'inline-block' }}>
+        <div className={styles.Emojis}>{this.renderEmojis(emojiReactions)}</div>
         <Button
           className={styles.OpenPickerButton}
           circular
-          icon={<Icon size='large' name='add circle' />}
+          icon={<Icon size="large" name="add circle" />}
           onClick={this.togglePicker}
         />
-        {this.state.pickerOpen &&
+        {this.state.pickerOpen && (
           <Picker
             set={EMOJI_SHEET}
             onSelect={this.addEmoji}
-            title=''
-            style={{position: 'absolute', right: 0, top: '28px'}}
+            title=""
+            style={{ position: 'absolute', right: 0, top: '28px' }}
           />
-        }
+        )}
       </div>
     );
   }
 }
 
-Reaction.propTypes = {
-
-};
+Reaction.propTypes = {};
 
 function mapStateToProps(state, ownProps) {
   let { channel, permlink } = ownProps.match.params;
@@ -88,8 +83,8 @@ function mapStateToProps(state, ownProps) {
   return {
     channel,
     permlink,
-    emojiReactions: selectors.reactions.emojis(state, channel, permlink),
-  }
+    emojiReactions: selectors.reactions.emojis(state, channel, permlink)
+  };
 }
 
 export default withRouter(connect(mapStateToProps)(Reaction));

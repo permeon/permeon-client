@@ -1,34 +1,28 @@
 import _ from 'lodash';
 import config from '../config';
-import { safeJsonParse } from "../lib/utils";
+import { safeJsonParse } from '../lib/utils';
 
+const { APP_NAME } = config.pick('APP_NAME');
 
-const {APP_NAME} = config.pick('APP_NAME');
-
-const videoApps = [
-  APP_NAME,
-  'dtube',
-];
+const videoApps = [APP_NAME, 'dtube'];
 
 const parsers = {
   [APP_NAME]: mainAppParser,
-  'dtube': dtubeParser,
+  dtube: dtubeParser
 };
 
 export function countVotes(votes) {
   const voteCounts = {
     upvotes: 0,
-    downvotes: 0,
+    downvotes: 0
   };
-  votes.forEach(
-    vote => {
-      if (vote.percent >= 0) {
-        voteCounts.upvotes += 1;
-      } else {
-        voteCounts.downvotes += 1;
-      }
+  votes.forEach(vote => {
+    if (vote.percent >= 0) {
+      voteCounts.upvotes += 1;
+    } else {
+      voteCounts.downvotes += 1;
     }
-  );
+  });
   return voteCounts;
 }
 
@@ -66,10 +60,10 @@ export function getAppInfo(post) {
     const [appName, version] = _.split(_.get(jsonMetadata, 'app'), '/');
     return {
       appName: appName || '',
-      version: version || '',
+      version: version || ''
     };
   } catch (e) {
-    return {appName: '', version: ''};
+    return { appName: '', version: '' };
   }
 }
 
@@ -82,7 +76,7 @@ export function formatDuration(durationSecs) {
   const duration = parseFloat(durationSecs, 10);
   const hours = Math.floor(duration / 3600);
   const mins = Math.floor((duration - hours * 3600) / 60);
-  const secs = Math.floor(((duration - hours * 3600) - mins * 60));
+  const secs = Math.floor(duration - hours * 3600 - mins * 60);
 
   const hoursF = hours > 9 ? hours : hours;
   const minsF = hours ? (mins > 9 ? mins : '0' + mins) : mins;
@@ -90,7 +84,6 @@ export function formatDuration(durationSecs) {
 
   return hours ? `${hoursF}:${minsF}:${secsF}` : `${minsF}:${secsF}`;
 }
-
 
 /**
  *  Video Post Parsers
@@ -102,12 +95,12 @@ function mainAppParser(post) {
     description: post.body,
     url: _.get(json_metadata, 'link'),
     duration: _.get(json_metadata, 'duration', 0),
-    thumbnail: _.get(json_metadata, 'thumbnail'),
+    thumbnail: _.get(json_metadata, 'thumbnail')
   };
   return {
     ...post,
     json_metadata,
-    videoData,
+    videoData
   };
 }
 
@@ -117,12 +110,12 @@ function dtubeParser(post) {
     description: _.get(json_metadata.video, 'content.description'),
     url: `https://ipfs.io/ipfs/${_.get(json_metadata.video, 'content.videohash')}`,
     duration: _.get(json_metadata.video, 'info.duration', 0),
-    thumbnail: `https://ipfs.io/ipfs/${_.get(json_metadata.video, 'info.snaphash')}`,
+    thumbnail: `https://ipfs.io/ipfs/${_.get(json_metadata.video, 'info.snaphash')}`
   };
   return {
     ...post,
     json_metadata,
-    videoData,
+    videoData
   };
 }
 
@@ -132,10 +125,10 @@ export function youtubeToEmbedSrc(src) {
 }
 
 function parseYoutubeSrc(src) {
-  const [ original, path, id ] = src.match(/(.*?)\?v=([^\/]+)/);
+  const [original, path, id] = src.match(/(.*?)\?v=([^\/]+)/);
   return {
     original,
     path,
-    id,
+    id
   };
 }

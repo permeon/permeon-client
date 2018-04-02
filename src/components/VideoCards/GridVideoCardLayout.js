@@ -12,8 +12,6 @@ const GridVideoCardLayout = ({ children, ...rest }) => {
   );
 };
 
-GridVideoCardLayout.propTypes = {
-
-};
+GridVideoCardLayout.propTypes = {};
 
 export default GridVideoCardLayout;

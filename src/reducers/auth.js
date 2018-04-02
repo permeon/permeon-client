@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
-import { actionTypes } from "../actions/authActions";
-import * as utils from "../lib/utils";
+import { actionTypes } from '../actions/authActions';
+import * as utils from '../lib/utils';
 
 const defaultAccounts = utils.storageGet('accounts') || {};
 
@@ -9,15 +9,15 @@ function accounts(state = defaultAccounts, action) {
   let newState;
   switch (action.type) {
     case actionTypes.ADD_ACCOUNT:
-      const newAccounts = {...state};
+      const newAccounts = { ...state };
       const account = newAccounts[action.username];
       newAccounts[action.username] = {
         ...account,
-        keys: action.keys,
+        keys: action.keys
       };
       return newAccounts;
     case actionTypes.REMOVE_ACCOUNT:
-      newState = {...state};
+      newState = { ...state };
       delete newState[action.username];
       return newState;
     default:
@@ -38,12 +38,12 @@ function activeAccount(state = defaultActiveAccount, action) {
 
 export default combineReducers({
   accounts,
-  activeAccount,
+  activeAccount
 });
 
 // Selectors
 export const isLoggedIn = state => !!state.activeAccount;
-export const getAccounts = state => Object.keys(state.accounts)
-  .map(username => ({ username, keys: state.accounts[username] }));
+export const getAccounts = state =>
+  Object.keys(state.accounts).map(username => ({ username, keys: state.accounts[username] }));
 export const activeAccountName = state => state.activeAccount || '';
 export const activeKeys = state => state.accounts[state.activeAccount] || '';

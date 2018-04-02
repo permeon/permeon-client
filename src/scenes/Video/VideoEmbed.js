@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {youtubeToEmbedSrc} from "../../helpers/videoHelpers";
+import { youtubeToEmbedSrc } from '../../helpers/videoHelpers';
 
 const VideoEmbed = ({ src }) => {
   if (!src) {
@@ -20,7 +20,7 @@ function renderVideo(src) {
 function renderYoutubeVideo(src) {
   const embedSrc = youtubeToEmbedSrc(src);
   return (
-    <div style={{position:'relative', paddingBottom: '56.25%'}}>
+    <div style={{ position: 'relative', paddingBottom: '56.25%' }}>
       <iframe
         frameBorder="0"
         height="100%"
@@ -28,20 +28,16 @@ function renderYoutubeVideo(src) {
         scrolling="no"
         src={embedSrc}
         allowFullScreen
-        style={{position: 'absolute', top: 0, left: 0}}
+        style={{ position: 'absolute', top: 0, left: 0 }}
       />
     </div>
-  ) ;
+  );
 }
 
 function renderDefaultVideo(src) {
-  return (
-    <video src={src} controls width='100%' style={{border: 'none'}} />
-  )
+  return <video src={src} controls width="100%" style={{ border: 'none' }} />;
 }
 
-VideoEmbed.propTypes = {
-
-};
+VideoEmbed.propTypes = {};
 
 export default VideoEmbed;

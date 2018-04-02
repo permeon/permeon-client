@@ -23,7 +23,7 @@ const prodConfig = {
         },
       },
       {
-        test: /^((?!semantic|leaflet).)*\.css$/,
+        test: /^((?!semantic|react-tagsinput|emoji-mart).)*\.css$/,
         use: localCss.extract({
           use: [
             {
@@ -42,7 +42,7 @@ const prodConfig = {
         })
       },
       {
-        test: /(semantic\.css|leaflet\.css)/,
+        test: /(semantic\.css|react-tagsinput\.css|emoji-mart\.css)/,
         use: globalCss.extract({
           use: [
             {
@@ -64,7 +64,6 @@ const prodConfig = {
   plugins: [
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production'),
-      'process.env.API_BASE_URL': JSON.stringify('https://geologger-server.herokuapp.com/api/'),
     }),
     globalCss,
     localCss,

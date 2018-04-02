@@ -30,5 +30,5 @@ function pick(...paths) {
 }
 
 export default {
-  pick,
-}
+  pick
+};

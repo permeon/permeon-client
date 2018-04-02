@@ -1,9 +1,9 @@
-import { createStore, applyMiddleware } from "redux";
-import { apiMiddleware } from "./apiMiddleware";
-import thunk from "redux-thunk";
-import { createLogger } from "redux-logger";
+import { createStore, applyMiddleware } from 'redux';
+import { apiMiddleware } from './apiMiddleware';
+import thunk from 'redux-thunk';
+import { createLogger } from 'redux-logger';
 
-import geoApp from "../reducers";
+import geoApp from '../reducers';
 
 const logger = createLogger({
   collapsed: true

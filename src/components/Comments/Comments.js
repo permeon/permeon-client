@@ -2,23 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Comment as SMComment, Header } from 'semantic-ui-react';
 
-import Comment from "./Comment";
-import {countVotes} from "../../helpers/videoHelpers";
-import {totalPostRewards} from "../../helpers/rewardsHelpers";
+import Comment from './Comment';
+import { countVotes } from '../../helpers/videoHelpers';
+import { totalPostRewards } from '../../helpers/rewardsHelpers';
 
-const Comments = ({
-  rootComments,
-  comments,
-}) => {
+const Comments = ({ rootComments, comments }) => {
   return (
     <div>
       <SMComment.Group>
-        <Header as='h3' dividing style={{border: 'none'}}>{comments.length} Comments</Header>
+        <Header as="h3" dividing style={{ border: 'none' }}>
+          {comments.length} Comments
+        </Header>
         {rootComments.map(comment => {
           const { upvotes, downvotes } = countVotes(comment.active_votes);
           return (
             <Comment
-              key={comment.author+comment.permlink}
+              key={comment.author + comment.permlink}
               depth={1}
               author={comment.author}
               date={comment.created}
@@ -29,15 +28,13 @@ const Comments = ({
               replies={comment.replies}
               comments={comments}
             />
-          )
+          );
         })}
       </SMComment.Group>
     </div>
   );
 };
 
-Comments.propTypes = {
-
-};
+Comments.propTypes = {};
 
 export default Comments;

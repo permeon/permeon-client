@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import {safeJsonParse} from "../lib/utils";
+import { safeJsonParse } from '../lib/utils';
 
 export function parseReactions(posts) {
   const parsedReactions = {};
@@ -10,9 +10,8 @@ export function parseReactions(posts) {
       parsedReactions[`${post.author}/${post.permlink}`] = {
         ...posts[`${post.author}/${post.permlink}`],
         json_metadata
-      }
+      };
     }
   }
   return parsedReactions;
 }
-

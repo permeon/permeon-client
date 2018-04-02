@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import TimeAgo from 'react-timeago'
-
+import TimeAgo from 'react-timeago';
 
 const TimeAgoWrapper = ({ date }) => {
   return <TimeAgo date={date} formatter={formatter} />;
@@ -15,8 +14,6 @@ function formatter(value, unit, suffix, date, defaultParser) {
   }
 }
 
-TimeAgoWrapper.propTypes = {
-
-};
+TimeAgoWrapper.propTypes = {};
 
 export default TimeAgoWrapper;

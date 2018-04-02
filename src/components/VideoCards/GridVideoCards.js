@@ -1,19 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import GridVideoCard from "../../components/VideoCards/GridVideoCard";
+import GridVideoCard from '../../components/VideoCards/GridVideoCard';
 
 import styles from './GridVideoCards.css';
-import {formatDuration, getAppInfo} from "../../helpers/videoHelpers";
-import {totalPostRewards} from "../../helpers/rewardsHelpers";
+import { formatDuration, getAppInfo } from '../../helpers/videoHelpers';
+import { totalPostRewards } from '../../helpers/rewardsHelpers';
 
-const GridVideoCards = ({
-  videos,
-}) => {
+const GridVideoCards = ({ videos }) => {
   return (
     <div className={styles.ChannelVideos}>
-      {parseVideos(videos).map(video => (
-        <GridVideoCard key={video.url} {...video} />
-      ))}
+      {parseVideos(videos).map(video => <GridVideoCard key={video.url} {...video} />)}
     </div>
   );
 };
@@ -27,12 +23,10 @@ function parseVideos(videos) {
     playtime: formatDuration(video.videoData.duration),
     rewards: totalPostRewards(video),
     date: video.created,
-    app: getAppInfo(video).appName,
+    app: getAppInfo(video).appName
   }));
 }
 
-GridVideoCards.propTypes = {
-
-};
+GridVideoCards.propTypes = {};
 
 export default GridVideoCards;

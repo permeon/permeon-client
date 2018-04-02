@@ -80,5 +80,8 @@
   },
   "peerDependencies": {
     "caniuse-lite": "1.0.30000697"
+  },
+  "prettier": {
+    "singleQuote": true
   }
 }

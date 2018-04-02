@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import _ from 'lodash';
 
-import { actionTypes } from "../actions/videoActions";
+import { actionTypes } from '../actions/videoActions';
 
 function videoReducer(state = null, action) {
   switch (action.type) {
@@ -13,12 +13,11 @@ function videoReducer(state = null, action) {
 }
 
 export default combineReducers({
-    video: videoReducer,
-  });
+  video: videoReducer
+});
 
 // Selectors
 export const video = (state, channel, permlink) =>
-  (_.get(state.video, 'author') === channel && _.get(state.video, 'permlink') === permlink)
+  _.get(state.video, 'author') === channel && _.get(state.video, 'permlink') === permlink
     ? state.video
     : null;
-
