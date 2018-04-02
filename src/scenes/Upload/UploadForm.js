@@ -23,7 +23,7 @@ class UploadForm extends React.Component {
   activeUploaderForm(activeUploader) {
     switch (activeUploader) {
       case 'linkUploader':
-        return <LinkUpload />;
+        return <LinkUpload redirect={this.props.redirect} />;
       default:
         return <div>not implemented</div>;
     }

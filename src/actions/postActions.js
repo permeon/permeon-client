@@ -23,18 +23,22 @@ export function postVideo({ link, title, body, tags, thumbnail }) {
     });
     tags.push(APP_NAME);
     const beneficiaries = [{ account: APP_NAME, weight: POST_BENEFICIARY_FEE }];
+    const generatedPermlink = generatePermlink();
 
     return commentWithBeneficiary(
       postingKey,
       '',
       rootTag,
       author,
-      generatePermlink(),
+      generatedPermlink,
       title,
       body,
       jsonMetadata,
       beneficiaries,
-    );
+    )
+      .then(response => {
+        return `/${rootTag}/@${author}/${generatedPermlink}`;
+      });
   }
 }
 

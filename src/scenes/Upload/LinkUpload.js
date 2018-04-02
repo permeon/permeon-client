@@ -68,37 +68,16 @@ const LinkUploadForm = ({
   </Form>
 );
 
-const LinkUpload = ({ dispatch }) => {
+const LinkUpload = ({ dispatch, redirect }) => {
   return (
     <div>
       <Formik
         initialValues={{
-          link: 'https://www.youtube.com/watch?v=pjnBi_styks',
-          thumbnail: 'https://img.youtube.com/vi/pjnBi_styks/mqdefault.jpg',
-          title: 'Golden State Warriors vs Utah Jazz Full Game Highlights / March 25 / 2017-18 NBA Season',
-          body: '🏀Golden State Warriors vs Utah Jazz Full Game Highlights / March 25 / 2017-18 NBA Season\n' +
-          '\n' +
-          '👍Follow Us on Twitter: https://twitter.com/stayhls\n' +
-          '\n' +
-          '👍Like Us on Facebook: https://www.facebook.com/stayhls\n' +
-          '\n' +
-          '👀Subscribe To Me On Social Networks To Keep Up To Date With Updates On My Channel :)\n' +
-          '\n' +
-          '⚠️Disclaimer:\n' +
-          '➡️ Monetization is disabled.\n' +
-          '➡️ Companies that claim rights to my videos are entitled to the \n' +
-          'monetisations and will earn a profit from my videos if they \n' +
-          'decide to monetize them. This is not my decision.\n' +
-          '➡️ If you want the video removed, I\'d appreciate if you request the\n' +
-          'video to be globally blocked or muted, since it\'s hassle to deal \n' +
-          'with copyright strikes.\n' +
-          '\n' +
-          '📕Copyright Disclaimer Under Section 107 of the Copyright Act 1976,\n' +
-          'allowance is made for "fair use" for purposes such as criticism,\n' +
-          'comment, news reporting, teaching, scholarship, and research.\n' +
-          'Fair use is a use permitted by copyright statute that might otherwise be infringing.\n' +
-          'Non-profit, educational or personal use tips the balance in favor of fair use.',
-          tags: ['nba', 'warriors', 'jazz'],
+          link: '',
+          thumbnail: '',
+          title: '',
+          body: '',
+          tags: [],
         }}
         validationSchema={
           yup.object().shape({
@@ -114,8 +93,9 @@ const LinkUpload = ({ dispatch }) => {
           { setSubmitting, setErrors }
         ) => {
           dispatch(postVideo(values))
-            .then(response => {
+            .then(path => {
               setSubmitting(false);
+              redirect(`v${path}`);
             })
             .catch(error => {
               console.log('error:', error);
