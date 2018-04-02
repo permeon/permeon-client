@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Route, Link } from 'react-router-dom';
+import { Route, Link, Redirect } from 'react-router-dom';
 
 import Sidebar from '../Sidebar/Sidebar';
 import Header from '../Header/Header';
@@ -44,6 +44,10 @@ class App extends Component {
           <Route path="/settings" component={Settings} />
           <Route exact path="/channel/:username" component={Channel} />
           <Route exact path="/v/:tag/:channel/:permlink" component={Video} />
+          <Route exact path="/permeon-client/dist/" render={() => (
+            <Redirect to="/" />
+          )}
+          />
         </div>
       </div>
     );

@@ -12,8 +12,7 @@ The client for permeon steem app.
 - fork repo
 - `yarn install`
 - `yarn start`
-- follow dev setup
-- create a new git branch with a name `feature/upvote_downvote_comments`
+- create a new git branch with a name describing feature/fix `feature/upvote_downvote_comments`
 - make changes
 - run tests `yarn test`
 - run prettier `yarn prettier`
