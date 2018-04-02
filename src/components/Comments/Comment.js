@@ -5,6 +5,7 @@ import DownvoteButton from "../Buttons/DownvoteButton";
 import UpvoteButton from "../Buttons/UpvoteButton";
 import {countVotes} from "../../helpers/videoHelpers";
 import TimeAgo from "../TimeAgo/TimeAgo";
+import {formatRewards, totalPostRewards} from "../../helpers/rewardsHelpers";
 
 const Comment = ({
   author,
@@ -29,7 +30,7 @@ const Comment = ({
       <SMComment.Content>
         <SMComment.Author as='a'>{author}</SMComment.Author>
         <SMComment.Metadata>
-          <div><TimeAgo date={date}/><span style={{marginLeft: '4px'}}>{rewards}</span></div>
+          <div><TimeAgo date={date}/><span style={{marginLeft: '4px'}}>{formatRewards(rewards)}</span></div>
         </SMComment.Metadata>
         <SMComment.Text>
           <p>{body}</p>
@@ -61,7 +62,7 @@ function renderChild(comment, comments) {
       depth={comment.depth}
       author={comment.author}
       date={comment.created}
-      rewards='$0.944'
+      rewards={totalPostRewards(comment)}
       body={comment.body}
       upvotes={upvotes}
       downvotes={downvotes}

@@ -7,7 +7,7 @@ import {formatDuration, getAppInfo} from "../../helpers/videoHelpers";
 import StackedVideoCard from "../../components/VideoCards/StackedVideoCard";
 import {selectors} from "../../reducers";
 import {channelVideos} from "../../actions/channelActions";
-import {postRewards} from "../../helpers/rewardsHelpers";
+import {totalPostRewards} from "../../helpers/rewardsHelpers";
 
 class RelatedVideos extends Component {
   constructor(props) {
@@ -40,7 +40,7 @@ function parseVideos(videos) {
     username: video.author,
     thumbnail: video.videoData.thumbnail,
     playtime: formatDuration(video.videoData.duration),
-    rewards: postRewards(video),//'$16.516',
+    rewards: totalPostRewards(video),//'$16.516',
     date: video.created,
     app: getAppInfo(video).appName,
   }));

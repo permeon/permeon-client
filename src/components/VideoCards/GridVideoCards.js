@@ -4,7 +4,7 @@ import GridVideoCard from "../../components/VideoCards/GridVideoCard";
 
 import styles from './GridVideoCards.css';
 import {formatDuration, getAppInfo} from "../../helpers/videoHelpers";
-import {postRewards} from "../../helpers/rewardsHelpers";
+import {totalPostRewards} from "../../helpers/rewardsHelpers";
 
 const GridVideoCards = ({
   videos,
@@ -25,7 +25,7 @@ function parseVideos(videos) {
     username: video.author,
     thumbnail: video.videoData.thumbnail,
     playtime: formatDuration(video.videoData.duration),
-    rewards: postRewards(video),
+    rewards: totalPostRewards(video),
     date: video.created,
     app: getAppInfo(video).appName,
   }));

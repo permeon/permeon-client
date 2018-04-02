@@ -4,6 +4,7 @@ import { Comment as SMComment, Header } from 'semantic-ui-react';
 
 import Comment from "./Comment";
 import {countVotes} from "../../helpers/videoHelpers";
+import {totalPostRewards} from "../../helpers/rewardsHelpers";
 
 const Comments = ({
   rootComments,
@@ -21,7 +22,7 @@ const Comments = ({
               depth={1}
               author={comment.author}
               date={comment.created}
-              rewards='$0.944'
+              rewards={totalPostRewards(comment)}
               body={comment.body}
               upvotes={upvotes}
               downvotes={downvotes}

@@ -6,6 +6,7 @@ import classNames from 'classnames';
 
 import styles from './GridVideoCard.css';
 import TimeAgo from "../TimeAgo/TimeAgo";
+import {formatRewards} from "../../helpers/rewardsHelpers";
 
 const GridVideoCard = ({
   url,
@@ -26,7 +27,7 @@ const GridVideoCard = ({
       </Link>
       <Link to={`/channel/${username}`} className={classNames(styles.AuthorLink, 'red')}>{username}</Link>
       <div>
-        <span className={styles.Rewards}>{rewards}</span>
+        <span className={styles.Rewards}>{formatRewards(rewards)}</span>
         <span className={styles.Date}><TimeAgo date={date}/></span>
       </div>
     </div>
