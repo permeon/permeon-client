@@ -1,0 +1,302 @@
+.react-tagsinput {
+  border-radius: 5px;
+  margin-bottom: 12px;
+}
+body {
+  overflow: hidden;
+  background-color: rgb(250, 250, 250);
+}
+.Header__2A0yN {
+  height: 56px;
+}
+.AccountSelector__DUIyP {
+  border-left: 4px solid #171F24 !important;
+}
+.GridVideoCards__10BBZ {
+  margin-top: 20px;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+.Home__3Rq6b {
+  margin-top: 20px !important;
+}
+.Login__3AxVb {
+  /*margin-top: 90px !important;*/
+  /*padding-top: -56px !important;*/
+  height: 100%;
+}
+.Sidebar__31SPG {
+  /*height: 100vh !important;*/
+  height: 100%;
+  overflow-y: scroll;
+  top: 56px !important;
+  padding-bottom: 56px;
+  background-color: rgb(250, 250, 250);
+
+}
+
+.Sidebar__2fBci::before {
+  display: none !important;
+
+}
+.ChannelBanner__19Big {
+  position: relative;
+  min-height: 150px;
+  max-height: 240px;
+  background-color: #171F24;
+}
+
+.ChannelBanner__2cwor {
+  -o-object-fit: cover;
+     object-fit: cover;
+  height: 100%;
+  width: 100%;
+  position: absolute !important;
+}
+.emoji-mart-emoji {
+  padding: 4px;
+  cursor: pointer
+  /*border-radius: 24px;*/
+  /*height: 24px !important;*/
+}
+
+.emoji-mart-emoji:hover {
+  /*background-color: red !important;*/
+}
+
+.Reaction__Dw-k9 {
+  position: relative;
+  top: 2px !important;
+  display: inline-block;
+}
+
+.Reaction__jHrRC {
+  position: relative;
+  top: 3px !important;
+  margin: 0 0 !important;
+  margin-right: 4px !important;
+  padding: 0 4px !important;
+  background: none !important;
+}
+.App__1_yxg {
+  border-radius: 0;
+  height: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.App__2JiF- {
+  width: 100%;
+  height: 100%;
+  margin-left: 0;
+  padding-top: 56px;
+}
+
+.GridVideoCard__frHhU {
+  width: 210px;
+  position: relative;
+  margin-bottom: 15px;
+  margin-right: 4px
+}
+
+.GridVideoCard__frHhU img {
+  height: 118px;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.GridVideoCard__frHhU h4 {
+  margin-top: 8px !important;
+  margin-bottom: 0 !important;
+  overflow: hidden;
+  max-height: 2.57143em !important;
+}
+
+@media (max-width: 400px) {
+  .GridVideoCard__frHhU {
+    width: 100%
+  }
+  .GridVideoCard__frHhU img {
+    width: 100%;
+  }
+}
+
+.GridVideoCard__2I6uz {
+  position: absolute;
+  right: 4px;
+  margin-top: -24px;
+  background: rgba(25, 28, 28, .8);
+  color: rgb(250, 250, 250);
+  padding: 0 4px;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.GridVideoCard__-nyYr {
+  font-size: .9em;
+  color: #777;
+}
+
+.GridVideoCard__3EtMc {
+  float: left;
+}
+
+.GridVideoCard__1786m {
+  float: left;
+  color: #777;
+  margin-left: 8px;
+}
+.StackedVideoCard__15geE {
+  position: relative;
+  width: 100%;
+  min-height: 90px;
+  margin-bottom: 8px;
+  margin-right: 4px
+}
+
+.StackedVideoCard__15geE img {
+  width: 160px;
+}
+
+.StackedVideoCard__15geE h5 {
+  margin: 0 0 0 8px !important;
+  overflow: hidden;
+  max-height: 2.57143em !important;
+}
+
+@media (max-width: 400px) {
+  .StackedVideoCard__15geE {
+    width: 100%
+  }
+  .StackedVideoCard__15geE img {
+    width: 100%;
+  }
+}
+
+.StackedVideoCard__2Kde2 {
+  position: absolute;
+  right: 4px;
+  margin-top: -24px;
+  background: rgba(25, 28, 28, .8);
+  color: rgb(250, 250, 250);
+  padding: 0 4px;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.StackedVideoCard__37hn4 {
+  font-size: .9em;
+  color: #777;
+}
+
+.StackedVideoCard__V3tiM {
+  float: left;
+}
+
+.StackedVideoCard__SQdEQ {
+  float: left;
+  color: #777;
+  margin-left: 4px;
+}
+
+/*@media (min-width: 0px) and (max-width: 447px) {*/
+  /*.ContentContainer {*/
+  /*width: 214px !important;*/
+  /*}*/
+  /*}*/
+  /*@media (min-width: 448px) and (max-width: 661px) {*/
+  /*@media (max-width: 661px) {*/
+  /*.ContentContainer {*/
+  /*width: 428px !important;*/
+  /*}*/
+  /*}*/
+  @media (min-width: 662px) {
+  .GridVideoCardLayout__8ZQKk {
+    width: 642px !important;
+  }
+}
+  @media (min-width: 876px) {
+  .GridVideoCardLayout__8ZQKk {
+    width: 856px !important;
+  }
+}
+  @media (min-width: 1090px) {
+  .GridVideoCardLayout__8ZQKk {
+    width: 1070px !important;
+  }
+}
+  @media (min-width: 1304px) {
+  .GridVideoCardLayout__8ZQKk {
+    width: 1284px !important;
+  }
+}
+
+.Channel__2-xQv {
+  margin-top: 20px !important;
+}
+
+
+/*@media (min-width: 0px) and (max-width: 447px) {*/
+
+
+/*.ContentContainer {*/
+
+
+/*width: 214px !important;*/
+
+
+/*}*/
+
+
+/*}*/
+
+
+/*@media (min-width: 448px) and (max-width: 661px) {*/
+
+
+/*@media (max-width: 661px) {*/
+
+
+/*.ContentContainer {*/
+
+
+/*width: 428px !important;*/
+
+
+/*}*/
+
+
+/*}*/
+
+
+@media (min-width: 662px) {
+  .Channel__1Joid {
+    width: 642px !important;
+  }
+}
+
+
+@media (min-width: 876px) {
+  .Channel__1Joid {
+    width: 856px !important;
+  }
+}
+
+
+@media (min-width: 1090px) {
+  .Channel__1Joid {
+    width: 1070px !important;
+  }
+}
+
+
+@media (min-width: 1304px) {
+  .Channel__1Joid {
+    width: 1284px !important;
+  }
+}
+
