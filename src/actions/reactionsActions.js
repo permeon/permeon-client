@@ -30,9 +30,10 @@ export function postReaction(channel, videoPermlink, emoji) {
       app: getAppJsonMetadata(),
     });
 
+    const generatedPermlink = `${videoPermlink}-${generatePermlink()}`;
     // Cheat to make ui appear like adding emoji is instant
     const reactionsPayload = {
-      [`${channel}/${videoPermlink}`]: {
+      [`${channel}/${generatedPermlink}`]: {
         author: channel,
         json_metadata: {
           emoji,
@@ -45,7 +46,7 @@ export function postReaction(channel, videoPermlink, emoji) {
       channel,
       videoPermlink,
       author,
-      `${videoPermlink}-${generatePermlink()}`,
+      generatedPermlink,
       '',   // title
       // '🍇', //
       _.get(emoji, 'native'), // body (cant be blank so use native emoji)
