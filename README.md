@@ -1,8 +1,20 @@
 # Permeon Client
-Some short description TODO
+The client for permeon steem app.
 
-## Setup
-TODO
 
 ## Dev Setup
-TODO
+- `git clone https://github.com/permeon/permeon-client.git && cd permeon-client`
+- `yarn install`
+- `yarn start` to run for dev
+- `yarn test` to run tests
+
+## Contributing
+- fork repo
+- `yarn install`
+- `yarn start`
+- follow dev setup
+- create a new git branch with a name `feature/upvote_downvote_comments`
+- make changes
+- run tests `yarn test`
+- run prettier `yarn prettier`
+- open a pull request to master
