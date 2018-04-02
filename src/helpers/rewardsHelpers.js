@@ -28,6 +28,5 @@ export function parsePayoutAmount(amount) {
 }
 
 export function formatRewards(amount) {
-  console.log('amount', amount);
   return `$${amount.toFixed(2)}`
 }
