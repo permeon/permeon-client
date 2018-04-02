@@ -67,17 +67,18 @@ class Channel extends Component {
   }
 
   render() {
-    const { username, moreVideosToLoad, isLoadingVideos, isSubscribedTo, isSubbingUnsubbing } = this.props;
+    const {
+      username, moreVideosToLoad, isLoadingVideos, isSubscribedTo, isSubbingUnsubbing, channelAccount
+    } = this.props;
     const { activeTab } = this.state;
     // TODO: put urls into config
-    const bannerUrl = 'https://img.esteem.ws/jz7gqt5t2c.jpg';
     const avatarUrl = `https://steemitimages.com/u/${username}/avatar/`;
 
     return (
       <div>
         <ChannelBanner
           username={username}
-          bannerUrl={bannerUrl}
+          bannerUrl={channelAccount.bannerUrl}
           avatarUrl={avatarUrl}
           isSubscribed={isSubscribedTo}
           onSubscribe={this.onSubscribeClick}
@@ -112,7 +113,8 @@ function mapStateToProps(state, ownProps) {
     moreVideosToLoad: !!Object.keys(selectors.channels.videoPagination(state)).length,
     isSubscribedTo: selectors.subscriptions.isSubscribedTo(state, activeAccount, username),
     mySubscriptions: selectors.subscriptions.mySubscriptions(state, activeAccount),
-    isSubbingUnsubbing: selectors.subscriptions.isSubbingUnsubbing(state, activeAccount, username)
+    isSubbingUnsubbing: selectors.subscriptions.isSubbingUnsubbing(state, activeAccount, username),
+    channelAccount: {}, // TODO: get account from chian
   }
 }
 

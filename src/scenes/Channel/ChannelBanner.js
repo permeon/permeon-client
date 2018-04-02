@@ -17,7 +17,7 @@ const ChannelBanner = ({
 }) => {
   return (
     <div className={styles.ChannelBanner}>
-      <Image src={bannerUrl} className={styles.BannerImage} />
+      {/*<Image src={bannerUrl} className={styles.BannerImage} />*/}
       <Container style={{paddingTop: '10px', position: 'relative'}}>
         <Image src={avatarUrl} circular style={{height: '80%'}} verticalAlign='middle' floated='left' />
         <Header as='h3' style={{position: 'relative', marginTop: '100px'}} floated='left' inverted>{username}</Header>

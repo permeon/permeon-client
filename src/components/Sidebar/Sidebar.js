@@ -65,7 +65,7 @@ class Sidebar extends Component {
           <Menu.Header>Subscriptions</Menu.Header>
           <Menu.Menu>
             {subscriptions.map(sub => (
-              <Menu.Item name={sub} as={Link} to={`/channel/${sub}`} className={styles.Item} />
+              <Menu.Item key={sub} name={sub} as={Link} to={`/channel/${sub}`} className={styles.Item} />
             ))}
           </Menu.Menu>
         </Menu.Item>

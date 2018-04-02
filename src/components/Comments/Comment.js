@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Comment as SMComment, Header, Button, Icon } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
+
 import DownvoteButton from "../Buttons/DownvoteButton";
 import UpvoteButton from "../Buttons/UpvoteButton";
 import {countVotes} from "../../helpers/videoHelpers";
@@ -28,7 +30,7 @@ const Comment = ({
     <SMComment>
       <SMComment.Avatar src={`https://steemitimages.com/u/${author}/avatar/`} />
       <SMComment.Content>
-        <SMComment.Author as='a'>{author}</SMComment.Author>
+        <SMComment.Author as={Link} to={`/channel/${author}`}>{author}</SMComment.Author>
         <SMComment.Metadata>
           <div><TimeAgo date={date}/><span style={{marginLeft: '4px'}}>{formatRewards(rewards)}</span></div>
         </SMComment.Metadata>

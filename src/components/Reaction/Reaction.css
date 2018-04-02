@@ -11,13 +11,16 @@
 }
 
 .Emojis {
+  position: relative;
+  top: 2px !important;
+  display: inline-block;
 }
 
 .OpenPickerButton {
   position: relative;
-  top: -20px !important;
-  margin: 10px 0 !important;
-  /*margin-left: 0 !important;*/
-  padding-left: 4px !important;
+  top: 3px !important;
+  margin: 0 0 !important;
+  margin-right: 4px !important;
+  padding: 0 4px !important;
   background: none !important;
 }

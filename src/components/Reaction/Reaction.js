@@ -55,16 +55,16 @@ class Reaction extends React.Component {
     const { emojiReactions } = this.props;
 
     return (
-      <div style={{top: '4px', position: 'relative', zIndex: '2000', display: 'inline-block'}}>
+      <div style={{position: 'relative', zIndex: '2000', display: 'inline-block'}}>
         <div className={styles.Emojis}>
           {this.renderEmojis(emojiReactions)}
-          <Button
-            className={styles.OpenPickerButton}
-            circular
-            icon={<Icon size='large' name='add circle' />}
-            floated='right' onClick={this.togglePicker}
-          />
         </div>
+        <Button
+          className={styles.OpenPickerButton}
+          circular
+          icon={<Icon size='large' name='add circle' />}
+          onClick={this.togglePicker}
+        />
         {this.state.pickerOpen &&
           <Picker
             set={EMOJI_SHEET}
