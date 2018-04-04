@@ -18,8 +18,15 @@ import { subscriptionCount } from '../../actions/subscriptionsActions';
 import { rootComments } from '../../helpers/commentHelpers';
 import Reaction from '../../components/Reaction/Reaction';
 import TimeAgo from '../../components/TimeAgo/TimeAgo';
+import {downvote, upvote} from "../../actions/votingActions";
 
 class Video extends Component {
+  constructor(props) {
+    super(props);
+    this.handleUpvote = this.handleUpvote.bind(this);
+    this.handleDownvote = this.handleDownvote.bind(this);
+  }
+
   componentDidMount() {
     this.fetchData(this.props);
   }
@@ -39,6 +46,16 @@ class Video extends Component {
     // if (!comments) {
     // dispatch(fetchComments(channel, permlink));
     // }
+  }
+
+  handleUpvote() {
+    const { dispatch, channel, permlink } = this.props;
+    dispatch(upvote(channel, permlink));
+  }
+
+  handleDownvote() {
+    const { dispatch, channel, permlink } = this.props;
+    dispatch(downvote(channel, permlink));
   }
 
   render() {
@@ -72,8 +89,8 @@ class Video extends Component {
               <div>{tags}</div>
               <div style={{ textAlign: 'right' }}>
                 <Reaction />
-                <UpvoteButton upvotes={upvotes} />
-                <DownvoteButton downvotes={downvotes} />
+                <UpvoteButton upvotes={upvotes} onClick={this.handleUpvote} />
+                <DownvoteButton downvotes={downvotes} onClick={this.handleDownvote} />
               </div>
             </Segment>
 

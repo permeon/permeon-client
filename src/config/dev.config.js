@@ -1,5 +1,6 @@
 import baseConfig from './base.config';
 
 export default {
-  ...baseConfig
+  ...baseConfig,
+  APP_NAME: 'bigballer-app',
 };
