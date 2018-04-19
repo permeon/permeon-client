@@ -64,6 +64,7 @@ const prodConfig = {
   plugins: [
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production'),
+      'process.env.PUBLIC_URL': JSON.stringify('permeon-client'),
     }),
     globalCss,
     localCss,

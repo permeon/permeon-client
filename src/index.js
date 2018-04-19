@@ -16,7 +16,7 @@ document.body.appendChild(root);
 const render = Component => {
   ReactDOM.render(
     <Provider store={store}>
-      <Router basename={process.env.PUBLIC_URL}>
+      <Router basename={process.env.PUBLIC_URL || ''}>
         <Component />
       </Router>
     </Provider>,
