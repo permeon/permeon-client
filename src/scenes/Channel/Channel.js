@@ -99,7 +99,7 @@ class Channel extends Component {
           <Loader active={isLoadingVideos} size="large" />
           {moreVideosToLoad && <Divider clearing />}
           {moreVideosToLoad && (
-            <Button onClick={this.loadMoreVideos} floated="right">
+            <Button onClick={this.loadMoreVideos} floated="right" disabled={isLoadingVideos}>
               more
             </Button>
           )}

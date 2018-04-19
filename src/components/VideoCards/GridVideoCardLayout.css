@@ -1,4 +1,3 @@
-
 /*@media (min-width: 0px) and (max-width: 447px) {*/
   /*.ContentContainer {*/
     /*width: 214px !important;*/
@@ -12,27 +11,28 @@
   /*}*/
 /*}*/
 
-@media (min-width: 662px) {
+@media (min-width: 702px) {
   .ContentContainer {
-    width: 642px !important;
+    width: 682px !important;
+    padding: 0 20px !important;
   }
 }
 
-@media (min-width: 876px) {
+@media (min-width: 916px) {
   .ContentContainer {
-    width: 856px !important;
+    width: 896px !important;
   }
 }
 
-@media (min-width: 1090px) {
+@media (min-width: 1130px) {
   .ContentContainer {
-    width: 1070px !important;
+    width: 1110px !important;
   }
 }
 
-@media (min-width: 1304px) {
+@media (min-width: 1344px) {
   .ContentContainer {
-    width: 1284px !important;
+    width: 1324px !important;
   }
 }
 

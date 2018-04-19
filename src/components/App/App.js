@@ -10,6 +10,10 @@ import Login from '../../scenes/Login/Login';
 import Upload from '../../scenes/Upload/Upload';
 import Channel from '../../scenes/Channel/Channel';
 import Video from '../../scenes/Video/Video';
+import HotVideos from '../../scenes/HotVideos/HotVideos';
+import NewVideos from '../../scenes/NewVideos/NewVideos'
+import TrendingVideos from '../../scenes/TrendingVideos/TrendingVideos'
+import SubscriptionVideos from '../../scenes/SubscriptionVideos/SubscriptionVideos'
 
 import styles from './App.css';
 import Settings from '../../scenes/Settings/Settings';
@@ -31,7 +35,7 @@ class App extends Component {
 
   render() {
     const { isSidebarVisible } = this.state;
-    const sidebarWidth = isSidebarVisible ? '250px' : '0';
+    const sidebarWidth = isSidebarVisible ? 250 : 0;
 
     return (
       <div className={styles.App}>
@@ -42,6 +46,10 @@ class App extends Component {
           <Route path="/login" component={Login} />
           <Route path="/upload" component={Upload} />
           <Route path="/settings" component={Settings} />
+          <Route path="/hot" component={HotVideos} />
+          <Route path="/new" component={NewVideos} />
+          <Route path="/trending" component={TrendingVideos} />
+          <Route path="/feed" component={SubscriptionVideos} />
           <Route exact path="/channel/:username" component={Channel} />
           <Route exact path="/v/:tag/:channel/:permlink" component={Video} />
           <Route exact path="/permeon-client/dist/" render={() => (

@@ -28,6 +28,7 @@ class Home extends Component {
 
   render() {
     const {
+      isLoggedIn,
       trendingVideos,
       newVideos,
       hotVideos,
@@ -39,14 +40,14 @@ class Home extends Component {
     } = this.props;
     return (
       <div>
-        <GridVideoCardLayout style={{ marginTop: '30px' }}>
+        {isLoggedIn && <GridVideoCardLayout style={{ marginTop: '30px' }}>
           <Header as="h3">Subscriptions</Header>
           <GridVideoCards videos={subscriptionVideos} />
           <Loader inline active={subscriptionVideosLoading} />
           <br />
           {!subscriptionVideosLoading && <Link to="/feed">SHOW MORE</Link>}
           <Divider />
-        </GridVideoCardLayout>
+        </GridVideoCardLayout> }
         <GridVideoCardLayout style={{ marginTop: '30px' }}>
           <Header as="h3">Trending</Header>
           <GridVideoCards videos={trendingVideos} />
@@ -89,7 +90,8 @@ function mapStateToProps(state, ownProps) {
     trendingVideosLoading: selectors.videos.isLoading(state, 'trending'),
     newVideosLoading: selectors.videos.isLoading(state, 'created'),
     hotVideosLoading: selectors.videos.isLoading(state, 'hot'),
-    subscriptionVideosLoading: selectors.videos.isLoading(state, 'feed')
+    subscriptionVideosLoading: selectors.videos.isLoading(state, 'feed'),
+    isLoggedIn: selectors.auth.isLoggedIn(state),
   };
 }
 
