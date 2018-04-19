@@ -52,7 +52,7 @@ class App extends Component {
           <Route path="/feed" component={SubscriptionVideos} />
           <Route exact path="/channel/:username" component={Channel} />
           <Route exact path="/v/:tag/:channel/:permlink" component={Video} />
-          <Route exact path="/permeon-client/dist/" render={() => (
+          <Route exact path="/dist/" render={() => (
             <Redirect to="/" />
           )}
           />
