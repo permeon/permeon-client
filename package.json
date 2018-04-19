@@ -83,6 +83,5 @@
   },
   "prettier": {
     "singleQuote": true
-  },
-  "homepage": "https://permeon.github.io/permeon-client/dist/"
+  }
 }
