@@ -6,13 +6,13 @@ body {
   overflow: hidden;
   background-color: rgb(250, 250, 250);
 }
-.Header__2A0yN {
+.Header__oE2FH {
   height: 56px;
 }
-.AccountSelector__DUIyP {
+.AccountSelector__27VZq {
   border-left: 4px solid #171F24 !important;
 }
-.GridVideoCards__10BBZ {
+.GridVideoCards__3jM3W {
   margin-top: 20px;
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
@@ -20,15 +20,15 @@ body {
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
 }
-.Home__3Rq6b {
+.Home__20-8C {
   margin-top: 20px !important;
 }
-.Login__3AxVb {
+.Login__Huw5p {
   /*margin-top: 90px !important;*/
   /*padding-top: -56px !important;*/
   height: 100%;
 }
-.Sidebar__31SPG {
+.Sidebar__3TPTb {
   /*height: 100vh !important;*/
   height: 100%;
   overflow-y: scroll;
@@ -38,18 +38,18 @@ body {
 
 }
 
-.Sidebar__2fBci::before {
+.Sidebar__1AYEB::before {
   display: none !important;
 
 }
-.ChannelBanner__19Big {
+.ChannelBanner__3QgY2 {
   position: relative;
   min-height: 150px;
   max-height: 240px;
   background-color: #171F24;
 }
 
-.ChannelBanner__2cwor {
+.ChannelBanner__39cyv {
   -o-object-fit: cover;
      object-fit: cover;
   height: 100%;
@@ -67,13 +67,13 @@ body {
   /*background-color: red !important;*/
 }
 
-.Reaction__Dw-k9 {
+.Reaction__z8Nom {
   position: relative;
   top: 2px !important;
   display: inline-block;
 }
 
-.Reaction__jHrRC {
+.Reaction__1GJ6d {
   position: relative;
   top: 3px !important;
   margin: 0 0 !important;
@@ -81,35 +81,35 @@ body {
   padding: 0 4px !important;
   background: none !important;
 }
-.App__1_yxg {
+.App__lBEXI {
   border-radius: 0;
   height: 100%;
   overflow-y: scroll;
   overflow-x: hidden;
 }
 
-.App__2JiF- {
+.App__32FeS {
   width: 100%;
   height: 100%;
   margin-left: 0;
   padding-top: 56px;
 }
 
-.GridVideoCard__frHhU {
+.GridVideoCard__3CiKM {
   width: 210px;
   position: relative;
   margin-bottom: 15px;
   margin-right: 4px
 }
 
-.GridVideoCard__frHhU img {
+.GridVideoCard__3CiKM img {
   height: 118px;
   width: 100%;
   -o-object-fit: cover;
      object-fit: cover;
 }
 
-.GridVideoCard__frHhU h4 {
+.GridVideoCard__3CiKM h4 {
   margin-top: 8px !important;
   margin-bottom: 0 !important;
   overflow: hidden;
@@ -117,15 +117,15 @@ body {
 }
 
 @media (max-width: 400px) {
-  .GridVideoCard__frHhU {
+  .GridVideoCard__3CiKM {
     width: 100%
   }
-  .GridVideoCard__frHhU img {
+  .GridVideoCard__3CiKM img {
     width: 100%;
   }
 }
 
-.GridVideoCard__2I6uz {
+.GridVideoCard__DlVHn {
   position: absolute;
   right: 4px;
   margin-top: -24px;
@@ -136,21 +136,21 @@ body {
   font-weight: bold;
 }
 
-.GridVideoCard__-nyYr {
+.GridVideoCard__2gN7S {
   font-size: .9em;
   color: #777;
 }
 
-.GridVideoCard__3EtMc {
+.GridVideoCard__3-PH7 {
   float: left;
 }
 
-.GridVideoCard__1786m {
+.GridVideoCard__3g-Bz {
   float: left;
   color: #777;
   margin-left: 8px;
 }
-.StackedVideoCard__15geE {
+.StackedVideoCard__1Edzw {
   position: relative;
   width: 100%;
   min-height: 90px;
@@ -158,26 +158,26 @@ body {
   margin-right: 4px
 }
 
-.StackedVideoCard__15geE img {
+.StackedVideoCard__1Edzw img {
   width: 160px;
 }
 
-.StackedVideoCard__15geE h5 {
+.StackedVideoCard__1Edzw h5 {
   margin: 0 0 0 8px !important;
   overflow: hidden;
   max-height: 2.57143em !important;
 }
 
 @media (max-width: 400px) {
-  .StackedVideoCard__15geE {
+  .StackedVideoCard__1Edzw {
     width: 100%
   }
-  .StackedVideoCard__15geE img {
+  .StackedVideoCard__1Edzw img {
     width: 100%;
   }
 }
 
-.StackedVideoCard__2Kde2 {
+.StackedVideoCard__2E-CS {
   position: absolute;
   right: 4px;
   margin-top: -24px;
@@ -188,16 +188,16 @@ body {
   font-weight: bold;
 }
 
-.StackedVideoCard__37hn4 {
+.StackedVideoCard__3imy3 {
   font-size: .9em;
   color: #777;
 }
 
-.StackedVideoCard__V3tiM {
+.StackedVideoCard__3eeM- {
   float: left;
 }
 
-.StackedVideoCard__SQdEQ {
+.StackedVideoCard__24lnW {
   float: left;
   color: #777;
   margin-left: 4px;
@@ -214,28 +214,28 @@ body {
   /*}*/
   /*}*/
   @media (min-width: 702px) {
-  .GridVideoCardLayout__8ZQKk {
+  .GridVideoCardLayout__jU_fE {
     width: 682px !important;
     padding: 0 20px !important;
   }
 }
   @media (min-width: 916px) {
-  .GridVideoCardLayout__8ZQKk {
+  .GridVideoCardLayout__jU_fE {
     width: 896px !important;
   }
 }
   @media (min-width: 1130px) {
-  .GridVideoCardLayout__8ZQKk {
+  .GridVideoCardLayout__jU_fE {
     width: 1110px !important;
   }
 }
   @media (min-width: 1344px) {
-  .GridVideoCardLayout__8ZQKk {
+  .GridVideoCardLayout__jU_fE {
     width: 1324px !important;
   }
 }
 
-.Channel__2-xQv {
+.Channel__2h8xG {
   margin-top: 20px !important;
 }
 
@@ -274,28 +274,28 @@ body {
 
 
 @media (min-width: 662px) {
-  .Channel__1Joid {
+  .Channel__39ED1 {
     width: 642px !important;
   }
 }
 
 
 @media (min-width: 876px) {
-  .Channel__1Joid {
+  .Channel__39ED1 {
     width: 856px !important;
   }
 }
 
 
 @media (min-width: 1090px) {
-  .Channel__1Joid {
+  .Channel__39ED1 {
     width: 1070px !important;
   }
 }
 
 
 @media (min-width: 1304px) {
-  .Channel__1Joid {
+  .Channel__39ED1 {
     width: 1284px !important;
   }
 }

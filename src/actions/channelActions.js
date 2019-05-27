@@ -31,7 +31,7 @@ export function channelVideos(username, limit = 20, start_author = '', start_per
         const videoPosts = getVideoPosts(response).filter(post => post.author === username);
         dispatch({
           type: actionTypes.RECEIVE_VIDEOS,
-          payload: transformPayload(videoPosts, 'id'),
+          payload: transformPayload(videoPosts, 'post_id'),
           username
         });
         dispatch(setVideosFetching(false));
