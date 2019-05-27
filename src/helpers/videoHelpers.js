@@ -27,6 +27,7 @@ export function countVotes(votes) {
 }
 
 export function getVideoPosts(posts) {
+  console.log("POOOOOOOOOOOOOOOOOOOOOST", posts)
   const videos = [];
   posts.forEach(post => {
     const parsedVideo = parseVideoPost(post);
@@ -108,7 +109,8 @@ function dtubeParser(post) {
   const json_metadata = safeJsonParse(post.json_metadata);
   const videoData = {
     description: _.get(json_metadata.video, 'content.description'),
-    url: `https://ipfs.io/ipfs/${_.get(json_metadata.video, 'content.videohash')}`,
+    // url: `https://ipfs.io/ipfs/${_.get(json_metadata.video, 'content.videohash')}`,
+    url: `https://video.dtube.top/ipfs/${_.get(json_metadata.video, 'content.videohash')}`,
     duration: _.get(json_metadata.video, 'info.duration', 0),
     thumbnail: `https://ipfs.io/ipfs/${_.get(json_metadata.video, 'info.snaphash')}`
   };

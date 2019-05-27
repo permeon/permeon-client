@@ -112,6 +112,10 @@ export function subscriptions(limit = 100, startFollowing = '') {
 export function allSubscriptions(startFollowing) {
   const pageSize = 100;
   return (dispatch, getState) => {
+    const activeAccount = selectors.auth.activeAccountName(getState());
+    if (!activeAccount) {
+      return
+    }
     return subscriptions(pageSize, startFollowing)(dispatch, getState)
       .then(response => {
         if (response.length === pageSize) {

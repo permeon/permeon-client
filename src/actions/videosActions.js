@@ -35,7 +35,7 @@ export function fetchTrending(tag, limit = 20, start_author = '', permlink = '')
     }
     dispatch(setVideosFetching(true, category));
     return steem.api
-      .getDiscussionsByTrendingAsync({ tag, limit, start_author, permlink })
+      .getDiscussionsByTrendingAsync({ tag, limit, start_author, start_permlink: permlink })
       .then(response => {
         const videoPosts = getVideoPosts(response);
         dispatch(receiveVideos(videoPosts, category));
@@ -56,7 +56,7 @@ export function fetchCreated(tag, limit = 20, start_author = '', permlink = '') 
     }
     dispatch(setVideosFetching(true, category));
     return steem.api
-      .getDiscussionsByCreatedAsync({ tag, limit, start_author, permlink })
+      .getDiscussionsByCreatedAsync({ tag, limit, start_author, start_permlink: permlink })
       .then(response => {
         const videoPosts = getVideoPosts(response);
         dispatch(receiveVideos(videoPosts, category));
@@ -77,7 +77,7 @@ export function fetchHot(tag, limit = 20, start_author = '', permlink = '') {
     }
     dispatch(setVideosFetching(true, category));
     return steem.api
-      .getDiscussionsByHotAsync({ tag, limit, start_author, permlink })
+      .getDiscussionsByHotAsync({ tag, limit, start_author, start_permlink: permlink })
       .then(response => {
         const videoPosts = getVideoPosts(response);
         dispatch(receiveVideos(videoPosts, category));
@@ -96,9 +96,12 @@ export function fetchFeed(tag, limit = 20, start_author = '', permlink = '') {
     if (selectors.videos.isLoading(getState(), category)) {
       return Promise.resolve();
     }
+    if (!tag) {
+      return
+    }
     dispatch(setVideosFetching(true, category));
     return steem.api
-      .getDiscussionsByFeedAsync({ tag, limit, start_author, permlink })
+      .getDiscussionsByFeedAsync({ tag, limit, start_author, start_permlink: permlink })
       .then(response => {
         const videoPosts = getVideoPosts(response);
         dispatch(receiveVideos(videoPosts, category));
