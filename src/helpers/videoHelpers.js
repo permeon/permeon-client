@@ -108,10 +108,9 @@ function dtubeParser(post) {
   const json_metadata = safeJsonParse(post.json_metadata);
   const videoData = {
     description: _.get(json_metadata.video, 'content.description'),
-    // url: `https://ipfs.io/ipfs/${_.get(json_metadata.video, 'content.videohash')}`,
-    url: `https://video.dtube.top/ipfs/${_.get(json_metadata.video, 'content.videohash')}`,
-    duration: _.get(json_metadata.video, 'info.duration', 0),
-    thumbnail: `https://snap1.d.tube/ipfs/${_.get(json_metadata.video, 'info.snaphash')}`
+    url: _.get(json_metadata.video, 'url', "https://www.youtube.com/watch?v=9BnLbv6QYcA"),
+    duration: _.get(json_metadata.video, 'duration', 0),
+    thumbnail: _.get(json_metadata.video, 'thumbnailUrl')
   };
   return {
     ...post,
