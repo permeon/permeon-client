@@ -160,6 +160,7 @@ body {
 
 .StackedVideoCard__1Edzw img {
   width: 160px;
+  max-height: 90px;
 }
 
 .StackedVideoCard__1Edzw h5 {
