@@ -2,7 +2,7 @@
 The client for permeon steem app.
 
 # Demo
-http://permeon.io
+https://permeon.github.io/permeon-client/
 
 
 ## Dev Setup
